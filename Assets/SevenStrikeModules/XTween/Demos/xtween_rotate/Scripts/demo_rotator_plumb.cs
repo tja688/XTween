@@ -10,7 +10,7 @@ public class demo_rotator_plumb : demo_base
     public Button btn_start;
     public Button btn_reset;
 
-    public RotationMode RotationMode;
+    public XTweenRotationMode RotationMode;
 
     // 摆荡参数 - 暴露在Inspector中，方便调整
     [Header("摆荡参数")]
@@ -62,7 +62,7 @@ public class demo_rotator_plumb : demo_base
         {
             currentTweener.Kill();
             // 最后一下归零，此动画需要播完直接杀死
-            rect_target.xt_Rotate_To(Vector3.zero, duration, false, true, TweenSpace.相对, RotationMode.Shortest).SetEase(easeMode).Play();
+            rect_target.xt_Rotate_To(Vector3.zero, duration, false, true, XTweenSpace.相对, XTweenRotationMode.Shortest).SetEase(easeMode).Play();
             Debug.Log("摆荡结束");
             return;
         }
@@ -90,7 +90,7 @@ public class demo_rotator_plumb : demo_base
             duration,
             isRelative,
             isAutoKill,
-            TweenSpace.相对,
+            XTweenSpace.相对,
             RotationMode,
             easeMode,
             true,

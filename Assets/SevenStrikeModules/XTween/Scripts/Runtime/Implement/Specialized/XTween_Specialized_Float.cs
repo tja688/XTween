@@ -26,7 +26,7 @@ namespace SevenStrikeModules.XTween
     /// 专门处理 float 类型动画的补间类
     /// </summary>
     /// <remarks>
-    /// 该类继承自 HudAnimation_TweenerBase<float>，实现了对 float 类型的插值计算
+    /// 该类继承自 XTween_Base<float>，实现了对 float 类型的插值计算
     /// 主要用于处理单个 浮点值 的动画，例如透明度、Image填充值等
     /// </remarks>
     public class XTween_Specialized_Float : XTween_Base<float>

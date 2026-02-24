@@ -80,7 +80,7 @@ namespace SevenStrikeModules.XTween
             }
             else if (TweenTypes_Rotations == XTweenTypes_Rotations.四元数_Quaternion)
             {
-                CurrentTweener = XTween.xt_Rotate_To(Target_RectTransform, EndValue_Quaternion, Duration, IsRelative, IsAutoKill, AnimateSpace, HudRotateMode, EaseMode, IsFromMode, () => FromValue_Quaternion, UseCurve, Curve).SetLoop(LoopCount, LoopType).SetLoopingDelay(LoopDelay).SetDelay(Delay).OnStart(() =>
+                CurrentTweener = XTween.xt_Rotate_To(Target_RectTransform, EndValue_Quaternion, Duration, IsRelative, IsAutoKill, AnimateSpace, RotateMode, EaseMode, IsFromMode, () => FromValue_Quaternion, UseCurve, Curve).SetLoop(LoopCount, LoopType).SetLoopingDelay(LoopDelay).SetDelay(Delay).OnStart(() =>
                 {
                     if (act_on_start != null)
                         act_on_start();

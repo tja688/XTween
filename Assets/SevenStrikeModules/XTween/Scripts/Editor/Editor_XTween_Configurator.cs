@@ -82,28 +82,28 @@ namespace SevenStrikeModules.XTween.Editor
         private void OnEnable()
         {
             #region 图标获取
-            logo = Editor_XTween_GUI.GetIcon("Icons_Hud_XTween_Configurator/logo");
+            logo = Editor_XTween_GUI.GetIcon("Icons_XTween_Configurator/logo");
 
-            LiquidIcon_Pure_Press = Editor_XTween_GUI.GetIcon("Icons_Hud_XTween_Configurator/liquidstyle_pure_press");
-            LiquidIcon_Pure_Released = Editor_XTween_GUI.GetIcon("Icons_Hud_XTween_Configurator/liquidstyle_pure_released");
+            LiquidIcon_Pure_Press = Editor_XTween_GUI.GetIcon("Icons_XTween_Configurator/liquidstyle_pure_press");
+            LiquidIcon_Pure_Released = Editor_XTween_GUI.GetIcon("Icons_XTween_Configurator/liquidstyle_pure_released");
 
-            LiquidIcon_Scanline_Press = Editor_XTween_GUI.GetIcon("Icons_Hud_XTween_Configurator/liquidstyle_scan_press");
-            LiquidIcon_Scanline_Released = Editor_XTween_GUI.GetIcon("Icons_Hud_XTween_Configurator/liquidstyle_scan_released");
+            LiquidIcon_Scanline_Press = Editor_XTween_GUI.GetIcon("Icons_XTween_Configurator/liquidstyle_scan_press");
+            LiquidIcon_Scanline_Released = Editor_XTween_GUI.GetIcon("Icons_XTween_Configurator/liquidstyle_scan_released");
 
-            LiquidIcon_DirtyScanline_Press = Editor_XTween_GUI.GetIcon("Icons_Hud_XTween_Configurator/liquidstyle_scandirty_press");
-            LiquidIcon_DirtyScanline_Released = Editor_XTween_GUI.GetIcon("Icons_Hud_XTween_Configurator/liquidstyle_scandirty_released");
+            LiquidIcon_DirtyScanline_Press = Editor_XTween_GUI.GetIcon("Icons_XTween_Configurator/liquidstyle_scandirty_press");
+            LiquidIcon_DirtyScanline_Released = Editor_XTween_GUI.GetIcon("Icons_XTween_Configurator/liquidstyle_scandirty_released");
 
-            Liquid_PreviewBg_Pure = Editor_XTween_GUI.GetIcon("Icons_Hud_XTween_Configurator/liquidstyle_previewbg_pure");
-            Liquid_PreviewBg_Scan = Editor_XTween_GUI.GetIcon("Icons_Hud_XTween_Configurator/liquidstyle_previewbg_scan");
-            Liquid_PreviewBg_ScanDirty = Editor_XTween_GUI.GetIcon("Icons_Hud_XTween_Configurator/liquidstyle_previewbg_scandirty");
+            Liquid_PreviewBg_Pure = Editor_XTween_GUI.GetIcon("Icons_XTween_Configurator/liquidstyle_previewbg_pure");
+            Liquid_PreviewBg_Scan = Editor_XTween_GUI.GetIcon("Icons_XTween_Configurator/liquidstyle_previewbg_scan");
+            Liquid_PreviewBg_ScanDirty = Editor_XTween_GUI.GetIcon("Icons_XTween_Configurator/liquidstyle_previewbg_scandirty");
 
-            Liquid_PreviewBg_status_playing = Editor_XTween_GUI.GetIcon("Icons_Hud_XTween_Configurator/liquidstyle_previewbg_status_playing");
-            Liquid_PreviewBg_status_idle = Editor_XTween_GUI.GetIcon("Icons_Hud_XTween_Configurator/liquidstyle_previewbg_status_idle");
+            Liquid_PreviewBg_status_playing = Editor_XTween_GUI.GetIcon("Icons_XTween_Configurator/liquidstyle_previewbg_status_playing");
+            Liquid_PreviewBg_status_idle = Editor_XTween_GUI.GetIcon("Icons_XTween_Configurator/liquidstyle_previewbg_status_idle");
 
-            Liquid_PreviewBg_Highlight = Editor_XTween_GUI.GetIcon("Icons_Hud_XTween_Configurator/Liquid_PreviewBg_Highlight");
+            Liquid_PreviewBg_Highlight = Editor_XTween_GUI.GetIcon("Icons_XTween_Configurator/Liquid_PreviewBg_Highlight");
 
-            Liquid_Plug = Editor_XTween_GUI.GetIcon("Icons_Hud_XTween_Configurator/LiquidPlug");
-            Liquid_MetalGrid = Editor_XTween_GUI.GetIcon("Icons_Hud_XTween_Configurator/MetalGrid");
+            Liquid_Plug = Editor_XTween_GUI.GetIcon("Icons_XTween_Configurator/LiquidPlug");
+            Liquid_MetalGrid = Editor_XTween_GUI.GetIcon("Icons_XTween_Configurator/MetalGrid");
             #endregion
 
             //获取配置文件
@@ -126,7 +126,7 @@ namespace SevenStrikeModules.XTween.Editor
             Editor_XTween_GUI.Gui_Icon(Icon_rect, logo);
 
             Title_rect = new Rect(rect.x + 85, rect.y + 15, rect.width - 80, 30);
-            Editor_XTween_GUI.Gui_Labelfield(Title_rect, "XTween 配置面板", GUIFilled.无, GUIColor.无, Color.white, TextAnchor.MiddleLeft, Vector2.zero, 20, Font_Bold);
+            Editor_XTween_GUI.Gui_Labelfield(Title_rect, "XTween 配置面板", XTweenGUIFilled.无, XTweenGUIColor.无, Color.white, TextAnchor.MiddleLeft, Vector2.zero, 20, Font_Bold);
 
             Sepline_rect = new Rect(rect.x + 85, rect.y + 60, 200, 1);
             Editor_XTween_GUI.Gui_Box(Sepline_rect, SepLineColor);
@@ -135,10 +135,10 @@ namespace SevenStrikeModules.XTween.Editor
             rect_primary.Set(23, 110, 300, 15);
             rect_secondary = rect_primary;
 
-            Editor_XTween_GUI.Gui_Group(new Rect(10, 90, 360, 200), GUIFilled.纯色边框, GUIColor.亮白, "动画面板配置预览", new Vector2(20, -7), XTween_Dashboard.Theme_Primary, Font_Light);
-            Editor_XTween_GUI.Gui_Group(new Rect(10, 300, 360, 198), GUIFilled.纯色边框, GUIColor.亮白, "动画面板样式配置", new Vector2(20, -7), XTween_Dashboard.Theme_Primary, Font_Light);
-            Editor_XTween_GUI.Gui_Group(new Rect(10, 508, 360, 250), GUIFilled.纯色边框, GUIColor.亮白, "动画池配置", new Vector2(20, -7), XTween_Dashboard.Theme_Primary, Font_Light);
-            Editor_XTween_GUI.Gui_Group(new Rect(10, 768, 360, 80), GUIFilled.纯色边框, GUIColor.亮白, "动画池回收保护", new Vector2(20, -7), XTween_Dashboard.Theme_Primary, Font_Light);
+            Editor_XTween_GUI.Gui_Group(new Rect(10, 90, 360, 200), XTweenGUIFilled.纯色边框, XTweenGUIColor.亮白, "动画面板配置预览", new Vector2(20, -7), XTween_Dashboard.Theme_Primary, Font_Light);
+            Editor_XTween_GUI.Gui_Group(new Rect(10, 300, 360, 198), XTweenGUIFilled.纯色边框, XTweenGUIColor.亮白, "动画面板样式配置", new Vector2(20, -7), XTween_Dashboard.Theme_Primary, Font_Light);
+            Editor_XTween_GUI.Gui_Group(new Rect(10, 508, 360, 250), XTweenGUIFilled.纯色边框, XTweenGUIColor.亮白, "动画池配置", new Vector2(20, -7), XTween_Dashboard.Theme_Primary, Font_Light);
+            Editor_XTween_GUI.Gui_Group(new Rect(10, 768, 360, 80), XTweenGUIFilled.纯色边框, XTweenGUIColor.亮白, "动画池回收保护", new Vector2(20, -7), XTween_Dashboard.Theme_Primary, Font_Light);
 
             #region 面板预览器
             rect_primary = new Rect(10, 20, 300, position.height);
@@ -222,37 +222,37 @@ namespace SevenStrikeModules.XTween.Editor
 
             // 播放时背景色
             rect_primary.Set(cloum_left, row, 90, 20);
-            Editor_XTween_GUI.Gui_Labelfield(rect_primary, "播放时背景色", GUIFilled.无, GUIColor.无, Color.white, TextAnchor.UpperLeft, 12, Font_Light);
+            Editor_XTween_GUI.Gui_Labelfield(rect_primary, "播放时背景色", XTweenGUIFilled.无, XTweenGUIColor.无, Color.white, TextAnchor.UpperLeft, 12, Font_Light);
             rect_primary.Set(cloum_right - 26, row - 5, 80, 20);
             TweenConfigData.LiquidColor_Playing = XTween_Utilitys.ConvertColorToHexString(Editor_XTween_GUI.Gui_ColorField(rect_primary, XTween_Utilitys.ConvertHexStringToColor(TweenConfigData.LiquidColor_Playing)), true);
 
             // 待命时背景色
             rect_primary.Set(cloum_left, row + interval, 90, 20);
-            Editor_XTween_GUI.Gui_Labelfield(rect_primary, "待命时背景色", GUIFilled.无, GUIColor.无, Color.white, TextAnchor.UpperLeft, 12, Font_Light);
+            Editor_XTween_GUI.Gui_Labelfield(rect_primary, "待命时背景色", XTweenGUIFilled.无, XTweenGUIColor.无, Color.white, TextAnchor.UpperLeft, 12, Font_Light);
             rect_primary.Set(cloum_right - 26, row - 5 + interval, 80, 20);
             TweenConfigData.LiquidColor_Idle = XTween_Utilitys.ConvertColorToHexString(Editor_XTween_GUI.Gui_ColorField(rect_primary, XTween_Utilitys.ConvertHexStringToColor(TweenConfigData.LiquidColor_Idle)), true);
 
             // 动画指示器闪烁
             rect_primary.Set(cloum_left, row + interval * 2f, 90, 20);
-            Editor_XTween_GUI.Gui_Labelfield(rect_primary, "动画指示器闪烁", GUIFilled.无, GUIColor.无, Color.white, TextAnchor.UpperLeft, 12, Font_Light);
+            Editor_XTween_GUI.Gui_Labelfield(rect_primary, "动画指示器闪烁", XTweenGUIFilled.无, XTweenGUIColor.无, Color.white, TextAnchor.UpperLeft, 12, Font_Light);
             rect_primary.Set(cloum_right - 26, row - 5 + interval * 2f, 80, 20);
-            TweenConfigData.LiquidBlinker = Editor_XTween_GUI.Gui_Popup(rect_primary, TweenConfigData.LiquidBlinker, new string[2] { "关闭", "开启" }, GUIFilled.实体, GUIColor.深空灰, Color.white);
+            TweenConfigData.LiquidBlinker = Editor_XTween_GUI.Gui_Popup(rect_primary, TweenConfigData.LiquidBlinker, new string[2] { "关闭", "开启" }, XTweenGUIFilled.实体, XTweenGUIColor.深空灰, Color.white);
 
             // 面板控件主题色
             rect_primary.Set(cloum_left, row + interval * 3f, 90, 20);
-            Editor_XTween_GUI.Gui_Labelfield(rect_primary, "面板控件主题色", GUIFilled.无, GUIColor.无, Color.white, TextAnchor.UpperLeft, 12, Font_Light);
+            Editor_XTween_GUI.Gui_Labelfield(rect_primary, "面板控件主题色", XTweenGUIFilled.无, XTweenGUIColor.无, Color.white, TextAnchor.UpperLeft, 12, Font_Light);
             rect_primary.Set(cloum_right - 26, row - 5 + interval * 3f, 80, 20);
             TweenConfigData.Theme_Primary = XTween_Utilitys.ConvertColorToHexString(Editor_XTween_GUI.Gui_ColorField(rect_primary, XTween_Utilitys.ConvertHexStringToColor(TweenConfigData.Theme_Primary)), true);
 
             // 面板分组边框色
             rect_primary.Set(cloum_left, row + interval * 4f, 90, 20);
-            Editor_XTween_GUI.Gui_Labelfield(rect_primary, "面板分组边框色", GUIFilled.无, GUIColor.无, Color.white, TextAnchor.UpperLeft, 12, Font_Light);
+            Editor_XTween_GUI.Gui_Labelfield(rect_primary, "面板分组边框色", XTweenGUIFilled.无, XTweenGUIColor.无, Color.white, TextAnchor.UpperLeft, 12, Font_Light);
             rect_primary.Set(cloum_right - 26, row - 5 + interval * 4f, 80, 20);
             TweenConfigData.Theme_Group = XTween_Utilitys.ConvertColorToHexString(Editor_XTween_GUI.Gui_ColorField(rect_primary, XTween_Utilitys.ConvertHexStringToColor(TweenConfigData.Theme_Group)), true);
 
             // 面板分割线色
             rect_primary.Set(cloum_left, row + interval * 5f, 90, 20);
-            Editor_XTween_GUI.Gui_Labelfield(rect_primary, "面板分割线色", GUIFilled.无, GUIColor.无, Color.white, TextAnchor.UpperLeft, 12, Font_Light);
+            Editor_XTween_GUI.Gui_Labelfield(rect_primary, "面板分割线色", XTweenGUIFilled.无, XTweenGUIColor.无, Color.white, TextAnchor.UpperLeft, 12, Font_Light);
             rect_primary.Set(cloum_right - 26, row - 5 + interval * 5f, 80, 20);
             TweenConfigData.Theme_SeperateLine = XTween_Utilitys.ConvertColorToHexString(Editor_XTween_GUI.Gui_ColorField(rect_primary, XTween_Utilitys.ConvertHexStringToColor(TweenConfigData.Theme_SeperateLine)), true);
             #endregion
@@ -261,49 +261,49 @@ namespace SevenStrikeModules.XTween.Editor
             row += 95;
             // 动画池预加载 Integer
             rect_primary.Set(cloum_left, row + interval * 4, 90, 20);
-            Editor_XTween_GUI.Gui_Labelfield(rect_primary, "动画池预加载 - Integer", GUIFilled.无, GUIColor.无, Color.white, TextAnchor.UpperLeft, 12, Font_Light);
+            Editor_XTween_GUI.Gui_Labelfield(rect_primary, "动画池预加载 - Integer", XTweenGUIFilled.无, XTweenGUIColor.无, Color.white, TextAnchor.UpperLeft, 12, Font_Light);
             rect_primary.Set(cloum_right - 26, row - 5 + interval * 4, 80, 20);
             TweenConfigData.PoolCount_Int = Editor_XTween_GUI.Gui_InputField_Int(rect_primary, TweenConfigData.PoolCount_Int);
 
             // 动画池预加载 Float
             rect_primary.Set(cloum_left, row + interval * 5, 90, 20);
-            Editor_XTween_GUI.Gui_Labelfield(rect_primary, "动画池预加载 - Float", GUIFilled.无, GUIColor.无, Color.white, TextAnchor.UpperLeft, 12, Font_Light);
+            Editor_XTween_GUI.Gui_Labelfield(rect_primary, "动画池预加载 - Float", XTweenGUIFilled.无, XTweenGUIColor.无, Color.white, TextAnchor.UpperLeft, 12, Font_Light);
             rect_primary.Set(cloum_right - 26, row - 5 + interval * 5, 80, 20);
             TweenConfigData.PoolCount_Float = Editor_XTween_GUI.Gui_InputField_Int(rect_primary, TweenConfigData.PoolCount_Float);
 
             // 动画池预加载 String
             rect_primary.Set(cloum_left, row + interval * 6, 90, 20);
-            Editor_XTween_GUI.Gui_Labelfield(rect_primary, "动画池预加载 - String", GUIFilled.无, GUIColor.无, Color.white, TextAnchor.UpperLeft, 12, Font_Light);
+            Editor_XTween_GUI.Gui_Labelfield(rect_primary, "动画池预加载 - String", XTweenGUIFilled.无, XTweenGUIColor.无, Color.white, TextAnchor.UpperLeft, 12, Font_Light);
             rect_primary.Set(cloum_right - 26, row - 5 + interval * 6, 80, 20);
             TweenConfigData.PoolCount_String = Editor_XTween_GUI.Gui_InputField_Int(rect_primary, TweenConfigData.PoolCount_String);
 
             // 动画池预加载 Color
             rect_primary.Set(cloum_left, row + interval * 7, 90, 20);
-            Editor_XTween_GUI.Gui_Labelfield(rect_primary, "动画池预加载 - Color", GUIFilled.无, GUIColor.无, Color.white, TextAnchor.UpperLeft, 12, Font_Light);
+            Editor_XTween_GUI.Gui_Labelfield(rect_primary, "动画池预加载 - Color", XTweenGUIFilled.无, XTweenGUIColor.无, Color.white, TextAnchor.UpperLeft, 12, Font_Light);
             rect_primary.Set(cloum_right - 26, row - 5 + interval * 7, 80, 20);
             TweenConfigData.PoolCount_Color = Editor_XTween_GUI.Gui_InputField_Int(rect_primary, TweenConfigData.PoolCount_Color);
 
             // 动画池预加载 Quaternion
             rect_primary.Set(cloum_left, row + interval * 8, 90, 20);
-            Editor_XTween_GUI.Gui_Labelfield(rect_primary, "动画池预加载 - Quaternion", GUIFilled.无, GUIColor.无, Color.white, TextAnchor.UpperLeft, 12, Font_Light);
+            Editor_XTween_GUI.Gui_Labelfield(rect_primary, "动画池预加载 - Quaternion", XTweenGUIFilled.无, XTweenGUIColor.无, Color.white, TextAnchor.UpperLeft, 12, Font_Light);
             rect_primary.Set(cloum_right - 26, row - 5 + interval * 8, 80, 20);
             TweenConfigData.PoolCount_Quaternion = Editor_XTween_GUI.Gui_InputField_Int(rect_primary, TweenConfigData.PoolCount_Quaternion);
 
             // 动画池预加载 Vector2
             rect_primary.Set(cloum_left, row + interval * 9, 90, 20);
-            Editor_XTween_GUI.Gui_Labelfield(rect_primary, "动画池预加载 - Vector2", GUIFilled.无, GUIColor.无, Color.white, TextAnchor.UpperLeft, 12, Font_Light);
+            Editor_XTween_GUI.Gui_Labelfield(rect_primary, "动画池预加载 - Vector2", XTweenGUIFilled.无, XTweenGUIColor.无, Color.white, TextAnchor.UpperLeft, 12, Font_Light);
             rect_primary.Set(cloum_right - 26, row - 5 + interval * 9, 80, 20);
             TweenConfigData.PoolCount_Vector2 = Editor_XTween_GUI.Gui_InputField_Int(rect_primary, TweenConfigData.PoolCount_Vector2);
 
             // 动画池预加载 Vector3
             rect_primary.Set(cloum_left, row + interval * 10, 90, 20);
-            Editor_XTween_GUI.Gui_Labelfield(rect_primary, "动画池预加载 - Vector3", GUIFilled.无, GUIColor.无, Color.white, TextAnchor.UpperLeft, 12, Font_Light);
+            Editor_XTween_GUI.Gui_Labelfield(rect_primary, "动画池预加载 - Vector3", XTweenGUIFilled.无, XTweenGUIColor.无, Color.white, TextAnchor.UpperLeft, 12, Font_Light);
             rect_primary.Set(cloum_right - 26, row - 5 + interval * 10, 80, 20);
             TweenConfigData.PoolCount_Vector3 = Editor_XTween_GUI.Gui_InputField_Int(rect_primary, TweenConfigData.PoolCount_Vector3);
 
             // 动画池预加载 Vector4
             rect_primary.Set(cloum_left, row + interval * 11, 90, 20);
-            Editor_XTween_GUI.Gui_Labelfield(rect_primary, "动画池预加载 - Vector4", GUIFilled.无, GUIColor.无, Color.white, TextAnchor.UpperLeft, 12, Font_Light);
+            Editor_XTween_GUI.Gui_Labelfield(rect_primary, "动画池预加载 - Vector4", XTweenGUIFilled.无, XTweenGUIColor.无, Color.white, TextAnchor.UpperLeft, 12, Font_Light);
             rect_primary.Set(cloum_right - 26, row - 5 + interval * 11, 80, 20);
             TweenConfigData.PoolCount_Vector4 = Editor_XTween_GUI.Gui_InputField_Int(rect_primary, TweenConfigData.PoolCount_Vector4);
             #endregion
@@ -312,32 +312,35 @@ namespace SevenStrikeModules.XTween.Editor
             row += 33;
             // 场景加载时动画池自动回收开关
             rect_primary.Set(cloum_left, row + interval * 12, 90, 20);
-            Editor_XTween_GUI.Gui_Labelfield(rect_primary, "动画池自动回收 - 场景加载时", GUIFilled.无, GUIColor.无, Color.white, TextAnchor.UpperLeft, 12, Font_Light);
+            Editor_XTween_GUI.Gui_Labelfield(rect_primary, "动画池自动回收 - 场景加载时", XTweenGUIFilled.无, XTweenGUIColor.无, Color.white, TextAnchor.UpperLeft, 12, Font_Light);
             rect_primary.Set(cloum_right - 26, row - 5 + interval * 12, 80, 20);
-            TweenConfigData.PoolRecyleAllOnSceneLoaded = Editor_XTween_GUI.Gui_Toggle(rect_primary, false, new string[2] { "关闭", "开启" }, TweenConfigData.PoolRecyleAllOnSceneLoaded, GUIFilled.无, GUIColor.亮白, GUIFilled.实体, XTween_Dashboard.Theme_Primary, Color.white, Color.black);
+            TweenConfigData.PoolRecyleAllOnSceneLoaded = Editor_XTween_GUI.Gui_Toggle(rect_primary, false, new string[2] { "关闭", "开启" }, TweenConfigData.PoolRecyleAllOnSceneLoaded, XTweenGUIFilled.无, XTweenGUIColor.亮白, XTweenGUIFilled.实体, XTween_Dashboard.Theme_Primary, Color.white, Color.black);
 
             // 场景卸载时动画池自动回收开关
             rect_primary.Set(cloum_left, row + interval * 13, 90, 20);
-            Editor_XTween_GUI.Gui_Labelfield(rect_primary, "动画池自动回收 - 场景卸载时", GUIFilled.无, GUIColor.无, Color.white, TextAnchor.UpperLeft, 12, Font_Light);
+            Editor_XTween_GUI.Gui_Labelfield(rect_primary, "动画池自动回收 - 场景卸载时", XTweenGUIFilled.无, XTweenGUIColor.无, Color.white, TextAnchor.UpperLeft, 12, Font_Light);
             rect_primary.Set(cloum_right - 26, row - 5 + interval * 13, 80, 20);
-            TweenConfigData.PoolRecyleAllOnSceneUnloaded = Editor_XTween_GUI.Gui_Toggle(rect_primary, false, new string[2] { "关闭", "开启" }, TweenConfigData.PoolRecyleAllOnSceneUnloaded, GUIFilled.无, GUIColor.亮白, GUIFilled.实体, XTween_Dashboard.Theme_Primary, Color.white, Color.black);
+            TweenConfigData.PoolRecyleAllOnSceneUnloaded = Editor_XTween_GUI.Gui_Toggle(rect_primary, false, new string[2] { "关闭", "开启" }, TweenConfigData.PoolRecyleAllOnSceneUnloaded, XTweenGUIFilled.无, XTweenGUIColor.亮白, XTweenGUIFilled.实体, XTween_Dashboard.Theme_Primary, Color.white, Color.black);
             #endregion
 
             #region 保存配置按钮
             Editor_XTween_GUI.Gui_Layout_Space(862);
-            Editor_XTween_GUI.Gui_Layout_Horizontal_Start(GUIFilled.无, GUIColor.无);
+            Editor_XTween_GUI.Gui_Layout_Horizontal_Start(XTweenGUIFilled.无, XTweenGUIColor.无);
             Editor_XTween_GUI.Gui_Layout_Space(15);
-            if (Editor_XTween_GUI.Gui_Layout_Button("复位参数", "", GUIFilled.实体, GUIColor.警示黄, Color.black, 35, new RectOffset(), new Vector2(0, 0), TextAnchor.MiddleCenter, 12, Font_Light))
+            if (Editor_XTween_GUI.Gui_Layout_Button("复位参数", "", XTweenGUIFilled.实体, XTweenGUIColor.警示黄, Color.black, 35, new RectOffset(), new Vector2(0, 0), TextAnchor.MiddleCenter, 12, Font_Light))
             {
                 // 使用延迟调用避免GUI布局冲突
                 EditorApplication.delayCall += () =>
                 {
                     string resReset = Editor_XTween_GUI.Open(XTweenDialogType.修改, "XTween配置面板消息", "XTween配置参数复位", "接下来会将XTween的配置参数全部复位，此操作不可逆！请确定是否继续该操作？", "复位", "暂不", 1);
+                    if (string.IsNullOrEmpty(resReset))
+                    {
+                        return;
+                    }
                     if (resReset == "暂不")
                     {
                         return;
                     }
-
                     TweenConfigData.Theme_Primary = "#3BFE9B";
                     TweenConfigData.Theme_Group = "#1E1E1E";
                     TweenConfigData.Theme_SeperateLine = "#535353";
@@ -360,7 +363,7 @@ namespace SevenStrikeModules.XTween.Editor
                 //SaveConfig();
             }
             Editor_XTween_GUI.Gui_Layout_Space(5);
-            if (Editor_XTween_GUI.Gui_Layout_Button("更新配置", "", GUIFilled.实体, GUIColor.深空灰, Color.white, 35, new RectOffset(), new Vector2(0, 0), TextAnchor.MiddleCenter, 12, Font_Light))
+            if (Editor_XTween_GUI.Gui_Layout_Button("更新配置", "", XTweenGUIFilled.实体, XTweenGUIColor.深空灰, Color.white, 35, new RectOffset(), new Vector2(0, 0), TextAnchor.MiddleCenter, 12, Font_Light))
             {
                 if (!Application.isPlaying)
                 {
@@ -368,6 +371,10 @@ namespace SevenStrikeModules.XTween.Editor
                     EditorApplication.delayCall += () =>
                     {
                         string resUpdate = Editor_XTween_GUI.Open(XTweenDialogType.警告, "XTween配置面板消息", "XTween配置参数更新", "接下来会将XTween的配置参数全部更新，此操作不可逆！请确定是否继续该操作？", "更新", "暂不", 0);
+                        if (string.IsNullOrEmpty(resUpdate))
+                        {
+                            return;
+                        }
                         if (resUpdate == "暂不")
                         {
                             return;

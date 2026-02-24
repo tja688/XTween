@@ -26,7 +26,7 @@ namespace SevenStrikeModules.XTween
     /// 专门处理 四维向量_Vector4 类型动画的补间类
     /// </summary>
     /// <remarks>
-    /// 该类继承自 HudAnimation_TweenerBase<四维向量_Vector4>，实现了对 四维向量_Vector4 类型的插值计算
+    /// 该类继承自 XTween_Base<四维向量_Vector4>，实现了对 四维向量_Vector4 类型的插值计算
     /// 主要用于处理单个 四维向量_Vector4 的动画，例如3D位置、缩放_Scale、旋转等
     /// </remarks>
     public class XTween_Specialized_Vector4 : XTween_Base<Vector4>

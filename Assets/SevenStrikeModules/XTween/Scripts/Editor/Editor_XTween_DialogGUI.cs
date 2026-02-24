@@ -47,7 +47,11 @@ namespace SevenStrikeModules.XTween.Editor
         /// <summary>
         /// 五个按钮
         /// </summary>
-        五个按钮 = 4
+        五个按钮 = 4,
+        /// <summary>
+        /// 动画预设对话框
+        /// </summary>
+        动画预设 = 5
     }
 
     public enum XTweenDialogType
@@ -79,9 +83,9 @@ namespace SevenStrikeModules.XTween.Editor
     }
 
     /// <summary>
-    /// XHud弹窗对话框参数
+    /// 弹窗对话框参数
     /// </summary>
-    public struct XHudDialogInfo
+    public struct DialogInfo
     {
         /// <summary>
         /// 弹窗类型
@@ -216,6 +220,14 @@ namespace SevenStrikeModules.XTween.Editor
         /// 按钮文本 - 特别
         /// </summary>
         public string Text_Special = "";
+        /// <summary>
+        /// 按钮文本 - 预设名称
+        /// </summary>
+        public string Text_PresetName = "Preset - Name";
+        /// <summary>
+        /// 按钮文本 - 预设解释
+        /// </summary>
+        public string Text_PresetDescription = "Preset - Description";
 
         /// <summary>
         /// 图片
@@ -276,6 +288,10 @@ namespace SevenStrikeModules.XTween.Editor
         /// 回调函数 - Special
         /// </summary>
         public Action<string> Callback_Special;
+        /// <summary>
+        /// 回调函数 - Apply
+        /// </summary>
+        public Action<string, string> Callback_SavedPreset;
 
         /// <summary>
         /// 日期时间
@@ -291,6 +307,8 @@ namespace SevenStrikeModules.XTween.Editor
         Rect Date_rect;
         Rect Icon_rect;
         Rect TotalCount_rect;
+        Rect preset_name_rect;
+        Rect preset_des_rect;
 
         /// <summary>
         /// 按钮宽度
@@ -355,27 +373,49 @@ namespace SevenStrikeModules.XTween.Editor
                     break;
             }
 
+            #region 对话框标题文字
             Title_rect = new Rect(rect.x + 100, rect.y + 15, rect.width - 80, 30);
-            Editor_XTween_GUI.Gui_Labelfield(Title_rect, Title, GUIFilled.无, GUIColor.无, Color.white, TextAnchor.MiddleLeft, Vector2.zero, 20, Font_Bold);
+            Editor_XTween_GUI.Gui_Labelfield(Title_rect, Title, XTweenGUIFilled.无, XTweenGUIColor.无, Color.white, TextAnchor.MiddleLeft, Vector2.zero, 20, Font_Bold);
+            #endregion
 
+            #region 对话框标题分割线
             Sepline_rect = new Rect(rect.x + 102, rect.y + 60, 200, 1);
             Editor_XTween_GUI.Gui_Box(Sepline_rect, SepLineColor);
+            #endregion
 
-            Editor_XTween_GUI.Gui_Labelfield_Thin_WrapClip(new Rect(rect.x + 26, rect.y + 80, rect.width - 45, rect.height), Message, GUIFilled.无, GUIColor.无, MessageColor, TextAnchor.UpperLeft, new Vector2(0, 0), 12, true, Font_Light);
+            #region 对话框内容文字
+            Editor_XTween_GUI.Gui_Labelfield_Thin_WrapClip(new Rect(rect.x + 26, rect.y + 80, rect.width - 45, rect.height), Message, XTweenGUIFilled.无, XTweenGUIColor.无, MessageColor, TextAnchor.UpperLeft, new Vector2(0, 0), 12, true, Font_Light);
+            #endregion
 
+            #region 对话框日期时间
             DateTimes = DateTime.Now.ToString("yyyy-MM-dd  HH:mm:ss:ff");
             Date_rect = new Rect(rect.x + 150, rect.y + 15, rect.width - 180, rect.height);
-            Editor_XTween_GUI.Gui_Labelfield_Thin_WrapClip(Date_rect, DateTimes, GUIFilled.无, GUIColor.无, DateTimeColor, TextAnchor.UpperRight, new Vector2(0, 0), 13, true, Font_Light);
+            Editor_XTween_GUI.Gui_Labelfield_Thin_WrapClip(Date_rect, DateTimes, XTweenGUIFilled.无, XTweenGUIColor.无, DateTimeColor, TextAnchor.UpperRight, new Vector2(0, 0), 13, true, Font_Light);
+            #endregion
 
             BaseObject.Update();
+
+            #region 对话框如果是保存动画预设类型 - 则显示 "预设名称" & "预设解释" 的输入框
+            if (XTweenDialogButtonMode == XTweenDialogButtonMode.动画预设)
+            {
+
+                preset_name_rect = new Rect(rect.x + 26, rect.y + 140, rect.width - 45, 38);
+                Text_PresetName = Editor_XTween_GUI.Gui_TextArea_String(preset_name_rect, Text_PresetName, false, 13);
+                Editor_XTween_GUI.Gui_Labelfield(new Rect(preset_name_rect.x, preset_name_rect.y - 30, 200, 20), "预设名称", XTweenGUIFilled.无, XTweenGUIColor.无, Color.white, TextAnchor.MiddleLeft, Vector2.zero, 13, Font_Light);
+
+                preset_des_rect = new Rect(rect.x + 26, rect.y + 230, rect.width - 45, 120);
+                Text_PresetDescription = Editor_XTween_GUI.Gui_TextArea_String(preset_des_rect, Text_PresetDescription, true, 13);
+                Editor_XTween_GUI.Gui_Labelfield(new Rect(preset_des_rect.x, preset_des_rect.y - 30, 200, 20), "预设说明", XTweenGUIFilled.无, XTweenGUIColor.无, Color.white, TextAnchor.MiddleLeft, Vector2.zero, 13, Font_Light);
+            }
+            #endregion
 
             #region 列表
             if (DataList.Count > 0)
             {
                 TotalCount_rect = new Rect(rect.x + 26, rect.height - 52, 80, 30);
-                Editor_XTween_GUI.Gui_Labelfield(TotalCount_rect, DataList.Count.ToString(), GUIFilled.无, GUIColor.无, XTween_Dashboard.Theme_Primary, TextAnchor.MiddleLeft, Vector2.zero, 17, Font_Bold);
+                Editor_XTween_GUI.Gui_Labelfield(TotalCount_rect, DataList.Count.ToString(), XTweenGUIFilled.无, XTweenGUIColor.无, XTween_Dashboard.Theme_Primary, TextAnchor.MiddleLeft, Vector2.zero, 17, Font_Bold);
 
-                Editor_XTween_GUI.Gui_Labelfield(new Rect(TotalCount_rect.x + 30, TotalCount_rect.y + 1, 20, TotalCount_rect.height), " 项", GUIFilled.无, GUIColor.无, Color.gray, TextAnchor.MiddleLeft, Vector2.zero, 14, Font_Bold);
+                Editor_XTween_GUI.Gui_Labelfield(new Rect(TotalCount_rect.x + 30, TotalCount_rect.y + 1, 20, TotalCount_rect.height), " 项", XTweenGUIFilled.无, XTweenGUIColor.无, Color.gray, TextAnchor.MiddleLeft, Vector2.zero, 14, Font_Bold);
 
                 Editor_XTween_GUI.Gui_Layout_Space(130);
                 DrawDataList();
@@ -383,12 +423,16 @@ namespace SevenStrikeModules.XTween.Editor
             }
             else
             {
-                Editor_XTween_GUI.Gui_Layout_Space(185);
+                if (XTweenDialogButtonMode == XTweenDialogButtonMode.动画预设)
+                    Editor_XTween_GUI.Gui_Layout_Space(380);
+                else
+                    Editor_XTween_GUI.Gui_Layout_Space(185);
             }
             #endregion
 
             BaseObject.ApplyModifiedProperties();
 
+            #region 按钮控件
             string FocusName = Text_Ok + PrimaryIndex;
 
             switch (PrimaryIndex)
@@ -410,9 +454,10 @@ namespace SevenStrikeModules.XTween.Editor
                     break;
             }
 
-            EditorGUI.FocusTextInControl(FocusName);
+            if (XTweenDialogButtonMode != XTweenDialogButtonMode.动画预设)
+                EditorGUI.FocusTextInControl(FocusName);
 
-            Editor_XTween_GUI.Gui_Layout_Horizontal_Start(GUIFilled.无, GUIColor.无, 0);
+            Editor_XTween_GUI.Gui_Layout_Horizontal_Start(XTweenGUIFilled.无, XTweenGUIColor.无, 0);
             Editor_XTween_GUI.Gui_Layout_FlexSpace();
             switch (XTweenDialogButtonMode)
             {
@@ -431,9 +476,13 @@ namespace SevenStrikeModules.XTween.Editor
                 case XTweenDialogButtonMode.五个按钮:
                     DialogType_BtnMode_5();
                     break;
+                case XTweenDialogButtonMode.动画预设:
+                    DialogType_TweenPresetSave();
+                    break;
             }
             Editor_XTween_GUI.Gui_Layout_Space(25);
             Editor_XTween_GUI.Gui_Layout_Horizontal_End();
+            #endregion
             Repaint();
         }
 
@@ -477,7 +526,7 @@ namespace SevenStrikeModules.XTween.Editor
             SerializedProperty sp_sub = prop.FindPropertyRelative("SubTitle");
             SerializedProperty sp_msg = prop.FindPropertyRelative("Message");
 
-            Editor_XTween_GUI.Gui_Labelfield(index_rect, index.ToString("D2"), GUIFilled.无, GUIColor.无, Color.gray, TextAnchor.MiddleLeft, Vector2.zero, 11);
+            Editor_XTween_GUI.Gui_Labelfield(index_rect, index.ToString("D2"), XTweenGUIFilled.无, XTweenGUIColor.无, Color.gray, TextAnchor.MiddleLeft, Vector2.zero, 11);
 
             #region 标识名称
 
@@ -489,9 +538,9 @@ namespace SevenStrikeModules.XTween.Editor
     TextClipping clipping = TextClipping.Clip;
 #endif
 
-            Editor_XTween_GUI.Gui_Labelfield(title_rect, sp_title.stringValue, GUIFilled.无, GUIColor.无, Editor_XTween_GUI.GetColor(GUIColor.亮白), TextAnchor.MiddleLeft, Vector2.zero, 12, clipping);
-            Editor_XTween_GUI.Gui_Labelfield_Thin(sub_rect, sp_sub.stringValue, GUIFilled.无, GUIColor.无, XTween_Dashboard.Theme_Primary, TextAnchor.MiddleLeft, Vector2.zero, 12);
-            Editor_XTween_GUI.Gui_Labelfield_Thin(msg_rect, sp_msg.stringValue, GUIFilled.无, GUIColor.无, XTween_Dashboard.Theme_Primary, TextAnchor.MiddleRight, Vector2.zero, 12);
+            Editor_XTween_GUI.Gui_Labelfield(title_rect, sp_title.stringValue, XTweenGUIFilled.无, XTweenGUIColor.无, Editor_XTween_GUI.GetColor(XTweenGUIColor.亮白), TextAnchor.MiddleLeft, Vector2.zero, 12, clipping);
+            Editor_XTween_GUI.Gui_Labelfield_Thin(sub_rect, sp_sub.stringValue, XTweenGUIFilled.无, XTweenGUIColor.无, XTween_Dashboard.Theme_Primary, TextAnchor.MiddleLeft, Vector2.zero, 12);
+            Editor_XTween_GUI.Gui_Labelfield_Thin(msg_rect, sp_msg.stringValue, XTweenGUIFilled.无, XTweenGUIColor.无, XTween_Dashboard.Theme_Primary, TextAnchor.MiddleRight, Vector2.zero, 12);
             #endregion
         }
 
@@ -559,7 +608,7 @@ namespace SevenStrikeModules.XTween.Editor
         private void DialogType_BtnMode_1()
         {
             GUI.backgroundColor = XTween_Dashboard.Theme_Primary;
-            if (Editor_XTween_GUI.Gui_Layout_Button(Text_Ok, "", GUIFilled.实体, GUIColor.亮白, XTween_Utilitys.GetColorBrightnessLimite(XTween_Dashboard.Theme_Primary) ? Color.black : Color.white, 12, ButtonWidth, ButtonHeight, Font_Light, Text_Ok + PrimaryIndex))
+            if (Editor_XTween_GUI.Gui_Layout_Button(Text_Ok, "", XTweenGUIFilled.实体, XTweenGUIColor.亮白, XTween_Utilitys.GetColorBrightnessLimite(XTween_Dashboard.Theme_Primary) ? Color.black : Color.white, 12, ButtonWidth, ButtonHeight, Font_Light, Text_Ok + PrimaryIndex))
             {
                 Close();
 
@@ -584,7 +633,7 @@ namespace SevenStrikeModules.XTween.Editor
             {
                 textcolor = Color.black;
             }
-            if (Editor_XTween_GUI.Gui_Layout_Button(Text_Cancel, "", GUIFilled.实体, GUIColor.亮白, textcolor, 12, ButtonWidth, ButtonHeight, Font_Light, Text_Cancel + PrimaryIndex))
+            if (Editor_XTween_GUI.Gui_Layout_Button(Text_Cancel, "", XTweenGUIFilled.实体, XTweenGUIColor.亮白, textcolor, 12, ButtonWidth, ButtonHeight, Font_Light, Text_Cancel + PrimaryIndex))
             {
                 Close();
                 // 调用回调函数
@@ -600,7 +649,7 @@ namespace SevenStrikeModules.XTween.Editor
             {
                 textcolor = Color.black;
             }
-            if (Editor_XTween_GUI.Gui_Layout_Button(Text_Ok, "", GUIFilled.实体, GUIColor.亮白, textcolor, 12, ButtonWidth, ButtonHeight, Font_Light, Text_Ok + PrimaryIndex))
+            if (Editor_XTween_GUI.Gui_Layout_Button(Text_Ok, "", XTweenGUIFilled.实体, XTweenGUIColor.亮白, textcolor, 12, ButtonWidth, ButtonHeight, Font_Light, Text_Ok + PrimaryIndex))
             {
                 Close();
                 // 调用回调函数
@@ -624,7 +673,7 @@ namespace SevenStrikeModules.XTween.Editor
             {
                 textcolor = Color.black;
             }
-            if (Editor_XTween_GUI.Gui_Layout_Button(Text_Alt, "", GUIFilled.实体, GUIColor.亮白, textcolor, 12, ButtonWidth, ButtonHeight, Font_Light, Text_Alt + PrimaryIndex))
+            if (Editor_XTween_GUI.Gui_Layout_Button(Text_Alt, "", XTweenGUIFilled.实体, XTweenGUIColor.亮白, textcolor, 12, ButtonWidth, ButtonHeight, Font_Light, Text_Alt + PrimaryIndex))
             {
                 Close();
 
@@ -641,7 +690,7 @@ namespace SevenStrikeModules.XTween.Editor
             {
                 textcolor = Color.black;
             }
-            if (Editor_XTween_GUI.Gui_Layout_Button(Text_Cancel, "", GUIFilled.实体, GUIColor.亮白, textcolor, 12, ButtonWidth, ButtonHeight, Font_Light, Text_Cancel + PrimaryIndex))
+            if (Editor_XTween_GUI.Gui_Layout_Button(Text_Cancel, "", XTweenGUIFilled.实体, XTweenGUIColor.亮白, textcolor, 12, ButtonWidth, ButtonHeight, Font_Light, Text_Cancel + PrimaryIndex))
             {
                 Close();
 
@@ -658,7 +707,7 @@ namespace SevenStrikeModules.XTween.Editor
             {
                 textcolor = Color.black;
             }
-            if (Editor_XTween_GUI.Gui_Layout_Button(Text_Ok, "", GUIFilled.实体, GUIColor.亮白, textcolor, 12, ButtonWidth, ButtonHeight, Font_Light, Text_Ok + PrimaryIndex))
+            if (Editor_XTween_GUI.Gui_Layout_Button(Text_Ok, "", XTweenGUIFilled.实体, XTweenGUIColor.亮白, textcolor, 12, ButtonWidth, ButtonHeight, Font_Light, Text_Ok + PrimaryIndex))
             {
                 Close();
 
@@ -683,7 +732,7 @@ namespace SevenStrikeModules.XTween.Editor
             {
                 textcolor = Color.black;
             }
-            if (Editor_XTween_GUI.Gui_Layout_Button(Text_Other, "", GUIFilled.实体, GUIColor.亮白, textcolor, 12, ButtonWidth, ButtonHeight, Font_Light, Text_Other + PrimaryIndex))
+            if (Editor_XTween_GUI.Gui_Layout_Button(Text_Other, "", XTweenGUIFilled.实体, XTweenGUIColor.亮白, textcolor, 12, ButtonWidth, ButtonHeight, Font_Light, Text_Other + PrimaryIndex))
             {
                 Close();
 
@@ -700,7 +749,7 @@ namespace SevenStrikeModules.XTween.Editor
             {
                 textcolor = Color.black;
             }
-            if (Editor_XTween_GUI.Gui_Layout_Button(Text_Alt, "", GUIFilled.实体, GUIColor.亮白, textcolor, 12, ButtonWidth, ButtonHeight, Font_Light, Text_Alt + PrimaryIndex))
+            if (Editor_XTween_GUI.Gui_Layout_Button(Text_Alt, "", XTweenGUIFilled.实体, XTweenGUIColor.亮白, textcolor, 12, ButtonWidth, ButtonHeight, Font_Light, Text_Alt + PrimaryIndex))
             {
                 Close();
 
@@ -717,7 +766,7 @@ namespace SevenStrikeModules.XTween.Editor
             {
                 textcolor = Color.black;
             }
-            if (Editor_XTween_GUI.Gui_Layout_Button(Text_Cancel, "", GUIFilled.实体, GUIColor.亮白, textcolor, 12, ButtonWidth, ButtonHeight, Font_Light, Text_Cancel + PrimaryIndex))
+            if (Editor_XTween_GUI.Gui_Layout_Button(Text_Cancel, "", XTweenGUIFilled.实体, XTweenGUIColor.亮白, textcolor, 12, ButtonWidth, ButtonHeight, Font_Light, Text_Cancel + PrimaryIndex))
             {
                 Close();
 
@@ -734,7 +783,7 @@ namespace SevenStrikeModules.XTween.Editor
             {
                 textcolor = Color.black;
             }
-            if (Editor_XTween_GUI.Gui_Layout_Button(Text_Ok, "", GUIFilled.实体, GUIColor.亮白, textcolor, 12, ButtonWidth, ButtonHeight, Font_Light, Text_Ok + PrimaryIndex))
+            if (Editor_XTween_GUI.Gui_Layout_Button(Text_Ok, "", XTweenGUIFilled.实体, XTweenGUIColor.亮白, textcolor, 12, ButtonWidth, ButtonHeight, Font_Light, Text_Ok + PrimaryIndex))
             {
                 Close();
 
@@ -759,7 +808,7 @@ namespace SevenStrikeModules.XTween.Editor
             {
                 textcolor = Color.black;
             }
-            if (Editor_XTween_GUI.Gui_Layout_Button(Text_Special, "", GUIFilled.实体, GUIColor.亮白, textcolor, 12, ButtonWidth, ButtonHeight, Font_Light, Text_Special + PrimaryIndex))
+            if (Editor_XTween_GUI.Gui_Layout_Button(Text_Special, "", XTweenGUIFilled.实体, XTweenGUIColor.亮白, textcolor, 12, ButtonWidth, ButtonHeight, Font_Light, Text_Special + PrimaryIndex))
             {
                 Close();
 
@@ -776,7 +825,7 @@ namespace SevenStrikeModules.XTween.Editor
             {
                 textcolor = Color.black;
             }
-            if (Editor_XTween_GUI.Gui_Layout_Button(Text_Other, "", GUIFilled.实体, GUIColor.亮白, textcolor, 12, ButtonWidth, ButtonHeight, Font_Light, Text_Other + PrimaryIndex))
+            if (Editor_XTween_GUI.Gui_Layout_Button(Text_Other, "", XTweenGUIFilled.实体, XTweenGUIColor.亮白, textcolor, 12, ButtonWidth, ButtonHeight, Font_Light, Text_Other + PrimaryIndex))
             {
                 Close();
 
@@ -793,7 +842,7 @@ namespace SevenStrikeModules.XTween.Editor
             {
                 textcolor = Color.black;
             }
-            if (Editor_XTween_GUI.Gui_Layout_Button(Text_Alt, "", GUIFilled.实体, GUIColor.亮白, textcolor, 12, ButtonWidth, ButtonHeight, Font_Light, Text_Alt + PrimaryIndex))
+            if (Editor_XTween_GUI.Gui_Layout_Button(Text_Alt, "", XTweenGUIFilled.实体, XTweenGUIColor.亮白, textcolor, 12, ButtonWidth, ButtonHeight, Font_Light, Text_Alt + PrimaryIndex))
             {
                 Close();
 
@@ -810,7 +859,7 @@ namespace SevenStrikeModules.XTween.Editor
             {
                 textcolor = Color.black;
             }
-            if (Editor_XTween_GUI.Gui_Layout_Button(Text_Cancel, "", GUIFilled.实体, GUIColor.亮白, textcolor, 12, ButtonWidth, ButtonHeight, Font_Light, Text_Cancel + PrimaryIndex))
+            if (Editor_XTween_GUI.Gui_Layout_Button(Text_Cancel, "", XTweenGUIFilled.实体, XTweenGUIColor.亮白, textcolor, 12, ButtonWidth, ButtonHeight, Font_Light, Text_Cancel + PrimaryIndex))
             {
                 Close();
 
@@ -827,12 +876,52 @@ namespace SevenStrikeModules.XTween.Editor
             {
                 textcolor = Color.black;
             }
-            if (Editor_XTween_GUI.Gui_Layout_Button(Text_Ok, "", GUIFilled.实体, GUIColor.亮白, textcolor, 12, ButtonWidth, ButtonHeight, Font_Light, Text_Ok + PrimaryIndex))
+            if (Editor_XTween_GUI.Gui_Layout_Button(Text_Ok, "", XTweenGUIFilled.实体, XTweenGUIColor.亮白, textcolor, 12, ButtonWidth, ButtonHeight, Font_Light, Text_Ok + PrimaryIndex))
             {
                 Close();
 
                 // 调用回调函数
                 Callback_Ok?.Invoke(Text_Ok);
+            }
+            GUI.backgroundColor = Color.white;
+        }
+
+        /// <summary>
+        /// 动画预设保存模式
+        /// </summary>
+        private void DialogType_TweenPresetSave()
+        {
+            Color textcolor = XTween_Utilitys.GetColorBrightnessLimite(XTween_Dashboard.Theme_Primary) ? Color.black : Color.white;
+
+            if (PrimaryIndex == 1)
+            {
+                GUI.backgroundColor = XTween_Dashboard.Theme_Primary;
+            }
+            else
+            {
+                textcolor = Color.black;
+            }
+            if (Editor_XTween_GUI.Gui_Layout_Button(Text_Cancel, "", XTweenGUIFilled.实体, XTweenGUIColor.亮白, textcolor, 12, ButtonWidth, ButtonHeight, Font_Light, Text_Cancel + PrimaryIndex))
+            {
+                Close();
+                // 调用回调函数
+                Callback_Cancel?.Invoke(Text_Cancel);
+            }
+            GUI.backgroundColor = Color.white;
+            Editor_XTween_GUI.Gui_Layout_Space(ButtonDistance);
+            if (PrimaryIndex == 0)
+            {
+                GUI.backgroundColor = XTween_Dashboard.Theme_Primary;
+            }
+            else
+            {
+                textcolor = Color.black;
+            }
+            if (Editor_XTween_GUI.Gui_Layout_Button(Text_Ok, "", XTweenGUIFilled.实体, XTweenGUIColor.亮白, textcolor, 12, ButtonWidth, ButtonHeight, Font_Light, Text_Ok + PrimaryIndex))
+            {
+                Close();
+                // 调用回调函数
+                Callback_SavedPreset?.Invoke(Text_PresetName, Text_PresetDescription);
             }
             GUI.backgroundColor = Color.white;
         }

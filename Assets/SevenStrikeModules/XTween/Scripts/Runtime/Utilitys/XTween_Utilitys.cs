@@ -108,25 +108,25 @@ namespace SevenStrikeModules.XTween
         /// <param name="Title">标题</param>
         /// <param name="Content">内容</param>
         /// <param name="Mode">消息类型</param>
-        public static GUIMsgState DebugInfo(string Title, string Content, GUIMsgState Mode, GameObject xobject = null)
+        public static XTweenGUIMsgState DebugInfo(string Title, string Content, XTweenGUIMsgState Mode, GameObject xobject = null)
         {
             if (!PrintMsgEnable)
-                return GUIMsgState.未开启消息模块功能;
+                return XTweenGUIMsgState.未开启消息模块功能;
             switch (Mode)
             {
-                case GUIMsgState.确认:
+                case XTweenGUIMsgState.确认:
                     Debug.Log("<color=#c4c4c4>" + Title + "： </color>" + "┠─<color=#c3e55c>" + Content + "</color>", xobject);
                     break;
-                case GUIMsgState.错误:
+                case XTweenGUIMsgState.错误:
                     Debug.Log("<color=#c4c4c4>" + Title + "： </color>" + "┠─<color=#ff3f3f>" + Content + "</color>", xobject);
                     break;
-                case GUIMsgState.通知:
+                case XTweenGUIMsgState.通知:
                     Debug.Log("<color=#c4c4c4>" + Title + "： </color>" + "┠─<color=#bebebe>" + Content + "</color>", xobject);
                     break;
-                case GUIMsgState.警告:
+                case XTweenGUIMsgState.警告:
                     Debug.Log("<color=#c4c4c4>" + Title + "： </color>" + "┠─<color=#ffb80e>" + Content + "</color>", xobject);
                     break;
-                case GUIMsgState.设置:
+                case XTweenGUIMsgState.设置:
                     Debug.Log("<color=#c4c4c4>" + Title + "： </color>" + "┠─<color=#5cc1e5>" + Content + "</color>", xobject);
                     break;
             }

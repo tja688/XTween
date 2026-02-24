@@ -827,13 +827,13 @@ namespace SevenStrikeModules.XTween
 
             #region 加载材质和贴图
 #if UNITY_EDITOR
-            string path_mat = XTween_Dashboard.Get_path_XTween_GUIStyle_Path() + "Icon/Icons_Hud_XTween_PathTool/XTween_PathMark.mat";
+            string path_mat = XTween_Dashboard.Get_path_XTween_GUIStyle_Path() + "Icon/Icons_XTween_PathTool/XTween_PathMark.mat";
             Material mat = AssetDatabase.LoadAssetAtPath<Material>(path_mat);
             if (PathMarksTexture != null)
                 mat.mainTexture = PathMarksTexture;
             else
             {
-                string path_tex = XTween_Dashboard.Get_path_XTween_GUIStyle_Path() + "Icon/Icons_Hud_XTween_PathTool/PathMark.png";
+                string path_tex = XTween_Dashboard.Get_path_XTween_GUIStyle_Path() + "Icon/Icons_XTween_PathTool/PathMark.png";
                 Texture2D tex = AssetDatabase.LoadAssetAtPath<Texture2D>(path_tex);
                 mat.mainTexture = tex;
             }

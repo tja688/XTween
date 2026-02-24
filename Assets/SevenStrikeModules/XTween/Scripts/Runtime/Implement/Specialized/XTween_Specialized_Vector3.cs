@@ -26,7 +26,7 @@ namespace SevenStrikeModules.XTween
     /// 专门处理 三维向量_Vector3 类型动画的补间类
     /// </summary>
     /// <remarks>
-    /// 该类继承自 HudAnimation_TweenerBase<三维向量_Vector3>，实现了对 三维向量_Vector3 类型的插值计算
+    /// 该类继承自 XTween_Base<三维向量_Vector3>，实现了对 三维向量_Vector3 类型的插值计算
     /// 主要用于处理单个 三维向量_Vector3 的动画，例如3D位置、缩放_Scale、旋转等
     /// </remarks>
     public class XTween_Specialized_Vector3 : XTween_Base<Vector3>

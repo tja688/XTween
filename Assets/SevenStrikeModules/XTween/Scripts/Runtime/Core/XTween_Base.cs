@@ -240,7 +240,7 @@ namespace SevenStrikeModules.XTween
         /// </summary>
         internal float _PauseTime { get; set; }
 
-        internal StepUpdateMode _stepMode = StepUpdateMode.EveryFrame;
+        internal XTweenStepUpdateMode _stepMode = XTweenStepUpdateMode.EveryFrame;
         internal float _stepInterval = 0f;          // 时间间隔（秒）
         internal float _stepProgressInterval = 0f;  // 进度间隔（0-1）
         internal float _lastStepTime = 0f;          // 上次时间间隔执行时间
@@ -658,7 +658,7 @@ namespace SevenStrikeModules.XTween
 
                 switch (_stepMode)
                 {
-                    case StepUpdateMode.TimeInterval:
+                    case XTweenStepUpdateMode.TimeInterval:
                         // 时间间隔模式
                         if (_lastStepTime == 0 || currentTime - _lastStepTime >= _stepInterval)
                         {
@@ -667,7 +667,7 @@ namespace SevenStrikeModules.XTween
                         }
                         break;
 
-                    case StepUpdateMode.ProgressStep:
+                    case XTweenStepUpdateMode.ProgressStep:
                         // 进度步长模式
                         float currentProgress = _CurrentLinearProgress;
                         if (_lastStepProgress < 0 ||
@@ -678,7 +678,7 @@ namespace SevenStrikeModules.XTween
                         }
                         break;
 
-                    case StepUpdateMode.EveryFrame:
+                    case XTweenStepUpdateMode.EveryFrame:
                     default:
                         // 每帧模式（默认，保持向后兼容）
                         shouldCallStepUpdate = true;
@@ -1055,7 +1055,7 @@ namespace SevenStrikeModules.XTween
             _CustomEaseCurve = null;
 
             // 重置步长状态
-            _stepMode = StepUpdateMode.EveryFrame;
+            _stepMode = XTweenStepUpdateMode.EveryFrame;
             _stepInterval = 0f;
             _stepProgressInterval = 0f;
             _lastStepTime = 0f;
@@ -1103,11 +1103,11 @@ namespace SevenStrikeModules.XTween
             if (!_isWaitingLoopDelay)
             {
                 // 根据当前模式决定是否重置进度值
-                if (_stepMode == StepUpdateMode.TimeInterval)
+                if (_stepMode == XTweenStepUpdateMode.TimeInterval)
                 {
                     _lastStepTime = 0f;
                 }
-                else if (_stepMode == StepUpdateMode.ProgressStep)
+                else if (_stepMode == XTweenStepUpdateMode.ProgressStep)
                 {
                     _lastStepProgress = -1f;
                 }
@@ -1605,7 +1605,7 @@ namespace SevenStrikeModules.XTween
         /// <returns>当前动画对象</returns>
         public XTween_Base<TArg> SetStepTimeInterval(float interval)
         {
-            _stepMode = StepUpdateMode.TimeInterval;
+            _stepMode = XTweenStepUpdateMode.TimeInterval;
             _stepInterval = Mathf.Max(0.001f, interval); // 最小1毫秒
             _lastStepTime = 0f;
             return ReturnSelf();
@@ -1618,7 +1618,7 @@ namespace SevenStrikeModules.XTween
         /// <returns>当前动画对象</returns>
         public XTween_Base<TArg> SetStepProgressInterval(float interval)
         {
-            _stepMode = StepUpdateMode.ProgressStep;
+            _stepMode = XTweenStepUpdateMode.ProgressStep;
             _stepProgressInterval = Mathf.Clamp(interval, 0.001f, 1f); // 最小0.1%进度
             _lastStepProgress = -1f;
             return ReturnSelf();
@@ -1630,7 +1630,7 @@ namespace SevenStrikeModules.XTween
         /// <returns>当前动画对象</returns>
         public XTween_Base<TArg> SetStepEveryFrame()
         {
-            _stepMode = StepUpdateMode.EveryFrame;
+            _stepMode = XTweenStepUpdateMode.EveryFrame;
             return ReturnSelf();
         }
         #endregion
@@ -1921,7 +1921,7 @@ namespace SevenStrikeModules.XTween
         /// 2. 每个子类应实现为：return this;
         /// 
         /// 典型实现示例：
-        /// public override HudAnimation_TweenerBase<float> ReturnSelf() => this;
+        /// public override XTween_Base<float> ReturnSelf() => this;
         /// 
         /// 使用场景：
         /// SetFrom(...).SetEase(...).Play() 等链式调用

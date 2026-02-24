@@ -23,7 +23,7 @@ namespace SevenStrikeModules.XTween
     /// <summary>
     /// 步长更新模式
     /// </summary>
-    public enum StepUpdateMode
+    public enum XTweenStepUpdateMode
     {
         /// <summary>
         /// 每帧（默认，保持向后兼容）
@@ -41,7 +41,7 @@ namespace SevenStrikeModules.XTween
     /// <summary>
     /// 四元数平滑差值过渡方式
     /// </summary>
-    public enum RotateLerpType
+    public enum XTweenRotateLerpType
     {
         LerpUnclamped,
         SlerpUnclamped
@@ -49,7 +49,7 @@ namespace SevenStrikeModules.XTween
     /// <summary>
     /// 欧拉角旋转动画的方式
     /// </summary>
-    public enum RotationMode
+    public enum XTweenRotationMode
     {
         /// <summary>
         /// 默认模式，保持按照角度顺序旋转
@@ -67,7 +67,7 @@ namespace SevenStrikeModules.XTween
     /// <summary>
     /// 动画坐标空间
     /// </summary>
-    public enum TweenSpace
+    public enum XTweenSpace
     {
         /// <summary>
         /// 本地坐标空间
@@ -133,11 +133,11 @@ namespace SevenStrikeModules.XTween
         /// </summary>
         平铺_Tiled = 11,
         /// <summary>
-        /// HUD文本属性动画
+        /// 文本属性动画
         /// </summary>
         文字_Text = 12,
         /// <summary>
-        /// HUD TMP文本属性动画
+        /// TMP文本属性动画
         /// </summary>
         文字_TmpText = 13
     }
@@ -210,7 +210,7 @@ namespace SevenStrikeModules.XTween
         尺寸_Size = 3
     }
     /// <summary>
-    /// 定义HUD文本组件可动画化的属性
+    /// 定义文本组件可动画化的属性
     /// 用于控制标准文本元素的动画
     /// </summary>
     public enum XTweenTypes_Text
@@ -233,7 +233,7 @@ namespace SevenStrikeModules.XTween
         文字内容_Content = 3
     }
     /// <summary>
-    /// 定义HUD TMP文本组件可动画化的属性
+    /// 定义TMP文本组件可动画化的属性
     /// 用于控制TextMeshPro文本元素的动画
     /// </summary>
     public enum XTweenTypes_TmpText
@@ -402,7 +402,7 @@ namespace SevenStrikeModules.XTween
     /// <summary>
     /// 颜色样式
     /// </summary>
-    public enum GUIColor
+    public enum XTweenGUIColor
     {
         /// <summary>
         /// 颜色值：232323
@@ -477,7 +477,7 @@ namespace SevenStrikeModules.XTween
     /// <summary>
     /// 填充类型
     /// </summary>
-    public enum GUIFilled
+    public enum XTweenGUIFilled
     {
         实体 = 0,
         边框 = 1,
@@ -488,7 +488,7 @@ namespace SevenStrikeModules.XTween
     /// <summary>
     /// 通知消息类型
     /// </summary>
-    public enum GUIMsgState
+    public enum XTweenGUIMsgState
     {
         通知 = 0,
         确认 = 1,

@@ -59,7 +59,7 @@ namespace SevenStrikeModules.XTween
             {
                 if (_instance == null)
                 {
-                    XTween_Utilitys.DebugInfo("XTween Manager动画管理器消息", "XTween Manager 还没有被实例化！", GUIMsgState.确认);
+                    XTween_Utilitys.DebugInfo("XTween Manager动画管理器消息", "XTween Manager 还没有被实例化！", XTweenGUIMsgState.确认);
                 }
                 return _instance;
             }
@@ -90,10 +90,10 @@ namespace SevenStrikeModules.XTween
                 XTween_Pool.SetPreloadCount(typeof(XTween_Specialized_Vector3), XTween_Dashboard.ConfigData.PoolCount_Vector3);
                 XTween_Pool.SetPreloadCount(typeof(XTween_Specialized_Vector4), XTween_Dashboard.ConfigData.PoolCount_Vector4);
                 XTween_Pool.PreloadAll();
-                XTween_Utilitys.DebugInfo("XTween Pool动画池消息", "XTween Pool动画池已预加载并就绪！", GUIMsgState.确认);
+                XTween_Utilitys.DebugInfo("XTween Pool动画池消息", "XTween Pool动画池已预加载并就绪！", XTweenGUIMsgState.确认);
             }
             DontDestroyOnLoad(gameObject);
-            XTween_Utilitys.DebugInfo("XTween Manager动画管理器消息", "XTween Manager动画管理器已就绪！", GUIMsgState.确认);
+            XTween_Utilitys.DebugInfo("XTween Manager动画管理器消息", "XTween Manager动画管理器已就绪！", XTweenGUIMsgState.确认);
         }
         #endregion
 
@@ -754,7 +754,7 @@ namespace SevenStrikeModules.XTween
 
             // 清空播放列表（避免残留引用）
             _ActiveTweens.Clear();
-            XTween_Utilitys.DebugInfo("XTween Manager动画管理器消息", $"检测到场景切换动作，自动回收 {tempTweens.Count} 个动画实例", GUIMsgState.确认);
+            XTween_Utilitys.DebugInfo("XTween Manager动画管理器消息", $"检测到场景切换动作，自动回收 {tempTweens.Count} 个动画实例", XTweenGUIMsgState.确认);
         }
         #endregion
     }

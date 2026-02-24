@@ -26,7 +26,7 @@ namespace SevenStrikeModules.XTween
     /// 专门处理 二维向量_Vector2 类型动画的补间类
     /// </summary>
     /// <remarks>
-    /// 该类继承自 HudAnimation_TweenerBase<二维向量_Vector2>，实现了对 二维向量_Vector2 类型的插值计算
+    /// 该类继承自 XTween_Base<二维向量_Vector2>，实现了对 二维向量_Vector2 类型的插值计算
     /// 主要用于处理单个 二维向量_Vector2 的动画，例如尺寸、2D位移等
     /// </remarks>
     public class XTween_Specialized_Vector2 : XTween_Base<Vector2>

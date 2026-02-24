@@ -26,7 +26,7 @@ namespace SevenStrikeModules.XTween
     /// 专门处理 颜色_Color 类型动画的补间类
     /// </summary>
     /// <remarks>
-    /// 该类继承自 HudAnimation_TweenerBase<颜色_Color>，实现了对 颜色_Color 类型的插值计算
+    /// 该类继承自 XTween_Base<颜色_Color>，实现了对 颜色_Color 类型的插值计算
     /// 主要用于处理单个 颜色_Color 的动画，例如Image颜色改变
     /// </remarks>
     public class XTween_Specialized_Color : XTween_Base<Color>

@@ -140,8 +140,8 @@ namespace SevenStrikeModules.XTween.Editor
             BaseScript = (XTween_Manager)target;
 
             #region 图标获取
-            icon_main = Editor_XTween_GUI.GetIcon("Icons_Hud_XTween_Manager/icon_main");
-            icon_pathpercent = Editor_XTween_GUI.GetIcon("Icons_Hud_XTween_Controller/icon_pathpercent");
+            icon_main = Editor_XTween_GUI.GetIcon("Icons_XTween_Manager/icon_main");
+            icon_pathpercent = Editor_XTween_GUI.GetIcon("Icons_XTween_Controller/icon_pathpercent");
             LiquidBg_Pure = Editor_XTween_GUI.GetIcon("Icons_Liquid/XTween_Manager/LiquidBg_Pure");
             LiquidBg_Scan = Editor_XTween_GUI.GetIcon("Icons_Liquid/XTween_Manager/LiquidBg_Scan");
             LiquidBg_Status_Pure = Editor_XTween_GUI.GetIcon("Icons_Liquid/XTween_Manager/LiquidBg_Status_Pure");
@@ -149,12 +149,12 @@ namespace SevenStrikeModules.XTween.Editor
             icon_notrun = Editor_XTween_GUI.GetIcon("Icons_Liquid/XTween_Manager/icon_notrun");
             Font_Bold = Editor_XTween_GUI.GetFont("SS_Editor_Bold");
             Font_Light = Editor_XTween_GUI.GetFont("SS_Editor_Light");
-            icon_preview_r = Editor_XTween_GUI.GetIcon("Icons_Hud_XTween_Manager/icon_preview_r");
-            icon_preview_p = Editor_XTween_GUI.GetIcon("Icons_Hud_XTween_Manager/icon_preview_p");
-            icon_rewind_r = Editor_XTween_GUI.GetIcon("Icons_Hud_XTween_Manager/icon_rewind_r");
-            icon_rewind_p = Editor_XTween_GUI.GetIcon("Icons_Hud_XTween_Manager/icon_rewind_p");
-            icon_recycle_r = Editor_XTween_GUI.GetIcon("Icons_Hud_XTween_Manager/icon_recycle_r");
-            icon_recycle_p = Editor_XTween_GUI.GetIcon("Icons_Hud_XTween_Manager/icon_recycle_p");
+            icon_preview_r = Editor_XTween_GUI.GetIcon("Icons_XTween_Manager/icon_preview_r");
+            icon_preview_p = Editor_XTween_GUI.GetIcon("Icons_XTween_Manager/icon_preview_p");
+            icon_rewind_r = Editor_XTween_GUI.GetIcon("Icons_XTween_Manager/icon_rewind_r");
+            icon_rewind_p = Editor_XTween_GUI.GetIcon("Icons_XTween_Manager/icon_rewind_p");
+            icon_recycle_r = Editor_XTween_GUI.GetIcon("Icons_XTween_Manager/icon_recycle_r");
+            icon_recycle_p = Editor_XTween_GUI.GetIcon("Icons_XTween_Manager/icon_recycle_p");
             LiquidPlug_Green = Editor_XTween_GUI.GetIcon("Icons_Liquid/LiquidPlug_Green");
             LiquidPlug_Yellow = Editor_XTween_GUI.GetIcon("Icons_Liquid/LiquidPlug_Yellow");
             MetalGrid = Editor_XTween_GUI.GetIcon("Icons_Liquid/MetalGrid");
@@ -162,9 +162,9 @@ namespace SevenStrikeModules.XTween.Editor
             LiquidDirty_Bg_Small = Editor_XTween_GUI.GetIcon("Icons_Liquid/XTween_Manager/LiquidDirty_Bg_Small");
             LiquidDirty_Status = Editor_XTween_GUI.GetIcon("Icons_Liquid/XTween_Manager/LiquidDirty_Status");
             LiquidDirty_Status_Small = Editor_XTween_GUI.GetIcon("Icons_Liquid/XTween_Manager/LiquidDirty_Status_Small");
-            ListIndex = Editor_XTween_GUI.GetIcon("Icons_Hud_XTween_Manager/ListIndex");
-            ItemIcon = Editor_XTween_GUI.GetIcon("Icons_Hud_XTween_Manager/ItemIcon");
-            Highlight = Editor_XTween_GUI.GetIcon("Icons_Hud_XTween_Manager/Highlight");
+            ListIndex = Editor_XTween_GUI.GetIcon("Icons_XTween_Manager/ListIndex");
+            ItemIcon = Editor_XTween_GUI.GetIcon("Icons_XTween_Manager/ItemIcon");
+            Highlight = Editor_XTween_GUI.GetIcon("Icons_XTween_Manager/Highlight");
             #endregion
 
             liquid_rectoffet = new RectOffset(45, 45, 20, 20);
@@ -210,14 +210,14 @@ namespace SevenStrikeModules.XTween.Editor
         {
             serializedObject.Update();
 
-            Editor_XTween_GUI.Gui_Layout_Banner(icon_main, GUIFilled.实体, GUIColor.深空灰, "XTween - 动画管理器", Color.white, 20, 20);
+            Editor_XTween_GUI.Gui_Layout_Banner(icon_main, XTweenGUIFilled.实体, XTweenGUIColor.深空灰, "XTween - 动画管理器", Color.white, 20, 20);
             Editor_XTween_GUI.Gui_Layout_Space(5);
 
             #region 动画批量操作
-            Editor_XTween_GUI.Gui_Layout_Vertical_Start(GUIFilled.纯色边框, GUIColor.亮白, 5, "动画批量操作", XTween_Dashboard.Theme_Primary);
+            Editor_XTween_GUI.Gui_Layout_Vertical_Start(XTweenGUIFilled.纯色边框, XTweenGUIColor.亮白, 5, "动画批量操作", XTween_Dashboard.Theme_Primary);
             Editor_XTween_GUI.Gui_Layout_Space(10);
 
-            Editor_XTween_GUI.Gui_Layout_Horizontal_Start(GUIFilled.无, GUIColor.无, 0);
+            Editor_XTween_GUI.Gui_Layout_Horizontal_Start(XTweenGUIFilled.无, XTweenGUIColor.无, 0);
             Editor_XTween_GUI.Gui_Layout_Space(10);
             #region 全部播放
             GUI.enabled = true;
@@ -228,7 +228,7 @@ namespace SevenStrikeModules.XTween.Editor
                     BaseScript.Play_All();
                 else
                 {
-                    XTween_Utilitys.DebugInfo("XTween动画管理器消息", "应用未运行，只有在应用运行时期才可以使用此功能！", GUIMsgState.警告);
+                    XTween_Utilitys.DebugInfo("XTween动画管理器消息", "应用未运行，只有在应用运行时期才可以使用此功能！", XTweenGUIMsgState.警告);
                 }
 
                 return;
@@ -243,7 +243,7 @@ namespace SevenStrikeModules.XTween.Editor
                     BaseScript.Rewind_All();
                 else
                 {
-                    XTween_Utilitys.DebugInfo("XTween动画管理器消息", "应用未运行，只有在引用运行时期才可以使用此功能！", GUIMsgState.警告);
+                    XTween_Utilitys.DebugInfo("XTween动画管理器消息", "应用未运行，只有在引用运行时期才可以使用此功能！", XTweenGUIMsgState.警告);
                 }
 
                 return;
@@ -258,7 +258,7 @@ namespace SevenStrikeModules.XTween.Editor
                     XTween_Pool.ForceRecycleAll();
                 else
                 {
-                    XTween_Utilitys.DebugInfo("XTween动画管理器消息", "应用未运行，只有在引用运行时期才可以使用此功能！", GUIMsgState.警告);
+                    XTween_Utilitys.DebugInfo("XTween动画管理器消息", "应用未运行，只有在引用运行时期才可以使用此功能！", XTweenGUIMsgState.警告);
                 }
                 return;
             }
@@ -289,7 +289,7 @@ namespace SevenStrikeModules.XTween.Editor
             }
 
             #region 统计数据
-            Editor_XTween_GUI.Gui_Layout_Vertical_Start(GUIFilled.纯色边框, GUIColor.亮白, 5, "统计数据", XTween_Dashboard.Theme_Primary);
+            Editor_XTween_GUI.Gui_Layout_Vertical_Start(XTweenGUIFilled.纯色边框, XTweenGUIColor.亮白, 5, "统计数据", XTween_Dashboard.Theme_Primary);
             Editor_XTween_GUI.Gui_Layout_Space(5);
 
             if (Application.isPlaying)
@@ -340,7 +340,7 @@ namespace SevenStrikeModules.XTween.Editor
             }
 
             rect_liquid_prim.Set(rect_liquid_set.x + rect_liquid_set.width - 85, rect_liquid_set.y + 20, 50, 6);
-            Editor_XTween_GUI.Gui_Labelfield(rect_liquid_prim, Application.isPlaying ? $"动画统计：{Count_Tweens} 个" : "", GUIFilled.无, GUIColor.无, Color.black, TextAnchor.MiddleRight, new Vector2(0, 0), 11, Font_Light);
+            Editor_XTween_GUI.Gui_Labelfield(rect_liquid_prim, Application.isPlaying ? $"动画统计：{Count_Tweens} 个" : "", XTweenGUIFilled.无, XTweenGUIColor.无, Color.black, TextAnchor.MiddleRight, new Vector2(0, 0), 11, Font_Light);
 
             progressheight = 70;
             LiquidProgress(rect_liquid_set, progressheight, liquid_left_margin, liquid_right_margin, 25, "播放中", Application.isPlaying ? $"{TwnData_Playing.Count} / {Count_Tweens} ({(Count_Tweens == 0 ? 0 : TwnData_Playing.Percentage_Smooth.ToString("F2"))})" : "-", (Count_Tweens == 0 ? 0 : TwnData_Playing.Percentage_Smooth));
@@ -358,7 +358,7 @@ namespace SevenStrikeModules.XTween.Editor
             #endregion
 
             #region 活跃动画列表
-            Editor_XTween_GUI.Gui_Layout_Vertical_Start(GUIFilled.纯色边框, GUIColor.亮白, 5, "活跃动画列表", XTween_Dashboard.Theme_Primary);
+            Editor_XTween_GUI.Gui_Layout_Vertical_Start(XTweenGUIFilled.纯色边框, XTweenGUIColor.亮白, 5, "活跃动画列表", XTween_Dashboard.Theme_Primary);
             Editor_XTween_GUI.Gui_Layout_Space(5);
 
             rect_liquid_prim = new Rect(18, 440, EditorGUIUtility.currentViewWidth - 35, 100);
@@ -432,7 +432,7 @@ namespace SevenStrikeModules.XTween.Editor
             {
                 Editor_XTween_GUI.Gui_Layout_Space(50);
                 Editor_XTween_GUI.Gui_Layout_Space(180);
-                Editor_XTween_GUI.Gui_Layout_Horizontal_Start(GUIFilled.无, GUIColor.无);
+                Editor_XTween_GUI.Gui_Layout_Horizontal_Start(XTweenGUIFilled.无, XTweenGUIColor.无);
                 Editor_XTween_GUI.Gui_Layout_FlexSpace();
                 Editor_XTween_GUI.Gui_Layout_Icon(45, icon_notrun, new Vector2(0, -20));
                 Editor_XTween_GUI.Gui_Layout_FlexSpace();
@@ -446,7 +446,7 @@ namespace SevenStrikeModules.XTween.Editor
     TextClipping clipping = TextClipping.Clip;
 #endif
 
-                Editor_XTween_GUI.Gui_Layout_Labelfield("当前没有活跃的动画", GUIFilled.无, GUIColor.无, Color.black * 0.8f, true, clipping, TextAnchor.MiddleCenter, 12, Font_Light);
+                Editor_XTween_GUI.Gui_Layout_Labelfield("当前没有活跃的动画", XTweenGUIFilled.无, XTweenGUIColor.无, Color.black * 0.8f, true, clipping, TextAnchor.MiddleCenter, 12, Font_Light);
                 Editor_XTween_GUI.Gui_Layout_Space(260);
             }
             else
@@ -517,7 +517,7 @@ namespace SevenStrikeModules.XTween.Editor
             bold_e = "";
 #endif
 
-            Editor_XTween_GUI.Gui_Labelfield(rect_item, $"ID：{tween.UniqueId.ToString()}", GUIFilled.无, GUIColor.无, Color.white, TextAnchor.MiddleLeft, Vector2.zero, 11, true, clipping, true, Font_Light);
+            Editor_XTween_GUI.Gui_Labelfield(rect_item, $"ID：{tween.UniqueId.ToString()}", XTweenGUIFilled.无, XTweenGUIColor.无, Color.white, TextAnchor.MiddleLeft, Vector2.zero, 11, true, clipping, true, Font_Light);
 
             bool IsExtraExpandPanel = currentWidth < 310 ? true : false;
             float height = 75;
@@ -541,7 +541,7 @@ namespace SevenStrikeModules.XTween.Editor
                 {
                     GUI.color = Color.black;
                     rect_item.Set(rect.width - 76, rect.y + 57, 100, 65);
-                    Editor_XTween_GUI.Gui_Labelfield(rect_item, "CustomCurve", GUIFilled.无, GUIColor.无, Color.black, TextAnchor.MiddleLeft, 11, Font_Bold);
+                    Editor_XTween_GUI.Gui_Labelfield(rect_item, "CustomCurve", XTweenGUIFilled.无, XTweenGUIColor.无, Color.black, TextAnchor.MiddleLeft, 11, Font_Bold);
                 }
             }
             #endregion
@@ -554,17 +554,17 @@ namespace SevenStrikeModules.XTween.Editor
             rect_item.Set(rect.x + 30, rect.y + height - 2, Highlight.width, Highlight.height);
             Editor_XTween_GUI.Gui_Icon(rect_item, Highlight);
             rect_item.Set(rect.x + 38, rect.y + height, rect.width, 15);
-            Editor_XTween_GUI.Gui_Labelfield(rect_item, "基础", GUIFilled.无, GUIColor.无, Color.black, TextAnchor.MiddleLeft, Vector2.zero, 13, true, clipping, true, Font_Light);
+            Editor_XTween_GUI.Gui_Labelfield(rect_item, "基础", XTweenGUIFilled.无, XTweenGUIColor.无, Color.black, TextAnchor.MiddleLeft, Vector2.zero, 13, true, clipping, true, Font_Light);
             rect_item.Set(rect.x + 10, rect.y + height + 15, rect.width - 20, 1);
             Editor_XTween_GUI.Gui_Box(rect_item);
             rect_item.Set(rect.x + 10, rect.y + height + 28, (rect.width / 2) - 5, 15);
-            Editor_XTween_GUI.Gui_Labelfield(rect_item, $"耗时：{bold_s}{tween.ElapsedTime * 1000:F0}{bold_e}ms / {bold_s}{tween.Duration * 1000:F0}{bold_e}ms", GUIFilled.无, GUIColor.无, Color.white, TextAnchor.MiddleLeft, Vector2.zero, 12, true, clipping, true, Font_Light);
+            Editor_XTween_GUI.Gui_Labelfield(rect_item, $"耗时：{bold_s}{tween.ElapsedTime * 1000:F0}{bold_e}ms / {bold_s}{tween.Duration * 1000:F0}{bold_e}ms", XTweenGUIFilled.无, XTweenGUIColor.无, Color.white, TextAnchor.MiddleLeft, Vector2.zero, 12, true, clipping, true, Font_Light);
             rect_item.Set(rect.x + (rect.width / 2) + 10, rect.y + height + 28, (rect.width / 2) - 10, 15);
-            Editor_XTween_GUI.Gui_Labelfield(rect_item, $"延迟：{bold_s}{tween.Delay.ToString()}{bold_e} s", GUIFilled.无, GUIColor.无, Color.white, TextAnchor.MiddleLeft, Vector2.zero, 12, true, clipping, true, Font_Light);
+            Editor_XTween_GUI.Gui_Labelfield(rect_item, $"延迟：{bold_s}{tween.Delay.ToString()}{bold_e} s", XTweenGUIFilled.无, XTweenGUIColor.无, Color.white, TextAnchor.MiddleLeft, Vector2.zero, 12, true, clipping, true, Font_Light);
             rect_item.Set(rect.x + 10, rect.y + height + 50, (rect.width / 2) - 5, 15);
-            Editor_XTween_GUI.Gui_Labelfield(rect_item, $"缓动：{bold_s}{tween.EaseMode.ToString()}{bold_e}", GUIFilled.无, GUIColor.无, Color.white, TextAnchor.MiddleLeft, Vector2.zero, 12, true, clipping, true, Font_Light);
+            Editor_XTween_GUI.Gui_Labelfield(rect_item, $"缓动：{bold_s}{tween.EaseMode.ToString()}{bold_e}", XTweenGUIFilled.无, XTweenGUIColor.无, Color.white, TextAnchor.MiddleLeft, Vector2.zero, 12, true, clipping, true, Font_Light);
             rect_item.Set(rect.x + (rect.width / 2) + 10, rect.y + height + 50, (rect.width / 2) - 10, 15);
-            Editor_XTween_GUI.Gui_Labelfield(rect_item, $"曲线：{bold_s}{(tween.UseCustomEaseCurve ? "使用" : "不使用")}{bold_e}", GUIFilled.无, GUIColor.无, Color.white, TextAnchor.MiddleLeft, Vector2.zero, 12, true, clipping, true, Font_Light);
+            Editor_XTween_GUI.Gui_Labelfield(rect_item, $"曲线：{bold_s}{(tween.UseCustomEaseCurve ? "使用" : "不使用")}{bold_e}", XTweenGUIFilled.无, XTweenGUIColor.无, Color.white, TextAnchor.MiddleLeft, Vector2.zero, 12, true, clipping, true, Font_Light);
             #endregion
 
             height += 78;
@@ -575,17 +575,17 @@ namespace SevenStrikeModules.XTween.Editor
             rect_item.Set(rect.x + 30, rect.y + height - 2, Highlight.width, Highlight.height);
             Editor_XTween_GUI.Gui_Icon(rect_item, Highlight);
             rect_item.Set(rect.x + 38, rect.y + height, rect.width, 15);
-            Editor_XTween_GUI.Gui_Labelfield(rect_item, "循环", GUIFilled.无, GUIColor.无, Color.black, TextAnchor.MiddleLeft, Vector2.zero, 13, true, clipping, true, Font_Light);
+            Editor_XTween_GUI.Gui_Labelfield(rect_item, "循环", XTweenGUIFilled.无, XTweenGUIColor.无, Color.black, TextAnchor.MiddleLeft, Vector2.zero, 13, true, clipping, true, Font_Light);
             rect_item.Set(rect.x + 10, rect.y + height + 15, rect.width - 20, 1);
             Editor_XTween_GUI.Gui_Box(rect_item);
             rect_item.Set(rect.x + 10, rect.y + height + 28, (rect.width / 2) - 5, 15);
-            Editor_XTween_GUI.Gui_Labelfield(rect_item, $"次数：{bold_s}{tween.LoopCount.ToString()}{bold_e} s", GUIFilled.无, GUIColor.无, Color.white, TextAnchor.MiddleLeft, Vector2.zero, 12, true, clipping, true, Font_Light);
+            Editor_XTween_GUI.Gui_Labelfield(rect_item, $"次数：{bold_s}{tween.LoopCount.ToString()}{bold_e} s", XTweenGUIFilled.无, XTweenGUIColor.无, Color.white, TextAnchor.MiddleLeft, Vector2.zero, 12, true, clipping, true, Font_Light);
             rect_item.Set(rect.x + (rect.width / 2) + 10, rect.y + height + 28, (rect.width / 2) - 10, 15);
-            Editor_XTween_GUI.Gui_Labelfield(rect_item, $"递归：{bold_s}{tween.CurrentLoop.ToString()}{bold_e} 次", GUIFilled.无, GUIColor.无, Color.white, TextAnchor.MiddleLeft, Vector2.zero, 12, true, clipping, true, Font_Light);
+            Editor_XTween_GUI.Gui_Labelfield(rect_item, $"递归：{bold_s}{tween.CurrentLoop.ToString()}{bold_e} 次", XTweenGUIFilled.无, XTweenGUIColor.无, Color.white, TextAnchor.MiddleLeft, Vector2.zero, 12, true, clipping, true, Font_Light);
             rect_item.Set(rect.x + 10, rect.y + height + 50, (rect.width / 2) - 5, 15);
-            Editor_XTween_GUI.Gui_Labelfield(rect_item, $"模式：{bold_s}{tween.LoopType.ToString()}{bold_e}", GUIFilled.无, GUIColor.无, Color.white, TextAnchor.MiddleLeft, Vector2.zero, 12, true, clipping, true, Font_Light);
+            Editor_XTween_GUI.Gui_Labelfield(rect_item, $"模式：{bold_s}{tween.LoopType.ToString()}{bold_e}", XTweenGUIFilled.无, XTweenGUIColor.无, Color.white, TextAnchor.MiddleLeft, Vector2.zero, 12, true, clipping, true, Font_Light);
             rect_item.Set(rect.x + (rect.width / 2) + 10, rect.y + height + 50, (rect.width / 2) - 10, 15);
-            Editor_XTween_GUI.Gui_Labelfield(rect_item, $"间隔：{bold_s}{tween.LoopingDelay.ToString()}{bold_e} s", GUIFilled.无, GUIColor.无, Color.white, TextAnchor.MiddleLeft, Vector2.zero, 12, true, clipping, true, Font_Light);
+            Editor_XTween_GUI.Gui_Labelfield(rect_item, $"间隔：{bold_s}{tween.LoopingDelay.ToString()}{bold_e} s", XTweenGUIFilled.无, XTweenGUIColor.无, Color.white, TextAnchor.MiddleLeft, Vector2.zero, 12, true, clipping, true, Font_Light);
             #endregion
 
             height += 78;
@@ -596,19 +596,19 @@ namespace SevenStrikeModules.XTween.Editor
             rect_item.Set(rect.x + 30, rect.y + height - 2, Highlight.width, Highlight.height);
             Editor_XTween_GUI.Gui_Icon(rect_item, Highlight);
             rect_item.Set(rect.x + 38, rect.y + height, rect.width, 15);
-            Editor_XTween_GUI.Gui_Labelfield(rect_item, "状态", GUIFilled.无, GUIColor.无, Color.black, TextAnchor.MiddleLeft, Vector2.zero, 13, true, clipping, true, Font_Light);
+            Editor_XTween_GUI.Gui_Labelfield(rect_item, "状态", XTweenGUIFilled.无, XTweenGUIColor.无, Color.black, TextAnchor.MiddleLeft, Vector2.zero, 13, true, clipping, true, Font_Light);
             rect_item.Set(rect.x + 72, rect.y + height, rect.width, 15);
-            Editor_XTween_GUI.Gui_Labelfield(rect_item, $"({GetStateString(tween)})", GUIFilled.无, GUIColor.无, Color.black, TextAnchor.MiddleLeft, Vector2.zero, 11, true, clipping, true, Font_Light);
+            Editor_XTween_GUI.Gui_Labelfield(rect_item, $"({GetStateString(tween)})", XTweenGUIFilled.无, XTweenGUIColor.无, Color.black, TextAnchor.MiddleLeft, Vector2.zero, 11, true, clipping, true, Font_Light);
             rect_item.Set(rect.x + 10, rect.y + height + 15, rect.width - 20, 1);
             Editor_XTween_GUI.Gui_Box(rect_item);
             rect_item.Set(rect.x + 10, rect.y + height + 28, (rect.width / 2) - 5, 15);
-            Editor_XTween_GUI.Gui_Labelfield(rect_item, $"自动杀死：{bold_s}{tween.AutoKill.ToString()}{bold_e}", GUIFilled.无, GUIColor.无, Color.white, TextAnchor.MiddleLeft, Vector2.zero, 12, true, clipping, true, Font_Light);
+            Editor_XTween_GUI.Gui_Labelfield(rect_item, $"自动杀死：{bold_s}{tween.AutoKill.ToString()}{bold_e}", XTweenGUIFilled.无, XTweenGUIColor.无, Color.white, TextAnchor.MiddleLeft, Vector2.zero, 12, true, clipping, true, Font_Light);
             rect_item.Set(rect.x + (rect.width / 2) + 10, rect.y + height + 28, (rect.width / 2) - 10, 15);
-            Editor_XTween_GUI.Gui_Labelfield(rect_item, $"相对模式：{bold_s}{tween.IsRelative.ToString()}{bold_e}", GUIFilled.无, GUIColor.无, Color.white, TextAnchor.MiddleLeft, Vector2.zero, 12, true, clipping, true, Font_Light);
+            Editor_XTween_GUI.Gui_Labelfield(rect_item, $"相对模式：{bold_s}{tween.IsRelative.ToString()}{bold_e}", XTweenGUIFilled.无, XTweenGUIColor.无, Color.white, TextAnchor.MiddleLeft, Vector2.zero, 12, true, clipping, true, Font_Light);
             rect_item.Set(rect.x + 10, rect.y + height + 50, (rect.width / 2) - 5, 15);
-            Editor_XTween_GUI.Gui_Labelfield(rect_item, $"暂停状态：{bold_s}{tween.IsPaused.ToString()}{bold_e}", GUIFilled.无, GUIColor.无, Color.white, TextAnchor.MiddleLeft, Vector2.zero, 12, true, clipping, true, Font_Light);
+            Editor_XTween_GUI.Gui_Labelfield(rect_item, $"暂停状态：{bold_s}{tween.IsPaused.ToString()}{bold_e}", XTweenGUIFilled.无, XTweenGUIColor.无, Color.white, TextAnchor.MiddleLeft, Vector2.zero, 12, true, clipping, true, Font_Light);
             rect_item.Set(rect.x + (rect.width / 2) + 10, rect.y + height + 50, (rect.width / 2) - 10, 15);
-            Editor_XTween_GUI.Gui_Labelfield(rect_item, $"完成状态：{bold_s}{tween.IsCompleted.ToString()}{bold_e}", GUIFilled.无, GUIColor.无, Color.white, TextAnchor.MiddleLeft, Vector2.zero, 12, true, clipping, true, Font_Light);
+            Editor_XTween_GUI.Gui_Labelfield(rect_item, $"完成状态：{bold_s}{tween.IsCompleted.ToString()}{bold_e}", XTweenGUIFilled.无, XTweenGUIColor.无, Color.white, TextAnchor.MiddleLeft, Vector2.zero, 12, true, clipping, true, Font_Light);
             #endregion
 
             Editor_XTween_GUI.Gui_Layout_Space(370);
@@ -638,10 +638,10 @@ namespace SevenStrikeModules.XTween.Editor
             EditorGUI.DrawRect(r_pro, Color.black);
             // 标题
             r_pro.Set(rect_progress.x + mar_left, rect_progress.y + (height - 17), 50, 6);
-            Editor_XTween_GUI.Gui_Labelfield(r_pro, title, GUIFilled.无, GUIColor.无, Color.black * 0.9f, TextAnchor.MiddleLeft, new Vector2(0, 0), 12, Font_Light);
+            Editor_XTween_GUI.Gui_Labelfield(r_pro, title, XTweenGUIFilled.无, XTweenGUIColor.无, Color.black * 0.9f, TextAnchor.MiddleLeft, new Vector2(0, 0), 12, Font_Light);
             // 数值
             r_pro.Set(rect_progress.x + (rect_progress.width - mar_right - mar_value), rect_progress.y + (height - 17), 50, 6);
-            Editor_XTween_GUI.Gui_Labelfield(r_pro, value, GUIFilled.无, GUIColor.无, Color.black * 0.95f, TextAnchor.MiddleRight, new Vector2(0, 0), 11, Font_Light);
+            Editor_XTween_GUI.Gui_Labelfield(r_pro, value, XTweenGUIFilled.无, XTweenGUIColor.无, Color.black * 0.95f, TextAnchor.MiddleRight, new Vector2(0, 0), 11, Font_Light);
             // 起点线
             r_pro.Set((rect_progress.x + mar_left), rect_progress.y + (height - 2), 1, 6);
             EditorGUI.DrawRect(r_pro, Color.black * 0.3f);

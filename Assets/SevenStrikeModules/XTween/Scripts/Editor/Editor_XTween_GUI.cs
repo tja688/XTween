@@ -81,7 +81,7 @@ namespace SevenStrikeModules.XTween.Editor
         /// 获取背景填充
         /// </summary>
         /// <param name="Color"></param>
-        public static Texture2D GetFillTexture(GUIFilled Mode, GUIColor Color, bool IsHalf = false)
+        public static Texture2D GetFillTexture(XTweenGUIFilled Mode, XTweenGUIColor Color, bool IsHalf = false)
         {
             if (GUICreator == null)
             {
@@ -105,14 +105,14 @@ namespace SevenStrikeModules.XTween.Editor
         /// </summary>
         /// <param name="Mode">类型</param>
         /// <param name="Color">颜色（具体请查看工程目录中文件的实际名称）</param>
-        public static Texture2D GetBtnFillTexture(GUIFilled Mode, GUIColor Color)
+        public static Texture2D GetBtnFillTexture(XTweenGUIFilled Mode, XTweenGUIColor Color)
         {
             if (GUICreator == null)
             {
                 Gui_Layout_Initia();
             }
 
-            if (Mode == GUIFilled.透明)
+            if (Mode == XTweenGUIFilled.透明)
                 return AssetDatabase.LoadAssetAtPath<Texture2D>(XTween_Dashboard.Get_path_XTween_GUIStyle_Path() + $"EditorUI/Button/Btn_{Mode}.png");
             else
                 return AssetDatabase.LoadAssetAtPath<Texture2D>(XTween_Dashboard.Get_path_XTween_GUIStyle_Path() + $"EditorUI/Button/Btn_{Mode}_{Color}.png");
@@ -144,7 +144,7 @@ namespace SevenStrikeModules.XTween.Editor
         /// </summary>
         /// <param name="color"></param>
         /// <returns></returns>
-        public static Color GetColor(GUIColor color)
+        public static Color GetColor(XTweenGUIColor color)
         {
             if (GUICreator == null)
             {
@@ -154,58 +154,58 @@ namespace SevenStrikeModules.XTween.Editor
             Color col = new Color();
             switch (color)
             {
-                case GUIColor.深空灰:
+                case XTweenGUIColor.深空灰:
                     ColorUtility.TryParseHtmlString("#232323", out col);
                     break;
-                case GUIColor.阴影灰:
+                case XTweenGUIColor.阴影灰:
                     ColorUtility.TryParseHtmlString("#909090", out col);
                     break;
-                case GUIColor.亮白:
+                case XTweenGUIColor.亮白:
                     ColorUtility.TryParseHtmlString("#e8e8e8", out col);
                     break;
-                case GUIColor.柠檬绿:
+                case XTweenGUIColor.柠檬绿:
                     ColorUtility.TryParseHtmlString("#c9e63f", out col);
                     break;
-                case GUIColor.工业蓝:
+                case XTweenGUIColor.工业蓝:
                     ColorUtility.TryParseHtmlString("#38aafb", out col);
                     break;
-                case GUIColor.警示黄:
+                case XTweenGUIColor.警示黄:
                     ColorUtility.TryParseHtmlString("#ffc230", out col);
                     break;
-                case GUIColor.玫瑰粉:
+                case XTweenGUIColor.玫瑰粉:
                     ColorUtility.TryParseHtmlString("#fa5d98", out col);
                     break;
-                case GUIColor.神秘紫:
+                case XTweenGUIColor.神秘紫:
                     ColorUtility.TryParseHtmlString("#9e5afb", out col);
                     break;
-                case GUIColor.魅力红:
+                case XTweenGUIColor.魅力红:
                     ColorUtility.TryParseHtmlString("#ff3737", out col);
                     break;
-                case GUIColor.灰绿:
+                case XTweenGUIColor.灰绿:
                     ColorUtility.TryParseHtmlString("#94a565", out col);
                     break;
-                case GUIColor.亮橘红:
+                case XTweenGUIColor.亮橘红:
                     ColorUtility.TryParseHtmlString("#ff872e", out col);
                     break;
-                case GUIColor.枪灰:
+                case XTweenGUIColor.枪灰:
                     ColorUtility.TryParseHtmlString("#747474", out col);
                     break;
-                case GUIColor.亮金色:
+                case XTweenGUIColor.亮金色:
                     ColorUtility.TryParseHtmlString("#ffd86b", out col);
                     break;
-                case GUIColor.沉暗红:
+                case XTweenGUIColor.沉暗红:
                     ColorUtility.TryParseHtmlString("#a32a2a", out col);
                     break;
-                case GUIColor.烟灰蓝:
+                case XTweenGUIColor.烟灰蓝:
                     ColorUtility.TryParseHtmlString("#76829a", out col);
                     break;
-                case GUIColor.健康绿:
+                case XTweenGUIColor.健康绿:
                     ColorUtility.TryParseHtmlString("#4aeec9", out col);
                     break;
-                case GUIColor.浅灰:
+                case XTweenGUIColor.浅灰:
                     ColorUtility.TryParseHtmlString("#414141", out col);
                     break;
-                case GUIColor.无:
+                case XTweenGUIColor.无:
                     break;
             }
             return col;
@@ -564,10 +564,10 @@ namespace SevenStrikeModules.XTween.Editor
         /// <param name="TitleOffset">标题偏移</param>
         /// <param name="TitleColor">标题颜色</param>
         /// <param name="Font">字体</param>
-        public static void Gui_Group(Rect rect_group, GUIFilled FillStyle, GUIColor Color, string Title, Vector2 TitleOffset, Color TitleColor, Font Font)
+        public static void Gui_Group(Rect rect_group, XTweenGUIFilled FillStyle, XTweenGUIColor Color, string Title, Vector2 TitleOffset, Color TitleColor, Font Font)
         {
             GUIStyle Style = new GUIStyle(Style_Group_Half);
-            if (FillStyle != GUIFilled.无)
+            if (FillStyle != XTweenGUIFilled.无)
                 Style.normal.background = GetFillTexture(FillStyle, Color, true);
             else
                 Style.normal.background = null;
@@ -578,14 +578,14 @@ namespace SevenStrikeModules.XTween.Editor
             GUI.EndGroup();
             GUI.backgroundColor = bgcol;
 
-            Gui_Labelfield(new Rect(rect_group.x + TitleOffset.x, rect_group.y + TitleOffset.y, 80, 20), Title, GUIFilled.无, GUIColor.亮白, TitleColor, TextAnchor.UpperLeft, new Vector2(0, 0), 12, Font);
+            Gui_Labelfield(new Rect(rect_group.x + TitleOffset.x, rect_group.y + TitleOffset.y, 80, 20), Title, XTweenGUIFilled.无, XTweenGUIColor.亮白, TitleColor, TextAnchor.UpperLeft, new Vector2(0, 0), 12, Font);
         }
 
         #region Box
-        public static void Gui_Box_Style(Rect rect, GUIFilled FillStyle, GUIColor Color)
+        public static void Gui_Box_Style(Rect rect, XTweenGUIFilled FillStyle, XTweenGUIColor Color)
         {
             GUIStyle Style = new GUIStyle(Style_Group);
-            if (FillStyle != GUIFilled.无)
+            if (FillStyle != XTweenGUIFilled.无)
                 Style.normal.background = GetFillTexture(FillStyle, Color);
             else
                 Style.normal.background = null;
@@ -679,7 +679,7 @@ namespace SevenStrikeModules.XTween.Editor
         /// <param name="Color"></param>
         /// <param name="ButtonTextColor"></param>        
         /// <returns>返回的Int值用于判断选择了那个选项</returns>
-        public static int Gui_Popup(Rect Rect, int index, string[] options, GUIFilled FillStyle, GUIColor Color, Color ButtonTextColor)
+        public static int Gui_Popup(Rect Rect, int index, string[] options, XTweenGUIFilled FillStyle, XTweenGUIColor Color, Color ButtonTextColor)
         {
             GUIStyle Style = new GUIStyle(Style_EnumsOption);
             Style.normal.background = GetFillTexture(FillStyle, Color);
@@ -694,7 +694,7 @@ namespace SevenStrikeModules.XTween.Editor
         /// </summary>
         /// <param name="Rect">按钮尺寸</param>
         /// <returns>返回的Int值用于判断选择了那个选项</returns>
-        public static void Gui_PopupWithString(Rect Rect, ref SerializedProperty serializedProperty, string[] options, GUIFilled FillStyle, GUIColor Color, Color ButtonTextColor)
+        public static void Gui_PopupWithString(Rect Rect, ref SerializedProperty serializedProperty, string[] options, XTweenGUIFilled FillStyle, XTweenGUIColor Color, Color ButtonTextColor)
         {
             GUIStyle Style = new GUIStyle(Style_EnumsOption);
             Style.normal.background = GetFillTexture(FillStyle, Color);
@@ -725,7 +725,7 @@ namespace SevenStrikeModules.XTween.Editor
         /// </summary>
         /// <param name="Rect">按钮尺寸</param>
         /// <returns>返回的布尔值用于判断该按钮是否被按下</returns>
-        public static bool Gui_Button(Rect Rect, Texture2D tex_release, Texture2D tex_press, bool use_tex = true, string button_text = "", string button_tooltip = "", Color button_color = default(Color), Color button_text_color = default(Color), GUIFilled FillStyle = GUIFilled.实体)
+        public static bool Gui_Button(Rect Rect, Texture2D tex_release, Texture2D tex_press, bool use_tex = true, string button_text = "", string button_tooltip = "", Color button_color = default(Color), Color button_text_color = default(Color), XTweenGUIFilled FillStyle = XTweenGUIFilled.实体)
         {
             GUIStyle Style = new GUIStyle(Style_Button);
 
@@ -737,8 +737,8 @@ namespace SevenStrikeModules.XTween.Editor
             }
             else
             {
-                if (FillStyle != GUIFilled.无)
-                    Style.normal.background = GetBtnFillTexture(FillStyle, GUIColor.亮白);
+                if (FillStyle != XTweenGUIFilled.无)
+                    Style.normal.background = GetBtnFillTexture(FillStyle, XTweenGUIColor.亮白);
                 else
                     Style.normal.background = null;
             }
@@ -769,7 +769,7 @@ namespace SevenStrikeModules.XTween.Editor
         /// </summary>
         /// <param name="Rect">按钮尺寸</param>
         /// <returns>返回的布尔值用于判断该按钮是否被按下</returns>
-        public static bool Gui_Button(Rect Rect, Texture2D tex_release, Texture2D tex_press, TextAnchor anchor, bool use_tex = true, string button_text = "", string button_tooltip = "", Color button_color = default(Color), Color button_text_color = default(Color), GUIFilled FillStyle = GUIFilled.实体, int FontSize = 12)
+        public static bool Gui_Button(Rect Rect, Texture2D tex_release, Texture2D tex_press, TextAnchor anchor, bool use_tex = true, string button_text = "", string button_tooltip = "", Color button_color = default(Color), Color button_text_color = default(Color), XTweenGUIFilled FillStyle = XTweenGUIFilled.实体, int FontSize = 12)
         {
             GUIStyle Style = new GUIStyle(Style_Button);
 
@@ -781,8 +781,8 @@ namespace SevenStrikeModules.XTween.Editor
             }
             else
             {
-                if (FillStyle != GUIFilled.无)
-                    Style.normal.background = GetBtnFillTexture(FillStyle, GUIColor.亮白);
+                if (FillStyle != XTweenGUIFilled.无)
+                    Style.normal.background = GetBtnFillTexture(FillStyle, XTweenGUIColor.亮白);
                 else
                     Style.normal.background = null;
             }
@@ -823,7 +823,7 @@ namespace SevenStrikeModules.XTween.Editor
         /// <param name="TextColor_Normal">正常状态选项按钮文字颜色</param>
         /// <param name="TextColor_Selected">选中状态选项按钮文字颜色</param>
         /// <returns></returns>
-        public static bool Gui_Toggle(Rect rect, bool simple, string[] Options = null, bool Val = false, GUIFilled FillStyle_Normal = GUIFilled.边框, GUIColor Color_Normal = GUIColor.亮白, GUIFilled FillStyle_Selected = GUIFilled.实体, Color Color_Selected = default, Color TextColor_Normal = default, Color TextColor_Selected = default)
+        public static bool Gui_Toggle(Rect rect, bool simple, string[] Options = null, bool Val = false, XTweenGUIFilled FillStyle_Normal = XTweenGUIFilled.边框, XTweenGUIColor Color_Normal = XTweenGUIColor.亮白, XTweenGUIFilled FillStyle_Selected = XTweenGUIFilled.实体, Color Color_Selected = default, Color TextColor_Normal = default, Color TextColor_Selected = default)
         {
             if (simple)
             {
@@ -834,7 +834,7 @@ namespace SevenStrikeModules.XTween.Editor
                 int x = 0;
                 GUIStyle Style = new GUIStyle(Style_ToolBar);
                 Style.normal.background = GetBtnFillTexture(FillStyle_Normal, Color_Normal);
-                Style.onNormal.background = GetBtnFillTexture(FillStyle_Selected, GUIColor.亮白);
+                Style.onNormal.background = GetBtnFillTexture(FillStyle_Selected, XTweenGUIColor.亮白);
                 Style.normal.textColor = TextColor_Normal;
                 Style.onNormal.textColor = TextColor_Selected;
 
@@ -867,11 +867,11 @@ namespace SevenStrikeModules.XTween.Editor
         /// <param name="TextColor_Normal"></param>
         /// <param name="TextColor_Selected"></param>
         /// <returns></returns>
-        public static int Gui_ToolBar(Rect rect, string[] Options, int Val, GUIFilled FillStyle_Normal, GUIFilled FillStyle_Selected, Color Color_Selected, Color TextColor_Normal, Color TextColor_Selected)
+        public static int Gui_ToolBar(Rect rect, string[] Options, int Val, XTweenGUIFilled FillStyle_Normal, XTweenGUIFilled FillStyle_Selected, Color Color_Selected, Color TextColor_Normal, Color TextColor_Selected)
         {
             GUIStyle Style = new GUIStyle(Style_ToolBar);
-            Style.normal.background = GetBtnFillTexture(FillStyle_Normal, GUIColor.亮白);
-            Style.onNormal.background = GetBtnFillTexture(FillStyle_Selected, GUIColor.亮白);
+            Style.normal.background = GetBtnFillTexture(FillStyle_Normal, XTweenGUIColor.亮白);
+            Style.onNormal.background = GetBtnFillTexture(FillStyle_Selected, XTweenGUIColor.亮白);
             Style.normal.textColor = TextColor_Normal;
             Style.onNormal.textColor = TextColor_Selected;
 
@@ -1023,6 +1023,20 @@ namespace SevenStrikeModules.XTween.Editor
         {
             return EditorGUI.TextField(Rect, val);
         }
+        /// <summary>
+        /// 创造一个String输入框
+        /// </summary>
+        /// <param name="Rect">尺寸_Size</param>
+        /// <param name="val"></param>
+        /// <param name="style"></param>
+        /// <returns>返回String数值</returns>
+        public static string Gui_TextArea_String(Rect Rect, string val, bool wordWrap, int fontsize)
+        {
+            GUIStyle Style = new GUIStyle(Style_TextsField);
+            Style.fontSize = fontsize;
+            Style.wordWrap = wordWrap;
+            return EditorGUI.TextArea(Rect, val, Style);
+        }
         #endregion
 
         /// <summary>
@@ -1077,7 +1091,7 @@ namespace SevenStrikeModules.XTween.Editor
         /// 创造一个Gui标签框 - 字符串内容
         /// </summary>
         /// <param name="Text">输入框标题</param>
-        public static void Gui_Labelfield(Rect Rect, string Text, GUIFilled FillStyle, GUIColor Color, Color ButtonTextColor, TextAnchor Align, Vector2 Offset, int FontSize = 12)
+        public static void Gui_Labelfield(Rect Rect, string Text, XTweenGUIFilled FillStyle, XTweenGUIColor Color, Color ButtonTextColor, TextAnchor Align, Vector2 Offset, int FontSize = 12)
         {
             GUIStyle Style = new GUIStyle(Style_LabelfieldBoldText);
             Style.normal.background = GetFillTexture(FillStyle, Color);
@@ -1091,7 +1105,7 @@ namespace SevenStrikeModules.XTween.Editor
         /// 创造一个Gui标签框 - 字符串内容
         /// </summary>
         /// <param name="Text">输入框标题</param>
-        public static void Gui_Labelfield(Rect Rect, string Text, GUIFilled FillStyle, GUIColor Color, Color ButtonTextColor, TextAnchor Align, int FontSize = 12, Font font = null)
+        public static void Gui_Labelfield(Rect Rect, string Text, XTweenGUIFilled FillStyle, XTweenGUIColor Color, Color ButtonTextColor, TextAnchor Align, int FontSize = 12, Font font = null)
         {
             GUIStyle Style = new GUIStyle(Style_LabelfieldBoldText);
             Style.normal.background = GetFillTexture(FillStyle, Color);
@@ -1105,7 +1119,7 @@ namespace SevenStrikeModules.XTween.Editor
         /// 创造一个Gui标签框 - 字符串内容
         /// </summary>
         /// <param name="Text">输入框标题</param>
-        public static void Gui_Labelfield(Rect Rect, string Text, GUIFilled FillStyle, GUIColor Color, Color ButtonTextColor, TextAnchor Align, int FontSize = 12, bool richText = true, Font font = null)
+        public static void Gui_Labelfield(Rect Rect, string Text, XTweenGUIFilled FillStyle, XTweenGUIColor Color, Color ButtonTextColor, TextAnchor Align, int FontSize = 12, bool richText = true, Font font = null)
         {
             GUIStyle Style = new GUIStyle(Style_LabelfieldBoldText);
             Style.normal.background = GetFillTexture(FillStyle, Color);
@@ -1120,7 +1134,7 @@ namespace SevenStrikeModules.XTween.Editor
         /// 创造一个Gui标签框 - 字符串内容
         /// </summary>
         /// <param name="Text">输入框标题</param>
-        public static void Gui_Labelfield(Rect Rect, string Text, GUIFilled FillStyle, GUIColor Color, Color ButtonTextColor, TextAnchor Align, int FontSize = 12, Font font = null, bool WordWrap = true)
+        public static void Gui_Labelfield(Rect Rect, string Text, XTweenGUIFilled FillStyle, XTweenGUIColor Color, Color ButtonTextColor, TextAnchor Align, int FontSize = 12, Font font = null, bool WordWrap = true)
         {
             GUIStyle Style = new GUIStyle(Style_LabelfieldBoldText);
             Style.normal.background = GetFillTexture(FillStyle, Color);
@@ -1135,7 +1149,7 @@ namespace SevenStrikeModules.XTween.Editor
         /// 创造一个Gui标签框 - 字符串内容
         /// </summary>
         /// <param name="Text">输入框标题</param>
-        public static void Gui_Labelfield(Rect Rect, string Text, GUIFilled FillStyle, GUIColor Color, Color ButtonTextColor, TextAnchor Align, Vector2 Offset, int FontSize = 12, Font font = null)
+        public static void Gui_Labelfield(Rect Rect, string Text, XTweenGUIFilled FillStyle, XTweenGUIColor Color, Color ButtonTextColor, TextAnchor Align, Vector2 Offset, int FontSize = 12, Font font = null)
         {
             GUIStyle Style = new GUIStyle(Style_LabelfieldBoldText);
             Style.normal.background = GetFillTexture(FillStyle, Color);
@@ -1150,7 +1164,7 @@ namespace SevenStrikeModules.XTween.Editor
         /// 创造一个Gui标签框 - 字符串内容
         /// </summary>
         /// <param name="Text">输入框标题</param>
-        public static void Gui_Labelfield(Rect Rect, string Text, GUIFilled FillStyle, GUIColor Color, Color ButtonTextColor, bool DisplayBg, Color BgColor, TextAnchor Align, Vector2 Offset, int FontSize = 12, Font font = null)
+        public static void Gui_Labelfield(Rect Rect, string Text, XTweenGUIFilled FillStyle, XTweenGUIColor Color, Color ButtonTextColor, bool DisplayBg, Color BgColor, TextAnchor Align, Vector2 Offset, int FontSize = 12, Font font = null)
         {
             GUIStyle Style = new GUIStyle(Style_LabelfieldBoldText);
             Style.normal.background = GetFillTexture(FillStyle, Color);
@@ -1170,7 +1184,7 @@ namespace SevenStrikeModules.XTween.Editor
         /// 创造一个Gui标签框 - 字符串内容
         /// </summary>
         /// <param name="Text">输入框标题</param>
-        public static void Gui_Labelfield(Rect Rect, string Text, GUIFilled FillStyle, GUIColor Color, Color ButtonTextColor, TextAnchor Align, Vector2 Offset, int FontSize = 12, TextClipping cliping = TextClipping.Overflow, bool RichText = false)
+        public static void Gui_Labelfield(Rect Rect, string Text, XTweenGUIFilled FillStyle, XTweenGUIColor Color, Color ButtonTextColor, TextAnchor Align, Vector2 Offset, int FontSize = 12, TextClipping cliping = TextClipping.Overflow, bool RichText = false)
         {
             GUIStyle Style = new GUIStyle(Style_LabelfieldBoldText);
             Style.normal.background = GetFillTexture(FillStyle, Color);
@@ -1185,7 +1199,7 @@ namespace SevenStrikeModules.XTween.Editor
         /// 创造一个Gui标签框 - 字符串内容
         /// </summary>
         /// <param name="Text">输入框标题</param>
-        public static void Gui_Labelfield(Rect Rect, string Text, GUIFilled FillStyle, GUIColor Color, Color ButtonTextColor, TextAnchor Align, Vector2 Offset, int FontSize = 12, bool ClipText = false, TextClipping ClipMode = TextClipping.Clip, bool RichText = false, Font font = null)
+        public static void Gui_Labelfield(Rect Rect, string Text, XTweenGUIFilled FillStyle, XTweenGUIColor Color, Color ButtonTextColor, TextAnchor Align, Vector2 Offset, int FontSize = 12, bool ClipText = false, TextClipping ClipMode = TextClipping.Clip, bool RichText = false, Font font = null)
         {
             GUIStyle Style = new GUIStyle(Style_LabelfieldBoldText);
             Style.normal.background = GetFillTexture(FillStyle, Color);
@@ -1208,7 +1222,7 @@ namespace SevenStrikeModules.XTween.Editor
         /// 创造一个Gui标签框 - 字符串内容
         /// </summary>
         /// <param name="Text">输入框标题</param>
-        public static void Gui_Labelfield_WrapText(Rect Rect, string Text, GUIFilled FillStyle, GUIColor Color, Color ButtonTextColor, TextAnchor Align, Vector2 Offset, int FontSize = 12, bool WrapText = false, bool ClipText = false, TextClipping ClipMode = TextClipping.Clip, bool RichText = false, Font font = null)
+        public static void Gui_Labelfield_WrapText(Rect Rect, string Text, XTweenGUIFilled FillStyle, XTweenGUIColor Color, Color ButtonTextColor, TextAnchor Align, Vector2 Offset, int FontSize = 12, bool WrapText = false, bool ClipText = false, TextClipping ClipMode = TextClipping.Clip, bool RichText = false, Font font = null)
         {
             GUIStyle Style = new GUIStyle(Style_LabelfieldBoldText);
             Style.normal.background = GetFillTexture(FillStyle, Color);
@@ -1232,7 +1246,7 @@ namespace SevenStrikeModules.XTween.Editor
         /// 创造一个Gui标签框（细字体） - 字符串内容
         /// </summary>
         /// <param name="Text">输入框标题</param>
-        public static void Gui_Labelfield_Thin_WrapClip(Rect Rect, string Text, GUIFilled FillStyle, GUIColor Color, Color ButtonTextColor, TextAnchor Align, Vector2 Offset, int FontSize = 12, bool RichText = false, Font font = null)
+        public static void Gui_Labelfield_Thin_WrapClip(Rect Rect, string Text, XTweenGUIFilled FillStyle, XTweenGUIColor Color, Color ButtonTextColor, TextAnchor Align, Vector2 Offset, int FontSize = 12, bool RichText = false, Font font = null)
         {
             GUIStyle Style = new GUIStyle(Style_Labelfield);
             Style.normal.background = GetFillTexture(FillStyle, Color);
@@ -1250,7 +1264,7 @@ namespace SevenStrikeModules.XTween.Editor
         /// 创造一个Gui标签框（细字体） - 字符串内容
         /// </summary>
         /// <param name="Text">输入框标题</param>
-        public static void Gui_Labelfield_Thin(Rect Rect, string Text, GUIFilled FillStyle, GUIColor Color, Color ButtonTextColor, TextAnchor Align, Vector2 Offset, int FontSize = 12, bool WrapWord = false, bool ContentClip = false, bool RichText = false)
+        public static void Gui_Labelfield_Thin(Rect Rect, string Text, XTweenGUIFilled FillStyle, XTweenGUIColor Color, Color ButtonTextColor, TextAnchor Align, Vector2 Offset, int FontSize = 12, bool WrapWord = false, bool ContentClip = false, bool RichText = false)
         {
             GUIStyle Style = new GUIStyle(Style_Labelfield);
             Style.normal.background = GetFillTexture(FillStyle, Color);
@@ -1268,7 +1282,7 @@ namespace SevenStrikeModules.XTween.Editor
         /// 创造一个Gui标签框（细字体） - 字符串内容
         /// </summary>
         /// <param name="Text">输入框标题</param>
-        public static void Gui_Labelfield_Thin_WithClipping(Rect Rect, string Text, GUIFilled FillStyle, GUIColor Color, Color ButtonTextColor, TextAnchor Align, Vector2 Offset, int FontSize = 12, bool WrapWord = false, bool ContentClip = false, bool RichText = false, TextClipping textClipping = TextClipping.Clip)
+        public static void Gui_Labelfield_Thin_WithClipping(Rect Rect, string Text, XTweenGUIFilled FillStyle, XTweenGUIColor Color, Color ButtonTextColor, TextAnchor Align, Vector2 Offset, int FontSize = 12, bool WrapWord = false, bool ContentClip = false, bool RichText = false, TextClipping textClipping = TextClipping.Clip)
         {
             GUIStyle Style = new GUIStyle(Style_Labelfield);
             Style.normal.background = GetFillTexture(FillStyle, Color);
@@ -1340,7 +1354,7 @@ namespace SevenStrikeModules.XTween.Editor
         /// <param name="FillStyle">版头背景填充样式  实心 / 镂空</param>
         /// <param name="Color">背景颜色</param>
         /// <param name="BannerText">版头文字</param>
-        public static void Gui_Layout_Banner(GUIFilled FillStyle, GUIColor Color, string BannerText, Color TextColor)
+        public static void Gui_Layout_Banner(XTweenGUIFilled FillStyle, XTweenGUIColor Color, string BannerText, Color TextColor)
         {
             if (GUICreator == null)
             {
@@ -1365,7 +1379,7 @@ namespace SevenStrikeModules.XTween.Editor
         /// <param name="FillStyle">版头背景填充样式  实心 / 镂空</param>
         /// <param name="Color">背景颜色</param>
         /// <param name="BannerText">版头文字</param>
-        public static void Gui_Layout_Banner(Texture2D Logo, GUIFilled FillStyle, GUIColor Color, string BannerText, Color TextColor, float logo_width = 0, float logo_height = 0)
+        public static void Gui_Layout_Banner(Texture2D Logo, XTweenGUIFilled FillStyle, XTweenGUIColor Color, string BannerText, Color TextColor, float logo_width = 0, float logo_height = 0)
         {
             if (GUICreator == null)
             {
@@ -1404,7 +1418,7 @@ namespace SevenStrikeModules.XTween.Editor
         /// <param name="FillStyle">版头背景填充样式  实心 / 镂空</param>
         /// <param name="Color">背景颜色</param>
         /// <param name="BannerText">版头文字</param>
-        public static void Gui_Layout_Banner(Texture2D Logo, GUIFilled FillStyle, GUIColor Color, string BannerText, Color TextColor, Texture2D LogoState, string StateText, float logo_width = 0, float logo_height = 0)
+        public static void Gui_Layout_Banner(Texture2D Logo, XTweenGUIFilled FillStyle, XTweenGUIColor Color, string BannerText, Color TextColor, Texture2D LogoState, string StateText, float logo_width = 0, float logo_height = 0)
         {
             if (GUICreator == null)
             {
@@ -1449,7 +1463,7 @@ namespace SevenStrikeModules.XTween.Editor
         /// 创造一个Gui标签框 - 字符串内容
         /// </summary>
         /// <param name="Text">输入框标题</param>
-        public static void Gui_Layout_Labelfield(string Text, GUIFilled FillStyle, GUIColor Color, Color ButtonTextColor, TextAnchor Align, int FontSize = 12, Font font = null)
+        public static void Gui_Layout_Labelfield(string Text, XTweenGUIFilled FillStyle, XTweenGUIColor Color, Color ButtonTextColor, TextAnchor Align, int FontSize = 12, Font font = null)
         {
             GUIStyle Style = new GUIStyle(Style_Labelfield);
             Style.normal.background = GetFillTexture(FillStyle, Color);
@@ -1464,7 +1478,7 @@ namespace SevenStrikeModules.XTween.Editor
         /// 创造一个Gui标签框 - 字符串内容
         /// </summary>
         /// <param name="Text">输入框标题</param>
-        public static void Gui_Layout_Labelfield(string Text, GUIFilled FillStyle, GUIColor Color, Color ButtonTextColor, bool Wrap = false, TextClipping Clipping = TextClipping.Overflow, TextAnchor Align = TextAnchor.MiddleCenter, int FontSize = 12, Font font = null)
+        public static void Gui_Layout_Labelfield(string Text, XTweenGUIFilled FillStyle, XTweenGUIColor Color, Color ButtonTextColor, bool Wrap = false, TextClipping Clipping = TextClipping.Overflow, TextAnchor Align = TextAnchor.MiddleCenter, int FontSize = 12, Font font = null)
         {
             GUIStyle Style = new GUIStyle(Style_Labelfield);
             Style.normal.background = GetFillTexture(FillStyle, Color);
@@ -1481,7 +1495,7 @@ namespace SevenStrikeModules.XTween.Editor
         /// 创造一个Gui标签框 - 字符串内容
         /// </summary>
         /// <param name="Text">输入框标题</param>
-        public static void Gui_Layout_Labelfield(string Text, GUIFilled FillStyle, GUIColor Color, Color ButtonTextColor, TextAnchor Align, Vector2 Offset, int FontSize = 12, Font font = null)
+        public static void Gui_Layout_Labelfield(string Text, XTweenGUIFilled FillStyle, XTweenGUIColor Color, Color ButtonTextColor, TextAnchor Align, Vector2 Offset, int FontSize = 12, Font font = null)
         {
             GUIStyle Style = new GUIStyle(Style_LabelfieldOffset);
             Style.normal.background = GetFillTexture(FillStyle, Color);
@@ -1497,7 +1511,7 @@ namespace SevenStrikeModules.XTween.Editor
         /// 创造一个Gui标签框 - 字符串内容
         /// </summary>
         /// <param name="Text">输入框标题</param>
-        public static void Gui_Layout_LabelfieldThin(string Text, GUIFilled FillStyle, GUIColor Color, Color ButtonTextColor, TextAnchor Align, Vector2 Offset, int FontSize = 12, Font font = null)
+        public static void Gui_Layout_LabelfieldThin(string Text, XTweenGUIFilled FillStyle, XTweenGUIColor Color, Color ButtonTextColor, TextAnchor Align, Vector2 Offset, int FontSize = 12, Font font = null)
         {
             GUIStyle Style = new GUIStyle(Style_Labelfield);
             Style.normal.background = GetFillTexture(FillStyle, Color);
@@ -1520,10 +1534,10 @@ namespace SevenStrikeModules.XTween.Editor
         /// <param name="Color">按钮背景填充颜色</param>
         /// <param name="ButtonTextColor">按钮文字</param>
         /// <returns>返回的布尔值用于判断该按钮是否被按下</returns>
-        public static bool Gui_Layout_Button(string Text, string Tooltip, GUIFilled FillStyle, GUIColor Color, Color ButtonTextColor, int BtnHeight)
+        public static bool Gui_Layout_Button(string Text, string Tooltip, XTweenGUIFilled FillStyle, XTweenGUIColor Color, Color ButtonTextColor, int BtnHeight)
         {
             GUIStyle Style = new GUIStyle(Style_Button);
-            if (FillStyle != GUIFilled.无)
+            if (FillStyle != XTweenGUIFilled.无)
             {
                 Style.normal.background = GetBtnFillTexture(FillStyle, Color);
                 Style.active.background = GetBtnFillTexture(FillStyle, Color);
@@ -1556,10 +1570,10 @@ namespace SevenStrikeModules.XTween.Editor
         /// <param name="ButtonTextColor">按钮文字</param>
         /// <param name="font">字体</param>
         /// <returns>返回的布尔值用于判断该按钮是否被按下</returns>
-        public static bool Gui_Layout_Button(string Text, string Tooltip, GUIFilled FillStyle, GUIColor Color, Color ButtonTextColor, int BtnHeight, Font font)
+        public static bool Gui_Layout_Button(string Text, string Tooltip, XTweenGUIFilled FillStyle, XTweenGUIColor Color, Color ButtonTextColor, int BtnHeight, Font font)
         {
             GUIStyle Style = new GUIStyle(Style_Button);
-            if (FillStyle != GUIFilled.无)
+            if (FillStyle != XTweenGUIFilled.无)
             {
                 Style.normal.background = GetBtnFillTexture(FillStyle, Color);
                 Style.active.background = GetBtnFillTexture(FillStyle, Color);
@@ -1615,10 +1629,10 @@ namespace SevenStrikeModules.XTween.Editor
         /// <param name="ButtonTextColor">按钮文字</param>
         /// <param name="ButtonHeight">按钮高度</param>
         /// <returns>返回的布尔值用于判断该按钮是否被按下</returns>
-        public static bool Gui_Layout_Button(string Text, string Tooltip, GUIFilled FillStyle, GUIColor Color, Color ButtonTextColor, float ButtonHeight, RectOffset Margin, Vector2 Offset)
+        public static bool Gui_Layout_Button(string Text, string Tooltip, XTweenGUIFilled FillStyle, XTweenGUIColor Color, Color ButtonTextColor, float ButtonHeight, RectOffset Margin, Vector2 Offset)
         {
             GUIStyle Style = new GUIStyle(Style_Button);
-            if (FillStyle != GUIFilled.无)
+            if (FillStyle != XTweenGUIFilled.无)
                 Style.normal.background = GetBtnFillTexture(FillStyle, Color);
             else
                 Style.normal.background = null;
@@ -1640,10 +1654,10 @@ namespace SevenStrikeModules.XTween.Editor
         /// <param name="ButtonTextColor">按钮文字</param>
         /// <param name="ButtonHeight">按钮高度</param>
         /// <returns>返回的布尔值用于判断该按钮是否被按下</returns>
-        public static bool Gui_Layout_Button(string Text, string Tooltip, GUIFilled FillStyle, GUIColor Color, Color ButtonTextColor, float ButtonHeight, RectOffset Margin, Vector2 Offset, TextAnchor textanchor, int FontSize, Font Font)
+        public static bool Gui_Layout_Button(string Text, string Tooltip, XTweenGUIFilled FillStyle, XTweenGUIColor Color, Color ButtonTextColor, float ButtonHeight, RectOffset Margin, Vector2 Offset, TextAnchor textanchor, int FontSize, Font Font)
         {
             GUIStyle Style = new GUIStyle(Style_Button);
-            if (FillStyle != GUIFilled.无)
+            if (FillStyle != XTweenGUIFilled.无)
             {
                 Style.normal.background = GetBtnFillTexture(FillStyle, Color);
                 Style.active.background = GetBtnFillTexture(FillStyle, Color);
@@ -1674,10 +1688,10 @@ namespace SevenStrikeModules.XTween.Editor
         /// <param name="Width">按钮宽度</param>
         /// <param name="Height">按钮高度</param>
         /// <returns>返回的布尔值用于判断该按钮是否被按下</returns>
-        public static bool Gui_Layout_Button(string Text, string Tooltip, GUIFilled FillStyle, GUIColor Color, Color ButtonTextColor, int FontSize, float Width, float Height)
+        public static bool Gui_Layout_Button(string Text, string Tooltip, XTweenGUIFilled FillStyle, XTweenGUIColor Color, Color ButtonTextColor, int FontSize, float Width, float Height)
         {
             GUIStyle Style = new GUIStyle(Style_Button);
-            if (FillStyle != GUIFilled.无)
+            if (FillStyle != XTweenGUIFilled.无)
                 Style.normal.background = GetBtnFillTexture(FillStyle, Color);
             else
                 Style.normal.background = null;
@@ -1707,10 +1721,10 @@ namespace SevenStrikeModules.XTween.Editor
         /// <param name="ButtonTextFont">字体</param>
         /// <param name="FocusName">焦点名称</param>
         /// <returns>返回的布尔值用于判断该按钮是否被按下</returns>
-        public static bool Gui_Layout_Button(string Text, string Tooltip, GUIFilled FillStyle, GUIColor Color, Color ButtonTextColor, int FontSize, float Width, float Height, Font ButtonTextFont, string FocusName)
+        public static bool Gui_Layout_Button(string Text, string Tooltip, XTweenGUIFilled FillStyle, XTweenGUIColor Color, Color ButtonTextColor, int FontSize, float Width, float Height, Font ButtonTextFont, string FocusName)
         {
             GUIStyle Style = new GUIStyle(Style_Button);
-            if (FillStyle != GUIFilled.无)
+            if (FillStyle != XTweenGUIFilled.无)
                 Style.normal.background = GetBtnFillTexture(FillStyle, Color);
             else
                 Style.normal.background = null;
@@ -1787,7 +1801,7 @@ namespace SevenStrikeModules.XTween.Editor
         /// <param name="Callback_Single"></param>
         /// <returns></returns>
         /// <exception cref="InvalidOperationException"></exception>
-        public static T Gui_Layout_Popup<T, TObject>(string Text, string[] Options, ref SerializedProperty Prop, GUIFilled FillStyle, float Width, float Height, TObject[] objects, Action<TObject[]> Callback_Multiple = null, Action<T> Callback_Single = null)
+        public static T Gui_Layout_Popup<T, TObject>(string Text, string[] Options, ref SerializedProperty Prop, XTweenGUIFilled FillStyle, float Width, float Height, TObject[] objects, Action<TObject[]> Callback_Multiple = null, Action<T> Callback_Single = null)
         {
             string fieldName = Prop.propertyPath;
 
@@ -1795,8 +1809,8 @@ namespace SevenStrikeModules.XTween.Editor
             bool allSame = true;
 
             GUIStyle Style = new GUIStyle(Style_ToolBar);
-            Style.normal.background = GetBtnFillTexture(FillStyle, GUIColor.亮白);
-            Style.onNormal.background = GetBtnFillTexture(FillStyle, GUIColor.亮白);
+            Style.normal.background = GetBtnFillTexture(FillStyle, XTweenGUIColor.亮白);
+            Style.onNormal.background = GetBtnFillTexture(FillStyle, XTweenGUIColor.亮白);
             Style.margin = new RectOffset(0, 0, -1, 0);
             if (XTween_Utilitys.GetColorBrightnessLimite(XTween_Dashboard.Theme_Primary))
             {
@@ -1945,7 +1959,7 @@ namespace SevenStrikeModules.XTween.Editor
         /// <param name="Callback_Single"></param>
         /// <returns></returns>
         /// <exception cref="InvalidOperationException"></exception>
-        public static T Gui_Layout_Popup<T, TObject>(string Text, string[] Options, ref SerializedProperty Prop, GUIFilled FillStyle, Color BgColor, float Width, float Height, TObject[] objects, Action<TObject[]> Callback_Multiple = null, Action<T> Callback_Single = null)
+        public static T Gui_Layout_Popup<T, TObject>(string Text, string[] Options, ref SerializedProperty Prop, XTweenGUIFilled FillStyle, Color BgColor, float Width, float Height, TObject[] objects, Action<TObject[]> Callback_Multiple = null, Action<T> Callback_Single = null)
         {
             string fieldName = Prop.propertyPath;
 
@@ -1953,8 +1967,8 @@ namespace SevenStrikeModules.XTween.Editor
             bool allSame = true;
 
             GUIStyle Style = new GUIStyle(Style_ToolBar);
-            Style.normal.background = GetBtnFillTexture(FillStyle, GUIColor.亮白);
-            Style.onNormal.background = GetBtnFillTexture(FillStyle, GUIColor.亮白);
+            Style.normal.background = GetBtnFillTexture(FillStyle, XTweenGUIColor.亮白);
+            Style.onNormal.background = GetBtnFillTexture(FillStyle, XTweenGUIColor.亮白);
             Style.margin = new RectOffset(0, 0, -1, 0);
             if (XTween_Utilitys.GetColorBrightnessLimite(BgColor))
             {
@@ -2108,7 +2122,7 @@ namespace SevenStrikeModules.XTween.Editor
         /// <param name="Height"></param>
         /// <param name="objects"></param>
         /// <returns></returns>
-        public static T Gui_Layout_Toggle<T, TObject>(string Text, string[] Options, ref SerializedProperty Prop, GUIFilled FillStyle_Normal, GUIFilled FillStyle_Selected, Color TextColor_Normal, float Width, float Height, TObject[] objects, Action<TObject[]> Callback_Multiple = null, Action<T> Callback_Single = null)
+        public static T Gui_Layout_Toggle<T, TObject>(string Text, string[] Options, ref SerializedProperty Prop, XTweenGUIFilled FillStyle_Normal, XTweenGUIFilled FillStyle_Selected, Color TextColor_Normal, float Width, float Height, TObject[] objects, Action<TObject[]> Callback_Multiple = null, Action<T> Callback_Single = null)
         {
             string fieldName = Prop.propertyPath;
 
@@ -2116,8 +2130,8 @@ namespace SevenStrikeModules.XTween.Editor
             int x = 0;
 
             GUIStyle Style = new GUIStyle(Style_ToolBar);
-            Style.normal.background = GetBtnFillTexture(FillStyle_Normal, GUIColor.无);
-            Style.onNormal.background = GetBtnFillTexture(FillStyle_Selected, GUIColor.亮白);
+            Style.normal.background = GetBtnFillTexture(FillStyle_Normal, XTweenGUIColor.无);
+            Style.onNormal.background = GetBtnFillTexture(FillStyle_Selected, XTweenGUIColor.亮白);
             Style.margin = new RectOffset(0, 0, -1, 0);
             Style.normal.textColor = TextColor_Normal;
             if (XTween_Utilitys.GetColorBrightnessLimite(XTween_Dashboard.Theme_Primary))
@@ -2287,7 +2301,7 @@ namespace SevenStrikeModules.XTween.Editor
         /// 创造一个Gui标签框 - 字符串内容
         /// </summary>
         /// <param name="Text">输入框标题</param>
-        public static void Gui_Layout_TextArea_Wrap(string Text, GUIFilled FillStyle, GUIColor Color, Color ButtonTextColor, TextAnchor Align, float Width, int FontSize = 12)
+        public static void Gui_Layout_TextArea_Wrap(string Text, XTweenGUIFilled FillStyle, XTweenGUIColor Color, Color ButtonTextColor, TextAnchor Align, float Width, int FontSize = 12)
         {
             GUIStyle Style = new GUIStyle(Style_Labelfield);
             Style.normal.background = GetFillTexture(FillStyle, Color);
@@ -2334,10 +2348,10 @@ namespace SevenStrikeModules.XTween.Editor
         /// </summary>
         /// <param name="FillStyle">填充样式  Solid=实心   Edge=空心</param>
         /// <param name="Color">填充颜色</param>
-        public static void Gui_Layout_Horizontal_Start(GUIFilled FillStyle, GUIColor Color)
+        public static void Gui_Layout_Horizontal_Start(XTweenGUIFilled FillStyle, XTweenGUIColor Color)
         {
             GUIStyle Style = new GUIStyle(Style_Group);
-            if (FillStyle != GUIFilled.无)
+            if (FillStyle != XTweenGUIFilled.无)
                 Style.normal.background = GetFillTexture(FillStyle, Color);
             else
                 Style.normal.background = null;
@@ -2348,10 +2362,10 @@ namespace SevenStrikeModules.XTween.Editor
         /// </summary>
         /// <param name="FillStyle">填充样式  Solid=实心   Edge=空心</param>
         /// <param name="Color">填充颜色</param>
-        public static void Gui_Layout_Horizontal_Start(GUIFilled FillStyle, GUIColor Color, Color AddedColor, float Space)
+        public static void Gui_Layout_Horizontal_Start(XTweenGUIFilled FillStyle, XTweenGUIColor Color, Color AddedColor, float Space)
         {
             GUIStyle Style = new GUIStyle(Style_Group);
-            if (FillStyle != GUIFilled.无)
+            if (FillStyle != XTweenGUIFilled.无)
                 Style.normal.background = GetFillTexture(FillStyle, Color);
             else
                 Style.normal.background = null;
@@ -2366,10 +2380,10 @@ namespace SevenStrikeModules.XTween.Editor
         /// </summary>
         /// <param name="FillStyle">填充样式  Solid=实心   Edge=空心</param>
         /// <param name="Color">填充颜色</param>
-        public static void Gui_Layout_Horizontal_Start(GUIFilled FillStyle, GUIColor Color, float Space)
+        public static void Gui_Layout_Horizontal_Start(XTweenGUIFilled FillStyle, XTweenGUIColor Color, float Space)
         {
             GUIStyle Style = new GUIStyle(Style_Group);
-            if (FillStyle != GUIFilled.无)
+            if (FillStyle != XTweenGUIFilled.无)
                 Style.normal.background = GetFillTexture(FillStyle, Color);
             else
                 Style.normal.background = null;
@@ -2390,10 +2404,10 @@ namespace SevenStrikeModules.XTween.Editor
         /// <param name="FillStyle">填充样式  Solid=实心   Edge=空心</param>
         /// <param name="Color">填充颜色</param>
         /// <summary>
-        public static void Gui_Layout_Vertical_Start(GUIFilled FillStyle, GUIColor Color, float Margin = 0)
+        public static void Gui_Layout_Vertical_Start(XTweenGUIFilled FillStyle, XTweenGUIColor Color, float Margin = 0)
         {
             GUIStyle Style = new GUIStyle(Style_Group);
-            if (FillStyle != GUIFilled.无)
+            if (FillStyle != XTweenGUIFilled.无)
                 Style.normal.background = GetFillTexture(FillStyle, Color);
             else
                 Style.normal.background = null;
@@ -2410,17 +2424,17 @@ namespace SevenStrikeModules.XTween.Editor
         /// <param name="Color">填充颜色</param>
         /// <param name="Margin">间距</param>
         /// <param name="Title">标题</param>
-        public static void Gui_Layout_Vertical_Start(GUIFilled FillStyle, GUIColor Color, float Margin, string Title, Color TitleColor)
+        public static void Gui_Layout_Vertical_Start(XTweenGUIFilled FillStyle, XTweenGUIColor Color, float Margin, string Title, Color TitleColor)
         {
             GUIStyle Style = new GUIStyle(Style_Group_Half);
-            if (FillStyle != GUIFilled.无)
+            if (FillStyle != XTweenGUIFilled.无)
                 Style.normal.background = GetFillTexture(FillStyle, Color, true);
             else
                 Style.normal.background = null;
             GUILayout.Space(5 + Margin);
             Color bgcol = GUI.backgroundColor;
             GUI.backgroundColor = XTween_Dashboard.Theme_Group;
-            Gui_Layout_Labelfield(Title, GUIFilled.无, GUIColor.无, TitleColor, TextAnchor.MiddleLeft, new Vector2(20, 2), 12);
+            Gui_Layout_Labelfield(Title, XTweenGUIFilled.无, XTweenGUIColor.无, TitleColor, TextAnchor.MiddleLeft, new Vector2(20, 2), 12);
             GUILayout.BeginVertical(Style);
             GUI.backgroundColor = bgcol;
             Gui_Layout_Space(Margin);
@@ -2432,17 +2446,17 @@ namespace SevenStrikeModules.XTween.Editor
         /// <param name="Color">填充颜色</param>
         /// <param name="Margin">间距</param>
         /// <param name="Title">标题</param>
-        public static bool Gui_Layout_Vertical_Start_WithFolder(GUIFilled FillStyle, GUIColor Color, float Margin, string Title, Color TitleColor, Color TitleHoverColor, Color TitleActiveColor, RectOffset Btn_Margin, Vector2 Btn_Offset, Texture2D Icon, bool fold, float hideIconThreshold)
+        public static bool Gui_Layout_Vertical_Start_WithFolder(XTweenGUIFilled FillStyle, XTweenGUIColor Color, float Margin, string Title, Color TitleColor, Color TitleHoverColor, Color TitleActiveColor, RectOffset Btn_Margin, Vector2 Btn_Offset, Texture2D Icon, bool fold, float hideIconThreshold)
         {
             GUIStyle Style = new GUIStyle(Style_Group_Half);
-            if (FillStyle != GUIFilled.无)
+            if (FillStyle != XTweenGUIFilled.无)
                 Style.normal.background = GetFillTexture(FillStyle, Color, true);
             else
                 Style.normal.background = null;
             GUILayout.Space(5 + Margin);
             Color bgcol = GUI.backgroundColor;
             GUI.backgroundColor = XTween_Dashboard.Theme_Group;
-            if (Gui_Layout_Button(Title, "", GUIFilled.透明, GUIColor.无, TitleColor, 20, Btn_Margin, Btn_Offset, TextAnchor.MiddleLeft, 12, GetFont("SS_Editor_Light")))
+            if (Gui_Layout_Button(Title, "", XTweenGUIFilled.透明, XTweenGUIColor.无, TitleColor, 20, Btn_Margin, Btn_Offset, TextAnchor.MiddleLeft, 12, GetFont("SS_Editor_Light")))
             {
                 fold = !fold;
             }
@@ -2463,10 +2477,10 @@ namespace SevenStrikeModules.XTween.Editor
         /// <param name="Color">填充颜色</param>
         /// <param name="Space">内部距离</param>
         /// <param name="Margin">外部间距</param>
-        public static void Gui_Layout_Vertical_Start(GUIFilled FillStyle, GUIColor Color, float Space, RectOffset Margin)
+        public static void Gui_Layout_Vertical_Start(XTweenGUIFilled FillStyle, XTweenGUIColor Color, float Space, RectOffset Margin)
         {
             GUIStyle Style = new GUIStyle(Style_Group);
-            if (FillStyle != GUIFilled.无)
+            if (FillStyle != XTweenGUIFilled.无)
                 Style.normal.background = GetFillTexture(FillStyle, Color);
             else
                 Style.normal.background = null;
@@ -2572,7 +2586,7 @@ namespace SevenStrikeModules.XTween.Editor
         /// <param name="ValueFontSize"></param>
         public static void StatuDisplayer_text(Texture2D Icon, float IconSize, Vector2 IconOffset, string Title, int TitleFontSize, string Value, Color ValueColor, int ValueFontSize, bool UseTitleLogo = true)
         {
-            Gui_Layout_Horizontal_Start(GUIFilled.无, GUIColor.无, 0);
+            Gui_Layout_Horizontal_Start(XTweenGUIFilled.无, XTweenGUIColor.无, 0);
             if (UseTitleLogo)
             {
                 Gui_Layout_Space(5);
@@ -2583,9 +2597,9 @@ namespace SevenStrikeModules.XTween.Editor
             {
                 Gui_Layout_Space(5);
             }
-            Gui_Layout_LabelfieldThin(Title, GUIFilled.无, GUIColor.无, Color.white, TextAnchor.MiddleLeft, new Vector2(0, 0), TitleFontSize);
+            Gui_Layout_LabelfieldThin(Title, XTweenGUIFilled.无, XTweenGUIColor.无, Color.white, TextAnchor.MiddleLeft, new Vector2(0, 0), TitleFontSize);
             Gui_Layout_FlexSpace();
-            Gui_Layout_LabelfieldThin(Value, GUIFilled.无, GUIColor.无, ValueColor, TextAnchor.MiddleRight, new Vector2(0, 0), ValueFontSize);
+            Gui_Layout_LabelfieldThin(Value, XTweenGUIFilled.无, XTweenGUIColor.无, ValueColor, TextAnchor.MiddleRight, new Vector2(0, 0), ValueFontSize);
             Gui_Layout_Space(5);
             Gui_Layout_Horizontal_End();
         }
@@ -2601,11 +2615,11 @@ namespace SevenStrikeModules.XTween.Editor
         /// <param name="ValueOffset"></param>
         public static void StatuDisplayer_tex(Texture2D Icon, float IconSize, Vector2 IconOffset, string Title, int TitleFontSize, Texture2D Value, float ValueSize, Vector2 ValueOffset)
         {
-            Gui_Layout_Horizontal_Start(GUIFilled.无, GUIColor.无, 0);
+            Gui_Layout_Horizontal_Start(XTweenGUIFilled.无, XTweenGUIColor.无, 0);
             Gui_Layout_Space(5);
             Gui_Layout_Icon(IconSize, Icon, IconOffset);
             Gui_Layout_Space(10);
-            Gui_Layout_LabelfieldThin(Title, GUIFilled.无, GUIColor.无, Color.white, TextAnchor.MiddleLeft, new Vector2(0, 0), TitleFontSize);
+            Gui_Layout_LabelfieldThin(Title, XTweenGUIFilled.无, XTweenGUIColor.无, Color.white, TextAnchor.MiddleLeft, new Vector2(0, 0), TitleFontSize);
             Gui_Layout_FlexSpace();
             Gui_Layout_Icon(ValueSize, Value, ValueOffset);
             Gui_Layout_Space(5);
@@ -2622,11 +2636,11 @@ namespace SevenStrikeModules.XTween.Editor
         /// <param name="Color"></param>
         public static void StatuDisplayer_color(Texture2D Icon, float IconSize, Vector2 IconOffset, string Title, int TitleFontSize, Color Color)
         {
-            Gui_Layout_Horizontal_Start(GUIFilled.无, GUIColor.无, 0);
+            Gui_Layout_Horizontal_Start(XTweenGUIFilled.无, XTweenGUIColor.无, 0);
             Gui_Layout_Space(5);
             Gui_Layout_Icon(IconSize, Icon, IconOffset);
             Gui_Layout_Space(10);
-            Gui_Layout_LabelfieldThin(Title, GUIFilled.无, GUIColor.无, Color.white, TextAnchor.MiddleLeft, new Vector2(0, 0), TitleFontSize);
+            Gui_Layout_LabelfieldThin(Title, XTweenGUIFilled.无, XTweenGUIColor.无, Color.white, TextAnchor.MiddleLeft, new Vector2(0, 0), TitleFontSize);
             Gui_Layout_FlexSpace();
             GUI.color = Color;
             Gui_Layout_Icon(IconSize, GetIcon("ColorRect"), IconOffset);
@@ -2648,7 +2662,7 @@ namespace SevenStrikeModules.XTween.Editor
         /// <param name="StateIconOffset"></param>
         public static void StatuDisplayer_icon(Texture2D Icon, float IconSize, Vector2 IconOffset, string Title, int TitleFontSize, Color Color, Texture2D StateIcon, float StateIconSize, Vector2 StateIconOffset, bool UseTitleLogo = true)
         {
-            Gui_Layout_Horizontal_Start(GUIFilled.无, GUIColor.无, 0);
+            Gui_Layout_Horizontal_Start(XTweenGUIFilled.无, XTweenGUIColor.无, 0);
             if (UseTitleLogo)
             {
                 Gui_Layout_Space(5);
@@ -2659,7 +2673,7 @@ namespace SevenStrikeModules.XTween.Editor
             {
                 Gui_Layout_Space(5);
             }
-            Gui_Layout_LabelfieldThin(Title, GUIFilled.无, GUIColor.无, Color.white, TextAnchor.MiddleLeft, new Vector2(0, 0), TitleFontSize);
+            Gui_Layout_LabelfieldThin(Title, XTweenGUIFilled.无, XTweenGUIColor.无, Color.white, TextAnchor.MiddleLeft, new Vector2(0, 0), TitleFontSize);
             Gui_Layout_FlexSpace();
             GUI.color = Color;
             Gui_Layout_Icon(StateIconSize, StateIcon, StateIconOffset);
@@ -2680,13 +2694,13 @@ namespace SevenStrikeModules.XTween.Editor
         /// <param name="ValueFontSize"></param>
         public static bool StatuDisplayer_btn(Texture2D Icon, float IconSize, Vector2 IconOffset, string Title, int TitleFontSize, string Value, Color ValueColor, int ValueFontSize, Color ButtonColor, float ButtonSize, string ButtonToolTip, Texture2D Button_Release, Texture2D Button_Press, float Button_Offset)
         {
-            Gui_Layout_Horizontal_Start(GUIFilled.无, GUIColor.无, 0);
+            Gui_Layout_Horizontal_Start(XTweenGUIFilled.无, XTweenGUIColor.无, 0);
             Gui_Layout_Space(5);
             Gui_Layout_Icon(IconSize, Icon, IconOffset);
             Gui_Layout_Space(10);
-            Gui_Layout_LabelfieldThin(Title, GUIFilled.无, GUIColor.无, Color.white, TextAnchor.MiddleLeft, new Vector2(0, 0), TitleFontSize);
+            Gui_Layout_LabelfieldThin(Title, XTweenGUIFilled.无, XTweenGUIColor.无, Color.white, TextAnchor.MiddleLeft, new Vector2(0, 0), TitleFontSize);
             Gui_Layout_FlexSpace();
-            Gui_Layout_LabelfieldThin(Value, GUIFilled.无, GUIColor.无, ValueColor, TextAnchor.MiddleRight, new Vector2(0, 0), ValueFontSize);
+            Gui_Layout_LabelfieldThin(Value, XTweenGUIFilled.无, XTweenGUIColor.无, ValueColor, TextAnchor.MiddleRight, new Vector2(0, 0), ValueFontSize);
             Gui_Layout_Space(10);
             bool sw = Gui_Layout_Button(ButtonSize, ButtonToolTip, Button_Release, Button_Press, Button_Offset);
             Gui_Layout_Space(5);
@@ -2709,7 +2723,7 @@ namespace SevenStrikeModules.XTween.Editor
         /// <param name="status_false"></param>
         public static void StatuDisplayer_Object(Texture2D Icon, float IconSize, Vector2 IconOffset, string Title, int TitleFontSize, Vector2 TitleOffset, Texture2D Icon_status, Vector2 Icon_statusOffset, bool status, Color status_true, Color status_false, SerializedProperty Property, bool UseTitleLogo = true)
         {
-            Gui_Layout_Horizontal_Start(GUIFilled.无, GUIColor.无, 0);
+            Gui_Layout_Horizontal_Start(XTweenGUIFilled.无, XTweenGUIColor.无, 0);
             if (UseTitleLogo)
             {
                 Gui_Layout_Space(5);
@@ -2720,7 +2734,7 @@ namespace SevenStrikeModules.XTween.Editor
             {
                 Gui_Layout_Space(5);
             }
-            Gui_Layout_LabelfieldThin(Title, GUIFilled.无, GUIColor.无, Color.white, TextAnchor.MiddleLeft, TitleOffset, TitleFontSize);
+            Gui_Layout_LabelfieldThin(Title, XTweenGUIFilled.无, XTweenGUIColor.无, Color.white, TextAnchor.MiddleLeft, TitleOffset, TitleFontSize);
             Gui_Layout_FlexSpace();
             Gui_Layout_Property_Field("", Property);
             Gui_Layout_Space(10);
@@ -3054,6 +3068,40 @@ namespace SevenStrikeModules.XTween.Editor
             // 回调消息接收
             window.Callback_Ok = (r) => { res = r; };
             window.SetInfo(type, title, msg, ok, "", "", "", "", PrimaryIndex);
+
+            if (usemodal)
+                // 显示模态窗口弹窗
+                window.ShowModal();
+            else
+                window.Show();
+
+            // 反馈选择消息
+            return res;
+        }
+        /// <summary>
+        /// 打开一个预设保存对话框 - 确认、取消
+        /// </summary>   
+        /// <param name="type"></param>
+        /// <param name="windowtitle"></param>
+        /// <param name="title"></param>
+        /// <param name="msg"></param>
+        /// <param name="ok"></param>
+        /// <param name="cancel"></param>
+        /// <param name="usemodal"></param>
+        public static string OpenPresetSaver(XTweenDialogType type, string windowtitle, string title, string msg, string ok, string cancel, int PrimaryIndex = 0, bool usemodal = true)
+        {
+            string res = "";
+            Editor_XTween_DialogGUI window = EditorWindow.GetWindow<Editor_XTween_DialogGUI>(true);
+            window.titleContent = new GUIContent(windowtitle);
+
+            window.XTweenDialogButtonMode = XTweenDialogButtonMode.动画预设;
+
+            Editor_XTween_GUI.CenterEditorWindow(new Vector2Int(545, 430), window);
+
+            // 回调消息接收
+            window.Callback_SavedPreset = (r, d) => { res = r + d; };
+            window.Callback_Cancel = (r) => { res = r; };
+            window.SetInfo(type, title, msg, ok, cancel, "", "", "", PrimaryIndex);
 
             if (usemodal)
                 // 显示模态窗口弹窗

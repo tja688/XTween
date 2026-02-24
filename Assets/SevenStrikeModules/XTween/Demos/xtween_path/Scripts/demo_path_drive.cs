@@ -27,7 +27,7 @@ public class demo_path_drive : demo_base
     [SerializeField] public Vector3 rotateFrom;
     [SerializeField] public float rotateDelay;
     [SerializeField] public AnimationCurve rotateCurve;
-    [SerializeField] public RotationMode RotationMode;
+    [SerializeField] public XTweenRotationMode RotationMode;
     [SerializeField] public bool AlwaysDraft;
 
     [Header("残影")]
@@ -228,7 +228,7 @@ public class demo_path_drive : demo_base
     /// <returns></returns>
     public XTween_Interface CreateRotationTween()
     {
-        return rotateTween = carTargetImage.rectTransform.xt_Rotate_To(rotateTarget, duration, isRelative, true, TweenSpace.相对, RotationMode, EaseMode.Linear, true, () => rotateFrom, true, rotateCurve).SetDelay(rotateDelay).SetLoop(0).OnComplete((s) =>
+        return rotateTween = carTargetImage.rectTransform.xt_Rotate_To(rotateTarget, duration, isRelative, true, XTweenSpace.相对, RotationMode, EaseMode.Linear, true, () => rotateFrom, true, rotateCurve).SetDelay(rotateDelay).SetLoop(0).OnComplete((s) =>
         {
             carTargetImage.rectTransform.localRotation = Quaternion.Euler(rotateFrom);
         }).OnKill(() =>

@@ -254,7 +254,7 @@ namespace SevenStrikeModules.XTween
             }
 
             if (!isrecycled)
-                XTween_Utilitys.DebugInfo("XTween Pool动画池消息", "所有动画均已回收！", GUIMsgState.确认);
+                XTween_Utilitys.DebugInfo("XTween Pool动画池消息", "所有动画均已回收！", XTweenGUIMsgState.确认);
         }
         #endregion
 

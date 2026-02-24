@@ -40,8 +40,8 @@ public class demo_rotator_absolute_angle : MonoBehaviour
     public int loopCount;
     public XTween_LoopType loopType;
     public EaseMode ease;
-    public RotationMode rotationMode;
-    public TweenSpace space;
+    public XTweenRotationMode rotationMode;
+    public XTweenSpace space;
     public XTween_Interface tweener_arrow;
     public XTween_Interface tweener_different;
 

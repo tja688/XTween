@@ -26,12 +26,12 @@ namespace SevenStrikeModules.XTween
     /// 专门处理 四元数_Quaternion 类型动画的补间类
     /// </summary>
     /// <remarks>
-    /// 该类继承自 HudAnimation_TweenerBase<四元数_Quaternion>，实现了对 四元数_Quaternion 类型的插值计算
+    /// 该类继承自 XTween_Base<四元数_Quaternion>，实现了对 四元数_Quaternion 类型的插值计算
     /// 主要用于处理单个 四元数_Quaternion 的动画，例如3D旋转等
     /// </remarks>
     public class XTween_Specialized_Quaternion : XTween_Base<Quaternion>
     {
-        public RotateLerpType LerpType = RotateLerpType.LerpUnclamped;
+        public XTweenRotateLerpType LerpType = XTweenRotateLerpType.LerpUnclamped;
 
         /// <summary>
         /// 默认初始化构造
@@ -40,7 +40,7 @@ namespace SevenStrikeModules.XTween
         /// <param name="endValue"></param>
         /// <param name="duration"></param>
         /// <param name="type"></param>
-        public XTween_Specialized_Quaternion(Quaternion defaultFromValue, Quaternion endValue, float duration, RotateLerpType type) : base(defaultFromValue, endValue, duration)
+        public XTween_Specialized_Quaternion(Quaternion defaultFromValue, Quaternion endValue, float duration, XTweenRotateLerpType type) : base(defaultFromValue, endValue, duration)
         {
             LerpType = type;
             // 已在基类 protected XTween_Base(TArg defaultFromValue, TArg endValue, float duration) 初始化
@@ -54,7 +54,7 @@ namespace SevenStrikeModules.XTween
         /// <param name="duration"></param>
         public XTween_Specialized_Quaternion(Quaternion defaultFromValue, Quaternion endValue, float duration) : base(defaultFromValue, endValue, duration)
         {
-            LerpType = RotateLerpType.SlerpUnclamped;
+            LerpType = XTweenRotateLerpType.SlerpUnclamped;
             // 已在基类 protected XTween_Base(TArg defaultFromValue, TArg endValue, float duration) 初始化
         }
 
@@ -69,7 +69,7 @@ namespace SevenStrikeModules.XTween
             _StartValue = Quaternion.identity;
             _CustomEaseCurve = null; // 显式初始化为null
             _UseCustomEaseCurve = false; // 默认不使用自定义曲线
-            LerpType = RotateLerpType.SlerpUnclamped;
+            LerpType = XTweenRotateLerpType.SlerpUnclamped;
 
             ResetState();
         }
@@ -84,7 +84,7 @@ namespace SevenStrikeModules.XTween
         /// <returns>插值结果。</returns>
         protected override Quaternion Lerp(Quaternion a, Quaternion b, float t)
         {
-            if (LerpType == RotateLerpType.SlerpUnclamped)
+            if (LerpType == XTweenRotateLerpType.SlerpUnclamped)
                 /// <summary>
                 /// 使用 四元数_Quaternion.SlerpUnclamped 方法计算插值
                 /// 四元数_Quaternion.SlerpUnclamped 是 Unity 提供的插值方法，适用于 四元数_Quaternion 类型

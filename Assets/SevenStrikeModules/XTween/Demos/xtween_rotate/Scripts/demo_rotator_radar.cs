@@ -18,7 +18,7 @@ public class demo_rotator_radar : demo_base
     public Button btn_NextMapSite;
     public Button btn_PrevMapSite;
 
-    public RotationMode TrailRotationMode;
+    public XTweenRotationMode TrailRotationMode;
 
     [Header("目标")]
     public Color site_Color = Color.white;
@@ -115,7 +115,7 @@ public class demo_rotator_radar : demo_base
     public override void Tween_Create()
     {
         Tween_Kill();
-        currentTweener = rect_RadarRotator.xt_Rotate_To(Vector3.forward * -360, duration, isRelative, isAutoKill, TweenSpace.相对, TrailRotationMode).SetLoop(loop).SetLoopingDelay(loopDelay).SetLoopType(loopType).SetEase(easeMode).OnComplete((d) =>
+        currentTweener = rect_RadarRotator.xt_Rotate_To(Vector3.forward * -360, duration, isRelative, isAutoKill, XTweenSpace.相对, TrailRotationMode).SetLoop(loop).SetLoopingDelay(loopDelay).SetLoopType(loopType).SetEase(easeMode).OnComplete((d) =>
         {
 
         }).SetStepTimeInterval(site_SpawnInterval).OnStepUpdate<Vector3>((s, v, w) =>

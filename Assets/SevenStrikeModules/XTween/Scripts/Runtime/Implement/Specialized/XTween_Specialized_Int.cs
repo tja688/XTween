@@ -26,7 +26,7 @@ namespace SevenStrikeModules.XTween
     /// 专门处理 整数_Int 类型动画的补间类
     /// </summary>
     /// <remarks>
-    /// 该类继承自 HudAnimation_TweenerBase<int>，实现了对 int 类型的插值计算
+    /// 该类继承自 XTween_Base<int>，实现了对 int 类型的插值计算
     /// 主要用于处理单个 整型值 的动画
     /// </remarks>
     public class XTween_Specialized_Int : XTween_Base<int>
