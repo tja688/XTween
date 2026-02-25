@@ -1264,7 +1264,7 @@ MonoBehaviour:
   FromValue_Vector4: {x: 0, y: 0, z: 0, w: 0}
   FromValue_Color: {r: 1, g: 1, b: 1, a: 1}
   FromValue_Quaternion: {x: 0, y: 0, z: 0, w: 1}
-  TweenTypes: 3
+  TweenTypes: 9
   TweenTypes_Positions: 0
   TweenTypes_Rotations: 0
   TweenTypes_Alphas: 0
@@ -1272,7 +1272,7 @@ MonoBehaviour:
   TweenTypes_Text: 0
   TweenTypes_TmpText: 0
   TweenTypes_To: 0
-  index_TweenTypes: "\u4F4D\u7F6E_Position"
+  index_TweenTypes: "\u900F\u660E\u5EA6_Alpha"
   index_TweenTypes_Positions: "\u951A\u70B9\u4F4D\u7F6E_AnchoredPosition"
   index_TweenTypes_Rotations: "\u6B27\u62C9\u89D2\u5EA6_Euler"
   index_TweenTypes_Rotation_Space: "\u7EDD\u5BF9"

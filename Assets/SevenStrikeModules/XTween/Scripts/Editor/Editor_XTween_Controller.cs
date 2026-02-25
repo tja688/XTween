@@ -614,6 +614,12 @@ namespace SevenStrikeModules.XTween.Editor
 
                     // 提取当前控制器的动画参数到数据类以便传递给预设管理器保存
                     XTween_PresetManager.preset_JsonFile_Checker();
+
+                    // 自动推断类型保存
+                    BaseScript.preset_Save_From_Controller(
+                        "AA",
+                        "BBNN，往返两次"
+                    );
                 };
             }
             if (Editor_XTween_GUI.Gui_Layout_Button("读取", "读取预设参数到当前动画", XTweenGUIFilled.实体, XTweenGUIColor.亮白, Color.black, 25))
