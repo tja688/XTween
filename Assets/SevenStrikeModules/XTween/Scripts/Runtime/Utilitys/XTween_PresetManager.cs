@@ -1359,6 +1359,67 @@ namespace SevenStrikeModules.XTween
 
             return preset_Get_Preset_From_Container<T>(container);
         }
+        /// <summary>
+        /// 获取指定类型的所有预设（返回预设对象列表）
+        /// </summary>
+        /// <typeparam name="T">预设数据类型</typeparam>
+        /// <param name="type">动画类型</param>
+        /// <returns>预设对象列表</returns>
+        public static List<T> preset_Get_All_Presets_Of_Type<T>(XTweenTypes type) where T : XTweenPresetBase
+        {
+            var result = new List<T>();
+            string targetType = GetFileNameFromType(type);
+
+            // 获取该类型的所有容器
+            var containers = preset_Container_GetAll();
+            foreach (var container in containers)
+            {
+                if (container.Type.Equals(targetType, StringComparison.OrdinalIgnoreCase))
+                {
+                    try
+                    {
+                        var preset = JsonUtility.FromJson<T>(container.Json);
+                        if (preset != null)
+                        {
+                            result.Add(preset);
+                        }
+                    }
+                    catch { }
+                }
+            }
+
+            return result;
+        }
+        /// <summary>
+        /// 获取指定类型的所有预设名称
+        /// </summary>
+        /// <param name="type">动画类型</param>
+        /// <returns>预设名称列表</returns>
+        public static List<string> preset_Get_All_Preset_Names(XTweenTypes type)
+        {
+            var names = new List<string>();
+            string targetType = GetFileNameFromType(type);
+
+            var containers = preset_Container_GetAll();
+            foreach (var container in containers)
+            {
+                if (container.Type.Equals(targetType, StringComparison.OrdinalIgnoreCase))
+                {
+                    try
+                    {
+                        // 由于预设类型不同，需要先解析为基类获取Name
+                        var basePreset = JsonUtility.FromJson<XTweenPresetBase>(container.Json);
+                        if (basePreset != null && !string.IsNullOrEmpty(basePreset.Name))
+                        {
+                            names.Add(basePreset.Name);
+                        }
+                    }
+                    catch { }
+                }
+            }
+
+            return names;
+        }
         #endregion
 
         #region Controller
@@ -1371,7 +1432,7 @@ namespace SevenStrikeModules.XTween
         /// <param name="controller">XTween_Controller实例</param>
         /// <param name="presetName">预设名称，为空时自动生成</param>
         /// <param name="description">预设描述</param>
-        public static void preset_Save_Preset_From_Controller<T>(XTween_Controller controller, string presetName = "", string description = "") where T : XTweenPresetBase, new()
+        public static void preset_Save_From_Controller_Manual<T>(this XTween_Controller controller, string presetName = "", string description = "") where T : XTweenPresetBase, new()
         {
 #if UNITY_EDITOR
             if (controller == null)
@@ -1593,7 +1654,7 @@ namespace SevenStrikeModules.XTween
         /// <param name="controller">XTween_Controller实例</param>
         /// <param name="presetName">预设名称，为空时自动生成</param>
         /// <param name="description">预设描述</param>
-        public static void preset_Save_Preset_From_Controller(XTween_Controller controller, string presetName = "", string description = "")
+        public static void preset_Save_From_Controller_Auto(this XTween_Controller controller, string presetName = "", string description = "")
         {
 #if UNITY_EDITOR
             if (controller == null)
@@ -1607,43 +1668,43 @@ namespace SevenStrikeModules.XTween
             switch (controller.TweenTypes)
             {
                 case XTweenTypes.透明度_Alpha:
-                    preset_Save_Preset_From_Controller<XTweenPreset_Alpha>(controller, presetName, description);
+                    preset_Save_From_Controller_Manual<XTweenPreset_Alpha>(controller, presetName, description);
                     break;
                 case XTweenTypes.颜色_Color:
-                    preset_Save_Preset_From_Controller<XTweenPreset_Color>(controller, presetName, description);
+                    preset_Save_From_Controller_Manual<XTweenPreset_Color>(controller, presetName, description);
                     break;
                 case XTweenTypes.位置_Position:
-                    preset_Save_Preset_From_Controller<XTweenPreset_Position>(controller, presetName, description);
+                    preset_Save_From_Controller_Manual<XTweenPreset_Position>(controller, presetName, description);
                     break;
                 case XTweenTypes.旋转_Rotation:
-                    preset_Save_Preset_From_Controller<XTweenPreset_Rotation>(controller, presetName, description);
+                    preset_Save_From_Controller_Manual<XTweenPreset_Rotation>(controller, presetName, description);
                     break;
                 case XTweenTypes.缩放_Scale:
-                    preset_Save_Preset_From_Controller<XTweenPreset_Scale>(controller, presetName, description);
+                    preset_Save_From_Controller_Manual<XTweenPreset_Scale>(controller, presetName, description);
                     break;
                 case XTweenTypes.尺寸_Size:
-                    preset_Save_Preset_From_Controller<XTweenPreset_Size>(controller, presetName, description);
+                    preset_Save_From_Controller_Manual<XTweenPreset_Size>(controller, presetName, description);
                     break;
                 case XTweenTypes.震动_Shake:
-                    preset_Save_Preset_From_Controller<XTweenPreset_Shake>(controller, presetName, description);
+                    preset_Save_From_Controller_Manual<XTweenPreset_Shake>(controller, presetName, description);
                     break;
                 case XTweenTypes.文字_Text:
-                    preset_Save_Preset_From_Controller<XTweenPreset_Text>(controller, presetName, description);
+                    preset_Save_From_Controller_Manual<XTweenPreset_Text>(controller, presetName, description);
                     break;
                 case XTweenTypes.文字_TmpText:
-                    preset_Save_Preset_From_Controller<XTweenPreset_TmpText>(controller, presetName, description);
+                    preset_Save_From_Controller_Manual<XTweenPreset_TmpText>(controller, presetName, description);
                     break;
                 case XTweenTypes.填充_Fill:
-                    preset_Save_Preset_From_Controller<XTweenPreset_Fill>(controller, presetName, description);
+                    preset_Save_From_Controller_Manual<XTweenPreset_Fill>(controller, presetName, description);
                     break;
                 case XTweenTypes.平铺_Tiled:
-                    preset_Save_Preset_From_Controller<XTweenPreset_Tiled>(controller, presetName, description);
+                    preset_Save_From_Controller_Manual<XTweenPreset_Tiled>(controller, presetName, description);
                     break;
                 case XTweenTypes.路径_Path:
-                    preset_Save_Preset_From_Controller<XTweenPreset_Path>(controller, presetName, description);
+                    preset_Save_From_Controller_Manual<XTweenPreset_Path>(controller, presetName, description);
                     break;
                 case XTweenTypes.原生动画_To:
-                    preset_Save_Preset_From_Controller<XTweenPreset_To>(controller, presetName, description);
+                    preset_Save_From_Controller_Manual<XTweenPreset_To>(controller, presetName, description);
                     break;
                 default:
                     if (EnableDebugLogs)
@@ -1651,6 +1712,254 @@ namespace SevenStrikeModules.XTween
                     break;
             }
 #endif
+        }
+        /// <summary>
+        /// 将指定的预设数据应用到XTween_Controller
+        /// </summary>
+        /// <typeparam name="T">预设数据类型，必须继承自XTweenPresetBase</typeparam>
+        /// <param name="controller">XTween_Controller实例</param>
+        /// <param name="preset">要应用的预设数据对象</param>
+        /// <param name="applyFromMode">是否应用起始值模式设置</param>
+        public static void preset_Apply_To_Controller<T>(this XTween_Controller controller, T preset, bool applyFromMode = true) where T : XTweenPresetBase
+        {
+            if (controller == null)
+            {
+                if (EnableDebugLogs)
+                    Debug.LogError("[XTween_PresetManager] 控制器不能为空！");
+                return;
+            }
+
+            if (preset == null)
+            {
+                if (EnableDebugLogs)
+                    Debug.LogError("[XTween_PresetManager] 预设数据不能为空！");
+                return;
+            }
+
+            // 应用基础参数
+            controller.Duration = preset.Duration;
+            controller.Delay = preset.Delay;
+            controller.UseRandomDelay = preset.UseRandomDelay;
+            controller.RandomDelay = preset.RandomDelay;
+            controller.EaseMode = preset.EaseMode;
+            controller.UseCurve = preset.UseCurve;
+            controller.Curve = preset.Curve;
+            controller.LoopCount = preset.LoopCount;
+            controller.LoopDelay = preset.LoopDelay;
+            controller.LoopType = preset.LoopType;
+            controller.IsRelative = preset.IsRelative;
+            controller.IsAutoKill = preset.IsAutoKill;
+
+            // 根据预设类型应用特定参数
+            switch (preset)
+            {
+                case XTweenPreset_Alpha alphaPreset:
+                    controller.TweenTypes = XTweenTypes.透明度_Alpha;
+                    controller.EndValue_Float = alphaPreset.EndValue;
+                    controller.FromValue_Float = alphaPreset.FromValue;
+                    controller.IsFromMode = applyFromMode && alphaPreset.UseFromMode;
+                    break;
+
+                case XTweenPreset_Color colorPreset:
+                    controller.TweenTypes = XTweenTypes.颜色_Color;
+                    controller.EndValue_Color = colorPreset.EndValue;
+                    controller.FromValue_Color = colorPreset.FromValue;
+                    controller.IsFromMode = applyFromMode && colorPreset.UseFromMode;
+                    break;
+
+                case XTweenPreset_Position posPreset:
+                    controller.TweenTypes = XTweenTypes.位置_Position;
+                    controller.TweenTypes_Positions = posPreset.PositionType;
+                    controller.EndValue_Vector2 = posPreset.EndValue_Vector2;
+                    controller.EndValue_Vector3 = posPreset.EndValue_Vector3;
+                    controller.FromValue_Vector2 = posPreset.FromValue_Vector2;
+                    controller.FromValue_Vector3 = posPreset.FromValue_Vector3;
+                    controller.IsFromMode = applyFromMode && posPreset.UseFromMode;
+                    break;
+
+                case XTweenPreset_Rotation rotPreset:
+                    controller.TweenTypes = XTweenTypes.旋转_Rotation;
+                    controller.TweenTypes_Rotations = rotPreset.RotationType;
+                    controller.EndValue_Vector3 = rotPreset.EndValue_Euler;
+                    controller.EndValue_Quaternion = rotPreset.EndValue_Quaternion;
+                    controller.FromValue_Vector3 = rotPreset.FromValue_Euler;
+                    controller.FromValue_Quaternion = rotPreset.FromValue_Quaternion;
+                    controller.AnimateSpace = rotPreset.AnimateSpace;
+                    controller.RotationMode = rotPreset.RotationMode;
+                    controller.RotateMode = rotPreset.RotateMode;
+                    controller.IsFromMode = applyFromMode && rotPreset.UseFromMode;
+                    break;
+
+                case XTweenPreset_Scale scalePreset:
+                    controller.TweenTypes = XTweenTypes.缩放_Scale;
+                    controller.EndValue_Vector3 = scalePreset.EndValue;
+                    controller.FromValue_Vector3 = scalePreset.FromValue;
+                    controller.IsFromMode = applyFromMode && scalePreset.UseFromMode;
+                    break;
+
+                case XTweenPreset_Size sizePreset:
+                    controller.TweenTypes = XTweenTypes.尺寸_Size;
+                    controller.EndValue_Vector2 = sizePreset.EndValue;
+                    controller.FromValue_Vector2 = sizePreset.FromValue;
+                    controller.IsFromMode = applyFromMode && sizePreset.UseFromMode;
+                    break;
+
+                case XTweenPreset_Shake shakePreset:
+                    controller.TweenTypes = XTweenTypes.震动_Shake;
+                    controller.TweenTypes_Shakes = shakePreset.ShakeType;
+                    controller.EndValue_Vector3 = shakePreset.Strength_Vector3;
+                    controller.EndValue_Vector2 = shakePreset.Strength_Vector2;
+                    controller.Vibrato = shakePreset.Vibrato;
+                    controller.Randomness = shakePreset.Randomness;
+                    controller.FadeShake = shakePreset.FadeShake;
+                    break;
+
+                case XTweenPreset_Text textPreset:
+                    controller.TweenTypes = XTweenTypes.文字_Text;
+                    controller.TweenTypes_Text = textPreset.TextType;
+                    controller.EndValue_Int = textPreset.EndValue_Int;
+                    controller.EndValue_Float = textPreset.EndValue_Float;
+                    controller.EndValue_Color = textPreset.EndValue_Color;
+                    controller.EndValue_String = textPreset.EndValue_String;
+                    controller.FromValue_Int = textPreset.FromValue_Int;
+                    controller.FromValue_Float = textPreset.FromValue_Float;
+                    controller.FromValue_Color = textPreset.FromValue_Color;
+                    controller.FromValue_String = textPreset.FromValue_String;
+                    controller.IsExtendedString = textPreset.IsExtendedString;
+                    controller.TextCursor = textPreset.TextCursor;
+                    controller.CursorBlinkTime = textPreset.CursorBlinkTime;
+                    controller.IsFromMode = applyFromMode && textPreset.UseFromMode;
+                    break;
+
+                case XTweenPreset_TmpText tmpPreset:
+                    controller.TweenTypes = XTweenTypes.文字_TmpText;
+                    controller.TweenTypes_TmpText = tmpPreset.TmpTextType;
+                    controller.EndValue_Float = tmpPreset.EndValue_Float;
+                    controller.EndValue_Color = tmpPreset.EndValue_Color;
+                    controller.EndValue_String = tmpPreset.EndValue_String;
+                    controller.EndValue_Vector4 = tmpPreset.EndValue_Vector4;
+                    controller.FromValue_Float = tmpPreset.FromValue_Float;
+                    controller.FromValue_Color = tmpPreset.FromValue_Color;
+                    controller.FromValue_String = tmpPreset.FromValue_String;
+                    controller.FromValue_Vector4 = tmpPreset.FromValue_Vector4;
+                    controller.IsExtendedString = tmpPreset.IsExtendedString;
+                    controller.IsFromMode = applyFromMode && tmpPreset.UseFromMode;
+                    break;
+
+                case XTweenPreset_Fill fillPreset:
+                    controller.TweenTypes = XTweenTypes.填充_Fill;
+                    controller.EndValue_Float = fillPreset.EndValue;
+                    controller.FromValue_Float = fillPreset.FromValue;
+                    controller.IsFromMode = applyFromMode && fillPreset.UseFromMode;
+                    break;
+
+                case XTweenPreset_Tiled tiledPreset:
+                    controller.TweenTypes = XTweenTypes.平铺_Tiled;
+                    controller.EndValue_Float = tiledPreset.EndValue;
+                    controller.FromValue_Float = tiledPreset.FromValue;
+                    controller.IsFromMode = applyFromMode && tiledPreset.UseFromMode;
+                    break;
+
+                case XTweenPreset_Path pathPreset:
+                    controller.TweenTypes = XTweenTypes.路径_Path;
+                    // 路径名称需要通过PathTool查找，这里只设置类型
+                    if (controller.Target_PathTool != null && !string.IsNullOrEmpty(pathPreset.PathName))
+                    {
+                        // 可以在这里添加通过名称查找PathTool的逻辑
+                    }
+                    break;
+
+                case XTweenPreset_To toPreset:
+                    controller.TweenTypes = XTweenTypes.原生动画_To;
+                    controller.TweenTypes_To = toPreset.ToType;
+                    controller.EndValue_Int = toPreset.EndValue_Int;
+                    controller.EndValue_Float = toPreset.EndValue_Float;
+                    controller.EndValue_String = toPreset.EndValue_String;
+                    controller.EndValue_Vector2 = toPreset.EndValue_Vector2;
+                    controller.EndValue_Vector3 = toPreset.EndValue_Vector3;
+                    controller.EndValue_Vector4 = toPreset.EndValue_Vector4;
+                    controller.EndValue_Color = toPreset.EndValue_Color;
+                    controller.FromValue_Int = toPreset.FromValue_Int;
+                    controller.FromValue_Float = toPreset.FromValue_Float;
+                    controller.FromValue_String = toPreset.FromValue_String;
+                    controller.FromValue_Vector2 = toPreset.FromValue_Vector2;
+                    controller.FromValue_Vector3 = toPreset.FromValue_Vector3;
+                    controller.FromValue_Vector4 = toPreset.FromValue_Vector4;
+                    controller.FromValue_Color = toPreset.FromValue_Color;
+                    controller.IsExtendedString = toPreset.IsExtendedString;
+                    controller.TextCursor = toPreset.TextCursor;
+                    controller.CursorBlinkTime = toPreset.CursorBlinkTime;
+                    controller.IsFromMode = applyFromMode && toPreset.UseFromMode;
+                    break;
+            }
+
+            if (EnableDebugLogs)
+                Debug.Log($"[XTween_PresetManager] 已应用预设 '{preset.Name}' 到控制器");
+        }
+        /// <summary>
+        /// 通过预设名称从指定类型的预设文件中加载并应用到控制器
+        /// </summary>
+        /// <typeparam name="T">预设数据类型，必须继承自XTweenPresetBase</typeparam>
+        /// <param name="controller">XTween_Controller实例</param>
+        /// <param name="type">动画类型</param>
+        /// <param name="presetName">要应用的预设名称</param>
+        /// <param name="applyFromMode">是否应用起始值模式设置</param>
+        /// <returns>是否成功应用</returns>
+        public static bool preset_Apply_To_Controller_ByName<T>(this XTween_Controller controller, XTweenTypes type, string presetName, bool applyFromMode = true) where T : XTweenPresetBase
+        {
+            if (string.IsNullOrEmpty(presetName))
+            {
+                if (EnableDebugLogs)
+                    Debug.LogError("[XTween_PresetManager] 预设名称不能为空！");
+                return false;
+            }
+
+            // 获取该类型的所有预设
+            var containers = preset_Container_GetAll();
+            foreach (var container in containers)
+            {
+                if (container.Type.Equals(GetFileNameFromType(type), StringComparison.OrdinalIgnoreCase))
+                {
+                    try
+                    {
+                        // 解析预设数据
+                        var preset = JsonUtility.FromJson<T>(container.Json);
+                        if (preset != null && preset.Name == presetName)
+                        {
+                            preset_Apply_To_Controller(controller, preset, applyFromMode);
+                            return true;
+                        }
+                    }
+                    catch { }
+                }
+            }
+
+            if (EnableDebugLogs)
+                Debug.LogWarning($"[XTween_PresetManager] 未找到名为 '{presetName}' 的预设 (类型: {type})");
+            return false;
+        }
+        /// <summary>
+        /// 通过索引从指定类型的预设文件中加载并应用到控制器
+        /// </summary>
+        /// <typeparam name="T">预设数据类型，必须继承自XTweenPresetBase</typeparam>
+        /// <param name="controller">XTween_Controller实例</param>
+        /// <param name="type">动画类型</param>
+        /// <param name="presetIndex">要应用的预设索引（从0开始）</param>
+        /// <param name="applyFromMode">是否应用起始值模式设置</param>
+        /// <returns>是否成功应用</returns>
+        public static bool preset_Apply_To_Controller_ByIndex<T>(this XTween_Controller controller, XTweenTypes type, int presetIndex, bool applyFromMode = true) where T : XTweenPresetBase
+        {
+            var presets = preset_Get_All_Presets_Of_Type<T>(type);
+
+            if (presetIndex < 0 || presetIndex >= presets.Count)
+            {
+                if (EnableDebugLogs)
+                    Debug.LogWarning($"[XTween_PresetManager] 预设索引超出范围: {presetIndex}, 可用数量: {presets.Count}");
+                return false;
+            }
+
+            preset_Apply_To_Controller(controller, presets[presetIndex], applyFromMode);
+            return true;
         }
         #endregion
 
