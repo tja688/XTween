@@ -23,7 +23,7 @@ namespace SevenStrikeModules.XTween.Editor
     using UnityEditor;
     using UnityEngine;
 
-    public class Editor_XTween_PresetsWindow : EditorWindow
+    public class Editor_XTween_PresetsCentral : EditorWindow
     {
         private void OnEnable()
         {
