@@ -20,9 +20,11 @@
  */
 namespace SevenStrikeModules.XTween
 {
+    using GluonGui.WorkspaceWindow.Views.WorkspaceExplorer;
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using UnityEditor.Presets;
     using UnityEngine;
 
     #region 预设类
@@ -129,6 +131,12 @@ namespace SevenStrikeModules.XTween
     [Serializable]
     public class XTweenPreset_Alpha : XTweenPresetBase
     {
+        /// <summary>
+        /// 透明度动画子类型
+        /// Image组件: 控制Image的透明度
+        /// CanvasGroup组件: 控制CanvasGroup的透明度
+        /// </summary>
+        [SerializeField] public XTweenTypes_Alphas AlphaType = XTweenTypes_Alphas.Image组件;
         /// <summary>
         /// 目标透明度值，范围0-1
         /// 0=完全透明，1=完全不透明
@@ -853,12 +861,12 @@ namespace SevenStrikeModules.XTween
                 preset_JsonFile_Save(type, jsonContent); // 保存到文件
 
                 if (EnableDebugLogs)
-                    Debug.Log($"[XTween_PresetManager] 预设资源不存在，已创建默认资源: {resourcePath}.json");
+                    XTween_Utilitys.DebugInfo("XTween预设管理器消息", $"预设资源不存在，已创建默认资源: {resourcePath}.json", XTweenGUIMsgState.设置);
             }
             else
             {
                 if (EnableDebugLogs)
-                    Debug.Log($"[XTween_PresetManager] 预设资源已存在: {resourcePath}.json");
+                    XTween_Utilitys.DebugInfo("XTween预设管理器消息", $"预设资源已存在: {resourcePath}.json", XTweenGUIMsgState.警告);
             }
         }
         /// <summary>
@@ -1005,28 +1013,9 @@ namespace SevenStrikeModules.XTween
                         LoopType = XTween_LoopType.Restart,
                         IsRelative = false,
                         IsAutoKill = false,
+                        AlphaType = XTweenTypes_Alphas.Image组件,
                         EndValue = 1f,
                         FromValue = 0f,
-                        UseFromMode = true
-                    });
-                    container.Presets.Add(new XTweenPreset_Alpha
-                    {
-                        Name = "淡入效果2",
-                        Description = "从半透明到完全不透明",
-                        Duration = 1.5f,
-                        Delay = 0f,
-                        UseRandomDelay = false,
-                        RandomDelay = new RandomDelay { Min = 0f, Max = 0f },
-                        EaseMode = EaseMode.InOutCubic,
-                        UseCurve = false,
-                        Curve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f),
-                        LoopCount = 0,
-                        LoopDelay = 0f,
-                        LoopType = XTween_LoopType.Restart,
-                        IsRelative = false,
-                        IsAutoKill = false,
-                        EndValue = 1f,
-                        FromValue = 0.5f,
                         UseFromMode = true
                     });
                     break;
@@ -1385,7 +1374,7 @@ namespace SevenStrikeModules.XTween
             UnityEditor.AssetDatabase.Refresh();
 
             if (EnableDebugLogs)
-                Debug.Log($"[XTween_PresetManager] 预设已保存: {fullPath}");
+                XTween_Utilitys.DebugInfo("XTween预设管理器消息", $"预设已保存: {fullPath}", XTweenGUIMsgState.确认);
 #endif
         }
         /// <summary>
@@ -1434,7 +1423,7 @@ namespace SevenStrikeModules.XTween
                 UnityEditor.AssetDatabase.Refresh();
 
                 if (EnableDebugLogs)
-                    Debug.Log($"[XTween_PresetManager] 预设已删除: {fullPath}");
+                    XTween_Utilitys.DebugInfo("XTween预设管理器消息", $"预设已删除: {fullPath}", XTweenGUIMsgState.确认);
             }
 #endif
         }
@@ -1553,7 +1542,7 @@ namespace SevenStrikeModules.XTween
             preset_JsonFile_Save(type, jsonContent);
 
             if (EnableDebugLogs)
-                Debug.Log($"[XTween_PresetManager] 默认预设已重新生成: {fileName}");
+                XTween_Utilitys.DebugInfo("XTween预设管理器消息", $"默认预设已重新生成: {fileName}", XTweenGUIMsgState.设置);
 #endif
         }
         #endregion
@@ -1779,7 +1768,7 @@ namespace SevenStrikeModules.XTween
             if (presetAsset == null)
             {
                 if (EnableDebugLogs)
-                    Debug.LogWarning($"[XTween_PresetManager] 无法加载预设: {resourcePath}.json");
+                    XTween_Utilitys.DebugInfo("XTween预设管理器消息", $"无法加载预设: {resourcePath}.json", XTweenGUIMsgState.错误);
                 return null;
             }
 
@@ -1790,7 +1779,7 @@ namespace SevenStrikeModules.XTween
             catch (Exception e)
             {
                 if (EnableDebugLogs)
-                    Debug.LogError($"[XTween_PresetManager] 解析预设JSON失败: {e.Message}");
+                    XTween_Utilitys.DebugInfo("XTween预设管理器消息", $"解析预设JSON失败: {e.Message}", XTweenGUIMsgState.错误);
                 return null;
             }
         }
@@ -1844,7 +1833,7 @@ namespace SevenStrikeModules.XTween
             if (presetAsset == null)
             {
                 if (EnableDebugLogs)
-                    Debug.LogWarning($"[XTween_PresetManager] 无法加载预设: {resourcePath}.json");
+                    XTween_Utilitys.DebugInfo("XTween预设管理器消息", $"无法加载预设: {resourcePath}.json", XTweenGUIMsgState.错误);
                 return null;
             }
 
@@ -1855,7 +1844,7 @@ namespace SevenStrikeModules.XTween
             catch (Exception e)
             {
                 if (EnableDebugLogs)
-                    Debug.LogError($"[XTween_PresetManager] 解析预设JSON失败: {e.Message}");
+                    XTween_Utilitys.DebugInfo("XTween预设管理器消息", $"解析预设JSON失败: {e.Message}", XTweenGUIMsgState.错误);
                 return null;
             }
         }
@@ -2152,13 +2141,13 @@ namespace SevenStrikeModules.XTween
         /// <item><description>文件写入失败（由底层方法抛出异常）</description></item>
         /// </list>
         /// </returns>
-        public static bool preset_Save_From_Controller(this XTween_Controller controller, string presetName = "", string description = "", bool overrideExist = false)
+        public static bool preset_Save_From_Controller(this XTween_Controller controller, string presetName = "", string description = "")
         {
 #if UNITY_EDITOR
             if (controller == null)
             {
                 if (EnableDebugLogs)
-                    Debug.LogError("[XTween_PresetManager] 控制器不能为空！");
+                    XTween_Utilitys.DebugInfo("XTween预设管理器消息", "控制器不能为空！", XTweenGUIMsgState.警告);
                 return false;
             }
 
@@ -2166,26 +2155,6 @@ namespace SevenStrikeModules.XTween
             if (string.IsNullOrEmpty(presetName))
             {
                 presetName = $"{controller.TweenTypes}_preset_{DateTime.Now:yyyyMMddHHmmss}";
-            }
-
-            // 检查重名
-            if (preset_Check_NameExists(controller.TweenTypes, presetName))
-            {
-                if (!overrideExist)
-                {
-                    // 不覆盖，返回false
-                    if (EnableDebugLogs)
-                        Debug.LogWarning($"[XTween_PresetManager] 预设名称 '{presetName}' 已存在，保存已取消");
-                    return false;
-                }
-                else
-                {
-                    if (EnableDebugLogs)
-                        Debug.Log($"[XTween_PresetManager] 预设名称 '{presetName}' 已存在，将覆盖保存");
-
-                    // 覆盖模式：先删除现有同名预设
-                    preset_Delete_ByName(controller.TweenTypes, presetName);
-                }
             }
 
             // 能执行到此处说明同意覆盖或者并没有同名预设
@@ -2220,7 +2189,7 @@ namespace SevenStrikeModules.XTween
                     return preset_Save_From_Controller<XTweenPreset_To>(controller, presetName, description);
                 default:
                     if (EnableDebugLogs)
-                        Debug.LogWarning($"[XTween_PresetManager] 不支持的动画类型: {controller.TweenTypes}");
+                        XTween_Utilitys.DebugInfo("XTween预设管理器消息", $"不支持的动画类型: {controller.TweenTypes}！", XTweenGUIMsgState.警告);
                     return false;
             }
 #else
@@ -2266,7 +2235,7 @@ namespace SevenStrikeModules.XTween
             preset_Container_Save_Added(controller.TweenTypes, preset);
 
             if (EnableDebugLogs)
-                Debug.Log($"[XTween_PresetManager] 已从控制器保存预设: {preset.Name}");
+                XTween_Utilitys.DebugInfo("XTween预设管理器消息", $"已从控制器保存到预设: {preset.Name}！", XTweenGUIMsgState.确认);
 
             return true;
 #else
@@ -2416,12 +2385,13 @@ namespace SevenStrikeModules.XTween
                 case XTweenTypes.透明度_Alpha:
                     if (preset is XTweenPreset_Alpha alphaPreset)
                     {
+                        alphaPreset.AlphaType = controller.TweenTypes_Alphas;
                         alphaPreset.EndValue = controller.EndValue_Float;
                         alphaPreset.FromValue = controller.FromValue_Float;
                         alphaPreset.UseFromMode = controller.IsFromMode;
 
                         if (EnableDebugLogs)
-                            Debug.Log($"[XTween_PresetManager] 已复制Alpha预设数据: EndValue={alphaPreset.EndValue}, FromValue={alphaPreset.FromValue}");
+                            XTween_Utilitys.DebugInfo("XTween预设管理器消息", $"已复制Alpha预设数据: EndValue={alphaPreset.EndValue}, FromValue={alphaPreset.FromValue}！", XTweenGUIMsgState.确认);
                     }
                     break;
                 #endregion
@@ -2435,7 +2405,7 @@ namespace SevenStrikeModules.XTween
                         colorPreset.UseFromMode = controller.IsFromMode;
 
                         if (EnableDebugLogs)
-                            Debug.Log($"[XTween_PresetManager] 已复制Color预设数据: EndValue={colorPreset.EndValue}, FromValue={colorPreset.FromValue}");
+                            XTween_Utilitys.DebugInfo("XTween预设管理器消息", $"已复制Color预设数据: EndValue={colorPreset.EndValue}, FromValue={colorPreset.FromValue}", XTweenGUIMsgState.确认);
                     }
                     break;
                 #endregion
@@ -2452,7 +2422,7 @@ namespace SevenStrikeModules.XTween
                         posPreset.UseFromMode = controller.IsFromMode;
 
                         if (EnableDebugLogs)
-                            Debug.Log($"[XTween_PresetManager] 已复制Position预设数据: Type={posPreset.PositionType}, End2D={posPreset.EndValue_Vector2}, End3D={posPreset.EndValue_Vector3}");
+                            XTween_Utilitys.DebugInfo("XTween预设管理器消息", $"已复制Position预设数据: Type={posPreset.PositionType}, End2D={posPreset.EndValue_Vector2}, End3D={posPreset.EndValue_Vector3}", XTweenGUIMsgState.确认);
                     }
                     break;
                 #endregion
@@ -2472,7 +2442,7 @@ namespace SevenStrikeModules.XTween
                         rotPreset.UseFromMode = controller.IsFromMode;
 
                         if (EnableDebugLogs)
-                            Debug.Log($"[XTween_PresetManager] 已复制Rotation预设数据: Type={rotPreset.RotationType}, Euler={rotPreset.EndValue_Euler}");
+                            XTween_Utilitys.DebugInfo("XTween预设管理器消息", $"已复制Rotation预设数据: Type={rotPreset.RotationType}, Euler={rotPreset.EndValue_Euler}", XTweenGUIMsgState.确认);
                     }
                     break;
                 #endregion
@@ -2486,7 +2456,7 @@ namespace SevenStrikeModules.XTween
                         scalePreset.UseFromMode = controller.IsFromMode;
 
                         if (EnableDebugLogs)
-                            Debug.Log($"[XTween_PresetManager] 已复制Scale预设数据: EndValue={scalePreset.EndValue}, FromValue={scalePreset.FromValue}");
+                            XTween_Utilitys.DebugInfo("XTween预设管理器消息", $"已复制Scale预设数据: EndValue={scalePreset.EndValue}, FromValue={scalePreset.FromValue}", XTweenGUIMsgState.确认);
                     }
                     break;
                 #endregion
@@ -2500,7 +2470,7 @@ namespace SevenStrikeModules.XTween
                         sizePreset.UseFromMode = controller.IsFromMode;
 
                         if (EnableDebugLogs)
-                            Debug.Log($"[XTween_PresetManager] 已复制Size预设数据: EndValue={sizePreset.EndValue}, FromValue={sizePreset.FromValue}");
+                            XTween_Utilitys.DebugInfo("XTween预设管理器消息", $"已复制Size预设数据: EndValue={sizePreset.EndValue}, FromValue={sizePreset.FromValue}", XTweenGUIMsgState.确认);
                     }
                     break;
                 #endregion
@@ -2517,7 +2487,7 @@ namespace SevenStrikeModules.XTween
                         shakePreset.FadeShake = controller.FadeShake;
 
                         if (EnableDebugLogs)
-                            Debug.Log($"[XTween_PresetManager] 已复制Shake预设数据: Type={shakePreset.ShakeType}, Vibrato={shakePreset.Vibrato}");
+                            XTween_Utilitys.DebugInfo("XTween预设管理器消息", $"已复制Shake预设数据: Type={shakePreset.ShakeType}, Vibrato={shakePreset.Vibrato}", XTweenGUIMsgState.确认);
                     }
                     break;
                 #endregion
@@ -2541,7 +2511,7 @@ namespace SevenStrikeModules.XTween
                         textPreset.UseFromMode = controller.IsFromMode;
 
                         if (EnableDebugLogs)
-                            Debug.Log($"[XTween_PresetManager] 已复制Text预设数据: Type={textPreset.TextType}, String='{textPreset.EndValue_String}'");
+                            XTween_Utilitys.DebugInfo("XTween预设管理器消息", $"已复制Text预设数据: Type={textPreset.TextType}, String='{textPreset.EndValue_String}", XTweenGUIMsgState.确认);
                     }
                     break;
                 #endregion
@@ -2563,7 +2533,7 @@ namespace SevenStrikeModules.XTween
                         tmpPreset.UseFromMode = controller.IsFromMode;
 
                         if (EnableDebugLogs)
-                            Debug.Log($"[XTween_PresetManager] 已复制TmpText预设数据: Type={tmpPreset.TmpTextType}, Color={tmpPreset.EndValue_Color}");
+                            XTween_Utilitys.DebugInfo("XTween预设管理器消息", $"已复制TmpText预设数据: Type={tmpPreset.TmpTextType}, Color={tmpPreset.EndValue_Color}", XTweenGUIMsgState.确认);
                     }
                     break;
                 #endregion
@@ -2577,7 +2547,7 @@ namespace SevenStrikeModules.XTween
                         fillPreset.UseFromMode = controller.IsFromMode;
 
                         if (EnableDebugLogs)
-                            Debug.Log($"[XTween_PresetManager] 已复制Fill预设数据: EndValue={fillPreset.EndValue}, FromValue={fillPreset.FromValue}");
+                            XTween_Utilitys.DebugInfo("XTween预设管理器消息", $"已复制Fill预设数据: EndValue={fillPreset.EndValue}, FromValue={fillPreset.FromValue}", XTweenGUIMsgState.确认);
                     }
                     break;
                 #endregion
@@ -2591,7 +2561,7 @@ namespace SevenStrikeModules.XTween
                         tiledPreset.UseFromMode = controller.IsFromMode;
 
                         if (EnableDebugLogs)
-                            Debug.Log($"[XTween_PresetManager] 已复制Tiled预设数据: EndValue={tiledPreset.EndValue}, FromValue={tiledPreset.FromValue}");
+                            XTween_Utilitys.DebugInfo("XTween预设管理器消息", $"已复制Tiled预设数据: EndValue={tiledPreset.EndValue}, FromValue={tiledPreset.FromValue}", XTweenGUIMsgState.确认);
                     }
                     break;
                 #endregion
@@ -2603,7 +2573,7 @@ namespace SevenStrikeModules.XTween
                         pathPreset.PathName = controller.Target_PathTool != null ? controller.Target_PathTool.name : "";
 
                         if (EnableDebugLogs)
-                            Debug.Log($"[XTween_PresetManager] 已复制Path预设数据: PathName={pathPreset.PathName}");
+                            XTween_Utilitys.DebugInfo("XTween预设管理器消息", $"已复制Path预设数据: PathName={pathPreset.PathName}", XTweenGUIMsgState.确认);
                     }
                     break;
                 #endregion
@@ -2633,7 +2603,7 @@ namespace SevenStrikeModules.XTween
                         toPreset.UseFromMode = controller.IsFromMode;
 
                         if (EnableDebugLogs)
-                            Debug.Log($"[XTween_PresetManager] 已复制To预设数据: Type={toPreset.ToType}");
+                            XTween_Utilitys.DebugInfo("XTween预设管理器消息", $"已复制To预设数据: Type={toPreset.ToType}", XTweenGUIMsgState.确认);
                     }
                     break;
                 #endregion
@@ -2641,7 +2611,7 @@ namespace SevenStrikeModules.XTween
                 #region 无类型/默认
                 default:
                     if (EnableDebugLogs)
-                        Debug.LogWarning($"[XTween_PresetManager] 不支持的动画类型: {controller.TweenTypes}，无法复制特定数据");
+                        XTween_Utilitys.DebugInfo("XTween预设管理器消息", $"不支持的动画类型: {controller.TweenTypes}，无法复制特定数据", XTweenGUIMsgState.错误);
                     break;
                     #endregion
             }
@@ -2708,7 +2678,7 @@ namespace SevenStrikeModules.XTween
             preset.IsAutoKill = controller.IsAutoKill;
 
             if (EnableDebugLogs)
-                Debug.Log($"[XTween_PresetManager] 已复制基类数据: Duration={preset.Duration}, LoopCount={preset.LoopCount}");
+                XTween_Utilitys.DebugInfo("XTween预设管理器消息", $"已复制基类数据: Duration={preset.Duration}, LoopCount={preset.LoopCount}", XTweenGUIMsgState.确认);
         }
         /// <summary>
         /// 删除指定类型的指定名称的预设
@@ -2757,9 +2727,8 @@ namespace SevenStrikeModules.XTween
             {
                 // 重新保存容器
                 preset_Container_Save_Replace(type, container.Presets);
-
                 if (EnableDebugLogs)
-                    Debug.Log($"[XTween_PresetManager] 已删除预设: {presetName}");
+                    XTween_Utilitys.DebugInfo("XTween预设管理器消息", $"已删除预设: {presetName}", XTweenGUIMsgState.确认);
 
                 return true;
             }
@@ -2865,14 +2834,14 @@ namespace SevenStrikeModules.XTween
             if (controller == null)
             {
                 if (EnableDebugLogs)
-                    Debug.LogError("[XTween_PresetManager] 控制器不能为空！");
+                    XTween_Utilitys.DebugInfo("XTween预设管理器消息", $"控制器不能为空！", XTweenGUIMsgState.错误);
                 return;
             }
 
             if (preset == null)
             {
                 if (EnableDebugLogs)
-                    Debug.LogError("[XTween_PresetManager] 预设数据不能为空！");
+                    XTween_Utilitys.DebugInfo("XTween预设管理器消息", $"预设数据不能为空！", XTweenGUIMsgState.错误);
                 return;
             }
 
@@ -2895,6 +2864,8 @@ namespace SevenStrikeModules.XTween
             {
                 case XTweenPreset_Alpha alphaPreset:
                     controller.TweenTypes = XTweenTypes.透明度_Alpha;
+                    controller.TweenTypes_Alphas = alphaPreset.AlphaType;
+                    controller.index_TweenTypes = controller.TweenTypes.ToString();
                     controller.EndValue_Float = alphaPreset.EndValue;
                     controller.FromValue_Float = alphaPreset.FromValue;
                     controller.IsFromMode = alphaPreset.UseFromMode;
@@ -3034,7 +3005,7 @@ namespace SevenStrikeModules.XTween
             }
 
             if (EnableDebugLogs)
-                Debug.Log($"[XTween_PresetManager] 已应用预设 '{preset.Name}' 到控制器");
+                XTween_Utilitys.DebugInfo("XTween预设管理器消息", $"已应用预设 '{preset.Name}' 到控制器！", XTweenGUIMsgState.确认);
         }
         /// <summary>
         /// 通过预设名称从指定类型的预设文件中加载并应用到控制器
@@ -3075,7 +3046,7 @@ namespace SevenStrikeModules.XTween
         /// true - 成功找到并应用预设
         /// false - 未找到匹配的预设
         /// </returns>
-        public static bool preset_Apply_To_Controller_ByName<T>(this XTween_Controller controller, XTweenTypes type, string presetName) where T : XTweenPresetBase
+        public static T preset_Apply_To_Controller_ByName<T>(this XTween_Controller controller, XTweenTypes type, string presetName) where T : XTweenPresetBase
         {
             var containers = preset_Container_GetAll();
             foreach (var container in containers)
@@ -3087,12 +3058,12 @@ namespace SevenStrikeModules.XTween
                         if (preset is T && preset.Name == presetName)
                         {
                             preset_Apply_To_Controller(controller, preset);
-                            return true;
+                            return preset as T;
                         }
                     }
                 }
             }
-            return false;
+            return null;
         }
         /// <summary>
         /// 通过索引从指定类型的预设文件中加载并应用到控制器
@@ -3143,7 +3114,7 @@ namespace SevenStrikeModules.XTween
             if (presetIndex < 0 || presetIndex >= presets.Count)
             {
                 if (EnableDebugLogs)
-                    Debug.LogWarning($"[XTween_PresetManager] 预设索引超出范围: {presetIndex}, 可用数量: {presets.Count}");
+                    XTween_Utilitys.DebugInfo("XTween预设管理器消息", $"预设索引超出范围: {presetIndex}, 可用数量: {presets.Count}！", XTweenGUIMsgState.警告);
                 return false;
             }
 

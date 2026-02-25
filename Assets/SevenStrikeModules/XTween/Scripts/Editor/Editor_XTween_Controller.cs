@@ -600,31 +600,11 @@ namespace SevenStrikeModules.XTween.Editor
             GUI.backgroundColor = XTween_Dashboard.Theme_Primary;
             if (Editor_XTween_GUI.Gui_Layout_Button("保存", "保存当前动画参数到预设", XTweenGUIFilled.实体, XTweenGUIColor.亮白, Color.black, 25))
             {
-                EditorApplication.delayCall += () =>
-                {
-                    string res = Editor_XTween_GUI.OpenPresetSaver(XTweenDialogType.修改, "XTween动画控制器消息", "保存动画预设", "是否确认要将当前的动画参数保存为动画预设？", "保存", "暂不", 0);
-                    if (string.IsNullOrEmpty(res))
-                    {
-                        return;
-                    }
-                    if (res == "暂不")
-                    {
-                        return;
-                    }
-
-                    // 提取当前控制器的动画参数到数据类以便传递给预设管理器保存
-                    XTween_PresetManager.preset_JsonFile_Checker();
-
-                    // 自动推断类型保存
-                    BaseScript.preset_Save_From_Controller(
-                        "AA",
-                        "BBNN，往返两次"
-                    );
-                };
+                Preset_Save();
             }
             if (Editor_XTween_GUI.Gui_Layout_Button("读取", "读取预设参数到当前动画", XTweenGUIFilled.实体, XTweenGUIColor.亮白, Color.black, 25))
             {
-
+                Preset_Load();
             }
             GUI.backgroundColor = Color.white;
             Editor_XTween_GUI.Gui_Layout_Horizontal_End();
@@ -1601,6 +1581,106 @@ namespace SevenStrikeModules.XTween.Editor
             }
 
             return valid;
+        }
+        #endregion
+
+        #region 预设操作
+        /// <summary>
+        /// 预设保存
+        /// </summary>
+        private void Preset_Load()
+        {
+            EditorApplication.delayCall += () =>
+            {
+                // 提示文字重点部分文字颜色
+                string keycol = XTween_Utilitys.ConvertColorToHexString(XTween_Dashboard.Theme_Primary, true);
+
+                XTweenPreset_Alpha preset = XTween_PresetManager.preset_Apply_To_Controller_ByName<XTweenPreset_Alpha>(BaseScript, XTweenTypes.透明度_Alpha, "Preset - NamePreset - Description");
+
+                if (preset != null)
+                {
+                    string v = Editor_XTween_GUI.Open(XTweenDialogType.确认, "XTween预设管理器消息", "预设读取完成", $"已读取<color={keycol}> {preset.Name} </color>预设到动画控制器，类型为：<color={keycol}> {preset.GetType().ToString()} </color>！", "明白", 0);
+
+                    if (XTween_PresetManager.EnableDebugLogs)
+                        XTween_Utilitys.DebugInfo("XTween预设管理器消息", $"预设应用成功！", XTweenGUIMsgState.确认);
+                }
+            };
+        }
+
+        /// <summary>
+        /// 预设读取
+        /// </summary>
+        private void Preset_Save()
+        {
+            EditorApplication.delayCall += () =>
+            {
+                string res = Editor_XTween_GUI.OpenPresetSaver(XTweenDialogType.修改, "XTween动画控制器消息", "保存动画预设", "是否确认要将当前的动画参数保存为动画预设？", "保存", "暂不", 0);
+                if (string.IsNullOrEmpty(res))
+                {
+                    return;
+                }
+                if (res == "暂不")
+                {
+                    return;
+                }
+
+                #region 检查预设文件
+                XTween_PresetManager.preset_JsonFile_Checker();
+                #endregion
+
+                #region 预设参数收集
+                // 分离标题与解释
+                string[] contents = res.Split(new char[1] { '@' });
+
+                // 预设标题
+                string pre_name = contents[0];
+                // 预设解释
+                string pre_des = contents[1];
+                #endregion
+
+                #region 检查预设重名状况并做出相应逻辑
+
+                // 提示文字重点部分文字颜色
+                string keycol = XTween_Utilitys.ConvertColorToHexString(XTween_Dashboard.Theme_Primary, true);
+
+                // 检查重名
+                bool isExist = XTween_PresetManager.preset_Check_NameExists(BaseScript.TweenTypes, pre_name);
+                if (isExist)
+                {
+                    string cdr = Editor_XTween_GUI.Open(XTweenDialogType.警告, "XTween预设管理器消息", $"预设重名 {pre_name}", "您当前保存的预设在库中已存在，是否确认要用当前的动画参数覆盖重名预设？", "覆盖", "暂不", 0);
+                    if (cdr == "覆盖")
+                    {
+                        // 覆盖模式：先删除现有同名预设
+                        XTween_PresetManager.preset_Delete_ByName(BaseScript.TweenTypes, pre_name);
+                        // 自动推断类型保存，覆盖方式
+                        if (BaseScript.preset_Save_From_Controller(pre_name, pre_des))
+                        {
+                            string v = Editor_XTween_GUI.Open(XTweenDialogType.确认, "XTween预设管理器消息", "预设保存完成", $"已将<color={keycol}> {pre_name} </color>的预设存入<color={keycol}> {BaseScript.TweenTypes} </color>预设库中，是否打开预设库查看？", "查看", "暂不", 1);
+                            if (v == "查看")
+                            {
+                                // 打开预设库面板进行管理
+                            }
+                        }
+                        if (XTween_PresetManager.EnableDebugLogs)
+                            XTween_Utilitys.DebugInfo("XTween预设管理器消息", $"预设名称 '{pre_name}' 已存在，将覆盖保存到预设库！", XTweenGUIMsgState.警告);
+                    }
+                }
+                else
+                {
+                    // 自动推断类型保存，新增方式
+                    if (BaseScript.preset_Save_From_Controller(pre_name, pre_des))
+                    {
+                        string v = Editor_XTween_GUI.Open(XTweenDialogType.确认, "XTween预设管理器消息", "预设保存完成", $"已将<color={keycol}> {pre_name} </color>的预设存入<color={keycol}> {BaseScript.TweenTypes} </color>预设库中，是否打开预设库查看？", "查看", "暂不", 1);
+                        if (v == "查看")
+                        {
+                            // 打开预设库面板进行管理
+                        }
+                    }
+                    if (XTween_PresetManager.EnableDebugLogs)
+                        XTween_Utilitys.DebugInfo("XTween预设管理器消息", $"预设名称 '{pre_name}' 未在库中发现重复，已保存到预设库！", XTweenGUIMsgState.通知);
+                }
+                #endregion
+            };
         }
         #endregion
     }

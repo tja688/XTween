@@ -3099,7 +3099,7 @@ namespace SevenStrikeModules.XTween.Editor
             Editor_XTween_GUI.CenterEditorWindow(new Vector2Int(545, 430), window);
 
             // 回调消息接收
-            window.Callback_SavedPreset = (r, d) => { res = r + d; };
+            window.Callback_SavedPreset = (r, d) => { res = $"{r}@{d}"; };
             window.Callback_Cancel = (r) => { res = r; };
             window.SetInfo(type, title, msg, ok, cancel, "", "", "", PrimaryIndex);
 
