@@ -159,7 +159,7 @@ namespace SevenStrikeModules.XTween.Editor
         /// 示例：
         /// if (PreviewCount > 10) sp_DebugMode.Log("警告：同时预览的动画过多");
         /// </summary>
-        [SerializeField] public static int PreviewCount => PreviewTweens.Count;
+        public static int PreviewCount => PreviewTweens.Count;
 
         /// <summary>
         /// 是否启用根据最大耗时自动终止预览

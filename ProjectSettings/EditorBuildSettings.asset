@@ -33,16 +33,16 @@ EditorBuildSettings:
     path: Assets/SevenStrikeModules/XTween/Demos/xtween_mover/xtween_mover_Wheel.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/SevenStrikeModules/XTween/Demos/xtween_path/xtween_path_Base.unity
+    path: Assets/SevenStrikeModules/XTween/Demos/xtween_Path/xtween_path_Base.unity
     guid: 084dbb53765245240965ba00309b9b3b
   - enabled: 1
-    path: Assets/SevenStrikeModules/XTween/Demos/xtween_path/xtween_path_CarDraft.unity
+    path: Assets/SevenStrikeModules/XTween/Demos/xtween_Path/xtween_path_CarDraft.unity
     guid: 66660eb8e50abb94cbb21b41b277400e
   - enabled: 1
-    path: Assets/SevenStrikeModules/XTween/Demos/xtween_path/xtween_path_LookAt.unity
+    path: Assets/SevenStrikeModules/XTween/Demos/xtween_Path/xtween_path_LookAt.unity
     guid: 53b7e4f7713761f4fa7ff235c4ac6d69
   - enabled: 1
-    path: Assets/SevenStrikeModules/XTween/Demos/xtween_path/xtween_path_Map.unity
+    path: Assets/SevenStrikeModules/XTween/Demos/xtween_Path/xtween_path_Map.unity
     guid: 319d7723d52fa19449d4573af9f46283
   - enabled: 1
     path: Assets/SevenStrikeModules/XTween/Demos/xtween_rotate/demo_rotatoe_AngularAbsolute.unity
@@ -66,22 +66,22 @@ EditorBuildSettings:
     path: Assets/SevenStrikeModules/XTween/Demos/xtween_scale/xtween_scale_Machine.unity
     guid: 3f012020a178b5d438318f4603bc5ed1
   - enabled: 1
-    path: Assets/SevenStrikeModules/XTween/Demos/xtween_sequence/xtween_sequence_Cat.unity
+    path: Assets/SevenStrikeModules/XTween/Demos/xtween_Sequence/xtween_sequence_Cat.unity
     guid: c7bc1a522b1b7fe4abf449230c70c78f
   - enabled: 1
-    path: Assets/SevenStrikeModules/XTween/Demos/xtween_sequence/xtween_sequence_Run.unity
+    path: Assets/SevenStrikeModules/XTween/Demos/xtween_Sequence/xtween_sequence_Run.unity
     guid: 45476fc742536ee4b96fa40a572733bb
   - enabled: 1
     path: Assets/SevenStrikeModules/XTween/Demos/xtween_shake/xtween_shake.unity
     guid: 33f2e350607487844ac4efcf2f7ac82b
   - enabled: 1
-    path: Assets/SevenStrikeModules/XTween/Demos/xtween_size/xtween_size.unity
+    path: Assets/SevenStrikeModules/XTween/Demos/xtween_Size/xtween_size.unity
     guid: ff6fce0851ba2ca4f88de7377f86c1fe
   - enabled: 1
-    path: Assets/SevenStrikeModules/XTween/Demos/xtween_text/xtween_text.unity
+    path: Assets/SevenStrikeModules/XTween/Demos/xtween_Text/xtween_text.unity
     guid: 93678a6b9419caa4dbfba80fe58b1402
   - enabled: 1
-    path: Assets/SevenStrikeModules/XTween/Demos/xtween_tiled/xtween_tiled.unity
+    path: Assets/SevenStrikeModules/XTween/Demos/xtween_Tiled/xtween_tiled.unity
     guid: 040e4909ccf19eb478950fe4643ddab5
   - enabled: 1
     path: Assets/SevenStrikeModules/XTween/Demos/xtween_value/xtween_value.unity
