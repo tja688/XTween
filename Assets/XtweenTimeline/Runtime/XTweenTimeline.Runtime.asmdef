@@ -1,0 +1,20 @@
+{
+  "name": "XTweenTimeline.Runtime",
+  "rootNamespace": "SevenStrikeModules.XTween.Timeline",
+  "references": [
+    "XTween.Runtime",
+    "UnityEngine.CoreModule",
+    "UnityEngine.UI",
+    "Unity.TextMeshPro",
+    "UnityEngine.IMGUIModule"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

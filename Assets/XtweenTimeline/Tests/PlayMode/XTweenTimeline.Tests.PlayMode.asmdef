@@ -1,0 +1,20 @@
+{
+  "name": "XTweenTimeline.Tests.PlayMode",
+  "rootNamespace": "SevenStrikeModules.XTween.Timeline.Tests",
+  "references": [
+    "XTweenTimeline.Runtime",
+    "XTween.Runtime"
+  ],
+  "optionalUnityReferences": [
+    "TestAssemblies"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": false,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

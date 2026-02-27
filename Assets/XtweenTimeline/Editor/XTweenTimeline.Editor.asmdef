@@ -1,0 +1,23 @@
+{
+  "name": "XTweenTimeline.Editor",
+  "rootNamespace": "SevenStrikeModules.XTween.Timeline.Editor",
+  "references": [
+    "XTweenTimeline.Runtime",
+    "XTween.Runtime",
+    "XTween.Editor",
+    "UnityEditor.CoreModule",
+    "UnityEditor.UI",
+    "UnityEngine.IMGUIModule"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}
