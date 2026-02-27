@@ -110,7 +110,7 @@ namespace SevenStrikeModules.XTween.Editor
         /// - 通过 Clear()/Kill() 方法移除动画
         /// - 列表中可能包含不同状态的动画（播放中/暂停/已完成）
         /// </summary>
-        [SerializeField] private static readonly List<XTween_Interface> PreviewTweens = new List<XTween_Interface>();
+        private static readonly List<XTween_Interface> PreviewTweens = new List<XTween_Interface>();
         /// <summary>
         /// 标记预览器当前是否处于播放状态
         /// 状态变化：
@@ -120,11 +120,11 @@ namespace SevenStrikeModules.XTween.Editor
         /// 1. 控制 Update() 中的超时检测逻辑
         /// 2. 外部可通过该状态判断预览器是否在运行
         /// </summary>
-        [SerializeField] internal static bool Played;
+        internal static bool Played;
         /// <summary>
         /// 存储所有动画中最长的总时长（Duration + Delay）
         /// </summary>
-        [SerializeField] private static float MaxTotalDuration;
+        private static float MaxTotalDuration;
         /// <summary>
         /// 记录动画预览开始的绝对时间戳（单位：秒，基于EditorApplication.timeSinceStartup）
         /// 
@@ -152,7 +152,7 @@ namespace SevenStrikeModules.XTween.Editor
         /// - 和MaxTotalDuration配合实现超时停止
         /// - 不受动画暂停/继续影响（始终记录初始播放时间）
         /// </summary>
-        [SerializeField] private static double PlayStartTime;
+        private static double PlayStartTime;
         /// <summary>
         /// 当前预览中的动画数量（只读）
         /// 
@@ -164,7 +164,7 @@ namespace SevenStrikeModules.XTween.Editor
         /// <summary>
         /// 是否启用根据最大耗时自动终止预览
         /// </summary>
-        [SerializeField] private static bool autoKillWithDuration = true;
+        private static bool autoKillWithDuration = true;
         /// <summary>
         /// 获取或设置是否启用【根据动画时长自动终止预览】功能
         /// 
@@ -204,7 +204,7 @@ namespace SevenStrikeModules.XTween.Editor
         /// <summary>
         /// Kill预览动画的时候是否先Rewind？
         /// </summary>
-        [SerializeField] private static bool beforeKillRewind = true;
+        private static bool beforeKillRewind = true;
         /// <summary>
         /// Kill预览动画的时候是否先Rewind？
         /// </summary>
@@ -217,7 +217,7 @@ namespace SevenStrikeModules.XTween.Editor
         /// <summary>
         /// Kill预览动画之后是否Clear预览动画列表？
         /// </summary>
-        [SerializeField] private static bool afterKillClear = true;
+        private static bool afterKillClear = true;
         /// <summary>
         /// Kill预览动画之后是否Clear预览动画列表？
         /// </summary>
