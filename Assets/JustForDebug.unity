@@ -299,7 +299,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: XTween.Runtime::SevenStrikeModules.XTween.XTween_Controller
   CurrentTweener:
-    rid: -2
+    rid: 2534423321349718186
   DebugMode: 0
   Duration: 0.5
   Delay: 0
@@ -409,8 +409,9 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
+    - rid: 2534423321349718186
+      type: {class: XTween_Specialized_Color, ns: SevenStrikeModules.XTween, asm: XTween.Runtime}
+      data: 
 --- !u!114 &239759725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1794,56 +1795,6 @@ Transform:
   - {fileID: 1097257600}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2140653511
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2140653513}
-  - component: {fileID: 2140653512}
-  m_Layer: 0
-  m_Name: XTweenDelayPlayOrderReproRunner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2140653512
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2140653511}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62123c0f08481a24dae56b8ce60cbd63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::XTweenDelayPlayOrderRepro
-  startX: 0
-  endX: 200
-  duration: 1
-  delay: 0.5
-  easeMode: 26
-  preDelayMoveThreshold: 0.001
---- !u!4 &2140653513
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2140653511}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1853,4 +1804,3 @@ SceneRoots:
   - {fileID: 1979269402}
   - {fileID: 265287213}
   - {fileID: 950972543}
-  - {fileID: 2140653513}
