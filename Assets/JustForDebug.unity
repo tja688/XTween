@@ -299,7 +299,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: XTween.Runtime::SevenStrikeModules.XTween.XTween_Controller
   CurrentTweener:
-    rid: 2534423321349718186
+    rid: 2534423321747653295
   DebugMode: 0
   Duration: 0.5
   Delay: 0
@@ -409,7 +409,7 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 2534423321349718186
+    - rid: 2534423321747653295
       type: {class: XTween_Specialized_Color, ns: SevenStrikeModules.XTween, asm: XTween.Runtime}
       data: 
 --- !u!114 &239759725
@@ -1352,7 +1352,7 @@ RectTransform:
   m_GameObject: {fileID: 353483920}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.05, y: 1.05, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 288465500}

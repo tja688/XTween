@@ -56,16 +56,16 @@ namespace SevenStrikeModules.XTween.Timeline
             {
                 using (new CallbackMuteScope(tween))
                 {
-                    SeekTweenInEditorInternal(tween, clampedTime);
+                    SeekTweenInEditorInternal(tween, clampedTime, suppressCallbacks);
                 }
             }
             else
             {
-                SeekTweenInEditorInternal(tween, clampedTime);
+                SeekTweenInEditorInternal(tween, clampedTime, suppressCallbacks);
             }
         }
 
-        private static void SeekTweenInEditorInternal(XTween_Interface tween, float time)
+        private static void SeekTweenInEditorInternal(XTween_Interface tween, float time, bool suppressCallbacks)
         {
             var editorType = Type.GetType("UnityEditor.EditorApplication, UnityEditor");
             if (editorType == null) return;
@@ -97,7 +97,39 @@ namespace SevenStrikeModules.XTween.Timeline
                 SetFieldValue(tween, "_ElapsedTime", elapsed);
             }
 
-            tween.Update((float)now);
+            var shouldContinue = tween.Update((float)now);
+            if (time <= delay || !shouldContinue)
+            {
+                ForceInvokeUpdate(tween, invokeAllCallbacks: !suppressCallbacks);
+            }
+        }
+
+        private static void ForceInvokeUpdate(XTween_Interface tween, bool invokeAllCallbacks)
+        {
+            if (tween == null) return;
+
+            var type = tween.GetType();
+            while (type != null)
+            {
+                var field = type.GetField("act_on_UpdateCallbacks", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+                if (field != null)
+                {
+                    if (field.GetValue(tween) is Delegate callback)
+                    {
+                        var targetCallback = invokeAllCallbacks ? callback : GetFirstInvocation(callback);
+                        targetCallback?.DynamicInvoke(tween.CurrentValue, tween.CurrentLinearProgress, tween.ElapsedTime);
+                    }
+                    return;
+                }
+                type = type.BaseType;
+            }
+        }
+
+        private static Delegate GetFirstInvocation(Delegate callback)
+        {
+            if (callback == null) return null;
+            var invocationList = callback.GetInvocationList();
+            return invocationList.Length > 0 ? invocationList[0] : callback;
         }
 #endif
 
@@ -125,9 +157,10 @@ namespace SevenStrikeModules.XTween.Timeline
         {
             private readonly object target;
             private readonly List<(FieldInfo field, object value)> backups = new List<(FieldInfo field, object value)>();
-            private static readonly HashSet<string> KeepFields = new HashSet<string>
+            private static readonly HashSet<string> KeepFirstDelegateFields = new HashSet<string>
             {
-                "act_on_UpdateCallbacks"
+                "act_on_UpdateCallbacks",
+                "act_on_RewindCallbacks"
             };
 
             public CallbackMuteScope(object target)
@@ -144,10 +177,22 @@ namespace SevenStrikeModules.XTween.Timeline
                     for (var i = 0; i < fields.Length; i++)
                     {
                         var field = fields[i];
-                        if (field.FieldType.BaseType != typeof(MulticastDelegate)) continue;
-                        if (KeepFields.Contains(field.Name)) continue;
-                        var original = field.GetValue(target);
-                        if (original == null) continue;
+                        if (!typeof(Delegate).IsAssignableFrom(field.FieldType)) continue;
+                        if (!(field.GetValue(target) is Delegate original)) continue;
+
+                        if (KeepFirstDelegateFields.Contains(field.Name))
+                        {
+                            var first = GetFirstInvocation(original);
+                            if (ReferenceEquals(first, original))
+                            {
+                                continue;
+                            }
+
+                            backups.Add((field, original));
+                            field.SetValue(target, first);
+                            continue;
+                        }
+
                         backups.Add((field, original));
                         field.SetValue(target, null);
                     }

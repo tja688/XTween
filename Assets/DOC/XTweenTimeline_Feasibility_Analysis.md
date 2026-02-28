@@ -232,6 +232,18 @@ Frame 组件本身与 Tween 引擎几乎无关，它是"立即状态变更"，�
 
 **XTween 的天然优势**：XTween_Base 已经在 `Update()` 方法中完整支持了 `!Application.isPlaying` 的编辑器模式时间计算，使用 `EditorApplication.timeSinceStartup`，这意味着编辑器预览功能几乎不需要特殊处理。
 
+**⚠️ XTween 预览跳变修复记录（已解决，2026-02-28 二次修正）**：
+在手动拖拽 Timeline 进度条（Seek 操作）时，游标跨越子 tween 边界（例如时间 < Delay 或时间 > Duration）会出现明显跳变。根因是 `XTween.Update()` 在边界分支会提前 `return`，导致目标对象在该帧没有收到可视更新。
+
+首版修复采用了“无条件强制触发 `act_on_UpdateCallbacks`”，虽然修复了跳变，但会把 `suppressCallbacks` 场景下的外部回调也一并执行，进而引入状态污染（表现为播放后对象状态被异常保留）。
+
+最终修复落地在 `XTweenTimelineCompat`：
+1. Seek 改为“仅边界补偿”：仅当 `time <= delay` 或 `Update` 提前结束时，才执行强制刷新，正常区间不重复触发。
+2. `suppressCallbacks=true` 时，`CallbackMuteScope` 对 `act_on_UpdateCallbacks` / `act_on_RewindCallbacks` 仅保留首个委托（内部 setter/回滚），其余外部委托静音，保证预览可视更新但不触发业务副作用。
+3. 新增 EditMode 回归用例：
+   - `CompatSeek_SuppressedCallback_UpdatesValueWithoutInvokingExternalOnUpdate`（可视值会更新、外部 OnUpdate 不触发）
+   - `CompatSeek_UnsuppressedCallback_InvokesExternalOnUpdate`（允许回调时仍会正常触发）
+
 **移植难度**：🟡 中 — 需要适配，但 XTween 的编辑器支持反而可能更简洁
 
 #### `DottController.cs` — 逻辑清晰

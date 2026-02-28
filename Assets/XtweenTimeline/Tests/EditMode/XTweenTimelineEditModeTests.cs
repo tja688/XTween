@@ -53,5 +53,41 @@ namespace SevenStrikeModules.XTween.Timeline.Tests
 
             tween.Kill();
         }
+
+        [Test]
+        public void CompatSeek_SuppressedCallback_UpdatesValueWithoutInvokingExternalOnUpdate()
+        {
+            float value = 0f;
+            var externalUpdateCalls = 0;
+
+            var tween = XTween.To(() => value, v => value = v, 1f, 0.1f, autokill: false)
+                .OnUpdate<float>((_, _, _) => externalUpdateCalls++);
+
+            XTweenTimelineCompat.SeekTweenInEditor(tween, 1f, suppressCallbacks: true);
+            Assert.That(value, Is.EqualTo(1f).Within(0.0001f));
+            Assert.AreEqual(0, externalUpdateCalls);
+
+            XTweenTimelineCompat.SeekTweenInEditor(tween, 0f, suppressCallbacks: true);
+            Assert.That(value, Is.EqualTo(0f).Within(0.0001f));
+            Assert.AreEqual(0, externalUpdateCalls);
+
+            tween.Kill();
+        }
+
+        [Test]
+        public void CompatSeek_UnsuppressedCallback_InvokesExternalOnUpdate()
+        {
+            float value = 0f;
+            var externalUpdateCalls = 0;
+
+            var tween = XTween.To(() => value, v => value = v, 1f, 0.1f, autokill: false)
+                .OnUpdate<float>((_, _, _) => externalUpdateCalls++);
+
+            XTweenTimelineCompat.SeekTweenInEditor(tween, 1f, suppressCallbacks: false);
+            Assert.That(value, Is.EqualTo(1f).Within(0.0001f));
+            Assert.Greater(externalUpdateCalls, 0);
+
+            tween.Kill();
+        }
     }
 }
